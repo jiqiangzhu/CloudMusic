@@ -4,7 +4,7 @@
             <span class="iconfont icon-liebiao1"></span>
         </div>
         <div class="top-center">
-            <div class="search-box">
+            <div class="search-box" @click="$router.push({path: '/search'})">
                 <span class="iconfont icon-sousuo"></span>
                 <input type="text" placeholder="大家都在搜 狼殿下">
             </div>

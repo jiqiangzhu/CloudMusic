@@ -46,7 +46,6 @@ export default {
       
     let res = await getBanner(1)
     this.imgList = res.data.banners;
-    console.log(this.imgList);
   }
 }
 </script>

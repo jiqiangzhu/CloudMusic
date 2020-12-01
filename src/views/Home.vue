@@ -4,6 +4,7 @@
     <Swiper />
     <IconList />
     <SetupMusicList />
+    <playCtl :tracks="$store.state.playlist" v-if="true" class="play-ctl" />
     <Bottom :barFlag="true" :playFlag="false"/>
   </div>
 </template>
@@ -16,6 +17,7 @@ import Swiper from '@/components/Swiper.vue'
 import IconList from '@/components/IconList.vue'
 import RecMusicList from '@/components/RecMusicList.vue'
 import SetupMusicList from '@/components/SetupMusicList.vue'
+import playCtl from '@/views/playCtl.vue'
 export default {
   name: 'Home',
   components: {
@@ -24,7 +26,8 @@ export default {
     Bottom,
     IconList,
     RecMusicList,
-    SetupMusicList
+    SetupMusicList,
+    playCtl
   }
   
 }
@@ -42,5 +45,8 @@ export default {
        fill: currentColor;
        overflow: hidden;
     }
-
+  .play-ctl {
+    background: #fff;
+    
+  }
 </style>

@@ -5,7 +5,7 @@
     </div>
 </template>
 <script>
-import playCtl from '@/components/playCtl.vue'
+import playCtl from '@/views/playCtl.vue'
 import BottomNav from '@/components/BottomNav.vue'
 import {mapState} from 'vuex'
 export default { 

@@ -27,3 +27,8 @@ export function getLyric(id) {
     return axios.get(`${baseUrl}/lyric?id=${id}`)
 }
 
+// 关键词搜索 
+// /search?keywords= 海阔天空
+export function getSearchResults(keyword) {
+    return axios.get(`${baseUrl}/cloudsearch?keywords=${keyword}`)
+}

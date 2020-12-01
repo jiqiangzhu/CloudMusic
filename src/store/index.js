@@ -1,14 +1,18 @@
-import { provide } from 'vue';
 import { createStore } from 'vuex'
 import {getLyric} from '@/api/index'
 
 export default createStore({
   state: {
-    playlist: [{al:{}}],
+    playlist: [{al:{
+      id: 98799011,
+      name: "耗尽",
+      pic: 109951165498613440,
+      picUrl: "http://p4.music.126.net/yITtaf5rX2hOXQSBn60opA==/109951165498613448.jpg",
+      pic_str: "109951165498613448"
+    }}],
     currentIndex: 0,
     lyric: '',
-    currentTime: 0,
-    interValId: 0
+    currentTime: 0
   },
   getters: {
     listLyric(state) {
@@ -69,11 +73,35 @@ export default createStore({
     setCurrentTime(state, value) {
       state.currentTime = value
     }
+    // setSearchHistory(state, value) {
+    //   if(typeof(value) == 'object') {
+    //     state.searchHistory = value.reverse()
+    //   } else if(typeof(value) == 'string') {
+    //     let itemObj = {value: value}
+    //     // 临时变量 存储正序数组
+    //     let temp = []
+    //     if(localStorage.searchHistory != "undefined" && localStorage.searchHistory != undefined) {
+    //       temp = JSON.parse(localStorage.searchHistory)
+    //     }
+    //     temp.push(itemObj)
+    //     temp = Array.from(new Set(temp))
+    //     console.log(temp[0] == temp[1]);
+    //     localStorage.searchHistory = JSON.stringify(temp)
+
+    //     state.searchHistory = JSON.parse(localStorage.searchHistory).reverse()
+    //   }      
+      
+    // }
   },
   actions: {
     async setLyric(context, params) {
       let result = await getLyric(params)
-      context.commit('setLyricList', result.data.lrc.lyric)
+      // console.log(result.data.lrc.lyric);
+      if(!result.data.lrc) {
+        context.commit('setLyricList', '')
+      } else {
+        context.commit('setLyricList', result.data.lrc.lyric)
+      }
     }
   },
   modules: {

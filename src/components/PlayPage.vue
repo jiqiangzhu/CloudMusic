@@ -1,5 +1,5 @@
 <template>
-    <div class="play-page">
+    <div class="play-page" >
         <div class="bg" :style="{backgroundImage: `url(${musicDetail.al.picUrl})`}" ></div>
         <div class="p-top">
             <span class="iconfont icon-jiantou8" @click="$emit('back')"></span>
@@ -34,8 +34,8 @@
             <div class="f-bottom">
                 <span class="iconfont icon-xunhuan"></span>
                 <span class="iconfont icon-48shangyishou" @click="goPlay(-1)"></span>
-                <span v-if="paused" @click="play" class="iconfont icon-iconset0481"></span>
-                <span v-else @click="play" class="iconfont icon-zanting"></span>
+                <span v-if="paused" @keyup.space="play" @click="play" class="iconfont icon-iconset0481"></span>
+                <span v-else @click="play" @keyup.space="play" class="iconfont icon-zanting"></span>
                 <span class="iconfont icon-xiayigexiayishou" @click="goPlay(1)"></span>
                 <span class="iconfont icon-liebiao"></span>
             </div>
@@ -70,7 +70,6 @@ export default {
             } else if(index>this.playlist.length-1) {
                 index = 0
             }
-            console.log(index);
             this.$store.commit('setCurrentIndex', index)
         }
     },
@@ -160,6 +159,7 @@ export default {
                 p {
                     width: 7.5rem;
                     text-align: center;
+                    color: #fff;
                 }
                 p.active {
                     color: #ff0000;

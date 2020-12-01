@@ -44,6 +44,9 @@ export default {
     mounted() {
         // this.$store.dispatch('setLyric', this.playlist[this.currentIndex].id)
     },
+    beforeUnmount() {
+        clearInterval(this.$store.state.intervalId)
+    },
     methods: {
         changeStateFn() {
             if(this.paused == true) {  

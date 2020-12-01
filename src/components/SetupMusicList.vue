@@ -60,7 +60,7 @@ export default {
     background: #fff;
     .music-top {
         width: 100%;
-        height: 0.8rem;
+        height: 0.66rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -82,7 +82,7 @@ export default {
     }
     .music-content {
         width: 100%;
-        height: 5rem;
+        height: 4.8rem;
         overflow: hidden;
         display: flex;
         flex-wrap: wrap;
@@ -90,13 +90,13 @@ export default {
         padding: 0 0.2rem;
         .music-item {
             width: 2.3rem;
-            height: 2.5rem;
+            height: 2.4rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
             img {
-                width: 2rem;
+                width: 1.8rem;
                 border-radius: 0.2rem;
                 height: auto;
             }

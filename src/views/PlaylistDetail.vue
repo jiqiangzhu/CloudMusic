@@ -12,7 +12,7 @@ import {getPlaylistDetail} from '@/api/index'
 import detailTop from '@/components/detailTop.vue'
 import PlayList from '@/components/PlayList.vue'
 import Bottom from '@/views/Bottom.vue'
-import playCtl from '@/components/playCtl.vue'
+import playCtl from '@/views/playCtl.vue'
 import {useRoute} from 'vue-router'
 import store from '@/store/index'
 export default {
@@ -43,7 +43,7 @@ export default {
             // console.log("PlaylistDetail: ", data);
             state.playlist = data.playlist
             store.commit('setPlayList', data.playlist.tracks)
-            // console.log("setPlayList-tracks: ", data.playlist.tracks);
+            console.log("setPlayList-tracks: ", data.playlist.tracks);
             state.avatarUrl = data.playlist.creator.avatarUrl
         })
         return {
