@@ -1,7 +1,7 @@
 <template>
     <div class="bottom-nav">
-        <div class="nav-item active">
-            <span class="iconfont icon-icon--"></span>
+        <div class="nav-item active" >
+            <span class="iconfont icon-icon--" @click="$router.push('/')"></span>
             <span class="see">发现</span>
         </div>
         <div class="nav-item">
@@ -9,7 +9,7 @@
             <span class="boke">播客</span>
         </div>
         <div class="nav-item">
-            <span class="iconfont icon-yinyue"></span>
+            <span class="iconfont icon-yinyue" @click="$router.push('/me')"></span>
             <span class="my">我的</span>
         </div>
         <div class="nav-item">

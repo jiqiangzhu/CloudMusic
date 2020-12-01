@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-
+import store from '@/store/index.js'
 const routes = [
   {
     path: '/',
@@ -11,6 +11,24 @@ const routes = [
     path: '/search',
     name: 'Search',
     component: () => import(/* webpackChunkName: "about" */ '../views/Search.vue')
+  },
+  {
+    path: '/me',
+    name: 'Me',
+    beforeEnter: (to, from, next)=> {
+      if(store.state.user.isLogin) {
+        next()
+      } else {
+        next('/login')
+      }
+      
+    },
+    component: () => import(/* webpackChunkName: "about" */ '../views/Me.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
   },
   {
     path: '/playlistDetail',

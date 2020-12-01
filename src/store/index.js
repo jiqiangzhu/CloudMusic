@@ -1,6 +1,5 @@
 import { createStore } from 'vuex'
-import {getLyric} from '@/api/index'
-
+import {getLyric, phoneLogin, getUserDetail} from '@/api/index'
 export default createStore({
   state: {
     playlist: [{al:{
@@ -12,7 +11,12 @@ export default createStore({
     }}],
     currentIndex: 0,
     lyric: '',
-    currentTime: 0
+    currentTime: 0,
+    user: {
+      isLogin: false,
+      userDetail:{},
+      userAccount: {}
+    }
   },
   getters: {
     listLyric(state) {
@@ -72,26 +76,10 @@ export default createStore({
     },
     setCurrentTime(state, value) {
       state.currentTime = value
+    },
+    setUser(state, value) {
+      state.user = value
     }
-    // setSearchHistory(state, value) {
-    //   if(typeof(value) == 'object') {
-    //     state.searchHistory = value.reverse()
-    //   } else if(typeof(value) == 'string') {
-    //     let itemObj = {value: value}
-    //     // 临时变量 存储正序数组
-    //     let temp = []
-    //     if(localStorage.searchHistory != "undefined" && localStorage.searchHistory != undefined) {
-    //       temp = JSON.parse(localStorage.searchHistory)
-    //     }
-    //     temp.push(itemObj)
-    //     temp = Array.from(new Set(temp))
-    //     console.log(temp[0] == temp[1]);
-    //     localStorage.searchHistory = JSON.stringify(temp)
-
-    //     state.searchHistory = JSON.parse(localStorage.searchHistory).reverse()
-    //   }      
-      
-    // }
   },
   actions: {
     async setLyric(context, params) {
@@ -102,6 +90,22 @@ export default createStore({
       } else {
         context.commit('setLyricList', result.data.lrc.lyric)
       }
+    },
+    async phoneLogin(context, params) {
+      let result = await phoneLogin(params.phone, params.password)
+      if(result.data.code == 200) {
+        context.state.user.isLogin = true
+        context.state.user.userAccount = result.data.account
+        
+        // 获取用户详情
+        let userDetail = await getUserDetail(result.data.account.id)
+        context.state.user.userDetail = userDetail.data
+        context.commit('setUser', context.state.user)
+        // 本地存储
+        
+        localStorage.userInfo = JSON.stringify(context.state.user)
+      }
+      return result
     }
   },
   modules: {

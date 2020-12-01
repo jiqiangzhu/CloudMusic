@@ -42,7 +42,6 @@ export default {
         onMounted(async()=>{
             let result = await getRecMusicList(10)
             state.musicList = result.data.result
-            console.log(result);
         }) 
         return {
             state,

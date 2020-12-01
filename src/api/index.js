@@ -32,3 +32,15 @@ export function getLyric(id) {
 export function getSearchResults(keyword) {
     return axios.get(`${baseUrl}/cloudsearch?keywords=${keyword}`)
 }
+
+// 手机登录 
+// /login/cellphone?phone=${phone}&password=${password}
+export function phoneLogin(phone, password) {
+    return axios.get(`${baseUrl}/login/cellphone?phone=${phone}&password=${password}`)
+}
+
+// 获取用户详情 
+// /search?keywords= 海阔天空
+export function getUserDetail(uid) {
+    return axios.get(`${baseUrl}/user/detail?uid=${uid}`)
+}
