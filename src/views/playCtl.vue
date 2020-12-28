@@ -22,6 +22,7 @@ import PlayPage from '@/components/PlayPage.vue'
 export default {
     props: ["tracks"],
     data() {
+        
         return {
             paused: true,
             isShow: false
@@ -75,6 +76,9 @@ export default {
     justify-content: space-between;
     align-items: center;
     background: #fff;
+    // position: fixed;
+    // left: 0;
+    // bottom: 1rem;
     .left {
         display: flex;
         align-items: center;

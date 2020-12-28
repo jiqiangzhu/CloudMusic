@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="app">
   <router-view/>
 </div>
   
@@ -9,7 +9,7 @@ export default {
   async mounted() {
     if(localStorage.userInfo != "" && localStorage.userInfo != undefined) {
       this.$store.state.user = JSON.parse(localStorage.userInfo)
-      console.log(this.$store.state.user);
+      
     }
   }
 }

@@ -1,9 +1,17 @@
 <template>
   <div class="home">
     <TopNav />
-    <Swiper />
+    <Swiper ref="mySwiper" :imgList="imgList" style="position: relative" :autoplay="true" @slideChangeTransitionStart="fn1" @slideChangeTransitionEnd="fn2">
+      <template v-slot="slotProps">
+        <img :src="slotProps.item.pic" alt="" >
+        <span class="tag" style="position: absolute; bottom: 5px; right: 20px; background:red;padding: 0 5px; border-radius: 3px;color:#fff;">新歌首发</span>
+      </template>
+      
+    </Swiper>
     <IconList />
     <SetupMusicList />
+    <!-- <button @click="$refs.mySwiper.swiper.slideNext()">下一页</button> -->
+
     <playCtl :tracks="$store.state.playlist" v-if="true" class="play-ctl" />
     <Bottom :barFlag="true" :playFlag="false"/>
   </div>
@@ -18,6 +26,7 @@ import IconList from '@/components/IconList.vue'
 import RecMusicList from '@/components/RecMusicList.vue'
 import SetupMusicList from '@/components/SetupMusicList.vue'
 import playCtl from '@/views/playCtl.vue'
+import {getBanner} from '../api/index'
 export default {
   name: 'Home',
   components: {
@@ -28,6 +37,27 @@ export default {
     RecMusicList,
     SetupMusicList,
     playCtl
+  },
+  data() {
+    return {
+      imgList: [
+          {pic:require('../assets/img/swiper1.jpg')},
+          {pic:require('../assets/img/swiper2.jpg')},
+          {pic:require('../assets/img/swiper3.jpg')}
+      ]
+    }
+  },
+  methods: {
+    fn1() {
+      // console.log('slideChangeTransitionStart');
+    },
+    fn2() {
+      // console.log('slideChangeTransitionEnd');
+    }
+  },
+  async beforeMount() {
+    let res = await getBanner(1)
+    this.imgList = res.data.banners;
   }
   
 }
@@ -35,7 +65,6 @@ export default {
 <style lang="less">
   .home {
     width: 7.5rem;
-    // height: 13.34rem;
     background: rgb(248,248,248);
     font-family: '微软雅黑';
   }

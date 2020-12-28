@@ -91,7 +91,7 @@ export default {
 <style lang="less" scoped>
     .play-page {
         width: 7.5rem;
-        height: 13.34rem;
+        height: 100vh;
         position: fixed;
         left: 0;
         top: 0;

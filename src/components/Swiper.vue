@@ -1,14 +1,14 @@
 <template>
     <div id="swiper-com">
-        <div class="swiper-container">
+        <div class="swiper-container" :id="'swiperIndex'+id">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="(item,i) in imgList" :key="i"> 
-                    <img :src="item.pic" alt="swiper">
+                <div class="swiper-slide" v-for="(item,i) in imgList" :key="i">
+                    <slot :item="item"></slot>
                 </div>
             </div>
             <!-- 如果需要分页器 -->
             <div class="swiper-pagination"></div>
-            
+            <!-- <button class="next" style="position: absolute; z-index: 100;" @click="nextFn">下一张</button> -->
         </div>
     </div>
 </template>
@@ -18,55 +18,87 @@ import Swiper from 'swiper'
 
 // import style (<= Swiper 5.x)
 import 'swiper/css/swiper.css'
-import {getBanner} from '../api/index'
 export default {
-  data() {
-      return {
-          imgList: [
-            //   {pic:require('../assets/img/swiper1.jpg')},
-              {pic:require('../assets/img/swiper2.jpg')},
-              {pic:require('../assets/img/swiper3.jpg')}
-          ]
-      }
-  },
-  components: {
-    Swiper
-  },
-  async mounted() {
-      var mySwiper = new Swiper ('.swiper-container', {
-        // direction: 'vertical', // 垂直切换选项
-        loop: true, // 循环模式选项
-        
-        // 如果需要分页器
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true
+    name: 'QSwiper',
+    props: {
+        imgList: {
+            type: Array,
+            default: []
+        },
+        loop: {
+            type: Boolean,
+            default: true
+        },
+        autoplay: {
+            type: Boolean,
+            default: false
         }
-    })  
-      
-    let res = await getBanner(1)
-    this.imgList = res.data.banners;
-  }
+    },
+    data() {
+        return {
+            swiper: null,
+            id: parseInt(Math.random()*100000)
+        }
+    },
+    components: {
+        Swiper
+    },
+    methods: {
+        nextFn() {
+            this.swiper.slideNext()
+        },
+        instance() {
+            if(this.swiper) {
+                this.swiper.destroy()
+            }
+            console.log(this.swiper);
+            this.swiper = new Swiper ('#swiperIndex'+this.id, {
+                // direction: 'vertical', // 垂直切换选项
+                loop: this.loop, // 循环模式选项
+                autoplay: this.autoplay,
+                // 如果需要分页器
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true
+                },
+                on: {
+                    slideChangeTransitionStart: ()=>{
+                        this.$emit('slideChangeTransitionStart')
+                    },
+                    slideChangeTransitionEnd: ()=>{
+                        this.$emit('slideChangeTransitionEnd')
+                    }
+                }
+            })
+        }
+    },
+    async updated() {
+        this.instance()
+    },
+    async mounted() {
+        this.instance()
+        
+    }
 }
 </script>
 
 <style lang="less">
 #swiper-com {
-    width: 7.5rem;
+    width: 100%;
     .swiper-container {
-        width: 7.5rem;
-        height: 3rem;
+        width: 100%;
+        height: 150px;
         display: flex;
         justify-content: center;
         .swiper-slide {
-            width: 7.5rem;
-            height: 3rem;
+            width: 100%;
+            height: 150px;
             display: flex;
             justify-content: center;
             img {
-                width: 7.1rem;
-                height: 3rem;
-                border-radius: 0.1rem;
+                width: 96%;
+                height: 150px;
+                border-radius: 5px;
             }
         }
         

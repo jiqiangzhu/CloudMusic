@@ -308,8 +308,6 @@ a {
     visibility: hidden;
 }
 
-.clearfix {
-}
 .divHeight {
     width: 100%;
     height: 10px;

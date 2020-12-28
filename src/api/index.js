@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-let baseUrl = "http://localhost:3000"
+let baseUrl = "http://188.131.193.21:3000"
+// let baseUrl = "http://music.cpengx.cn"
 
 // 网易云音乐api 调用此接口 , 可获取 banner( 轮播图 ) 数据
 //  type:资源类型,对应以下类型,默认为 0 即PC
