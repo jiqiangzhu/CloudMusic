@@ -1,11 +1,16 @@
 <template>
 <div class="app">
+  <Bottom />
   <router-view/>
 </div>
   
 </template>
 <script>
+import Bottom from './views/Bottom.vue'
 export default {
+  components: {
+    Bottom
+  },
   async mounted() {
     if(localStorage.userInfo != "" && localStorage.userInfo != undefined) {
       this.$store.state.user = JSON.parse(localStorage.userInfo)

@@ -139,7 +139,7 @@ export default {
         }
         .lyric {
             width: 7.5rem;
-            height: 7rem;
+            height: 7.1rem;
             position: relative;
             left: 0;
             top: 3rem;

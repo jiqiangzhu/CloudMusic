@@ -99,6 +99,7 @@
         position: fixed;
         top: 0;
         left: 0;
+        z-index: 1;
         justify-content: space-between;
         .top-left {
             display: flex;

@@ -1,9 +1,12 @@
 <template>
     <div class="play-contro">
         <div class="left" @click="isShow=!isShow">
+            <!-- {{playlist[0].al.name}} -->
             <img :src="playlist[currentIndex].al.picUrl" :alt="playlist[currentIndex].al.name">
-            <span class="title">{{playlist[currentIndex].name}}</span>
-            <span class="author">-{{"name"}}</span>
+            <span class="title">{{playlist[currentIndex].al.name}}</span>
+            <span>-</span>
+            <!-- {{playlist[currentIndex].ar}} -->
+            <span class="author"><span v-for="(item, i) in playlist[currentIndex].ar" :key="i">{{item.name}}  </span></span>
         </div>
         <div class="right">
             <span v-if="paused" @click="changeStateFn" class="iconfont icon-icon-"></span>
@@ -21,8 +24,7 @@ import PlayPage from '@/components/PlayPage.vue'
 
 export default {
     props: ["tracks"],
-    data() {
-        
+    data() {       
         return {
             paused: true,
             isShow: false
@@ -39,11 +41,15 @@ export default {
     },
     updated() {
         this.$store.dispatch('setLyric', this.playlist[this.currentIndex].id)
-        // console.log([this.$refs.audio][0].currentTime);
+        
         
     },
     mounted() {
         // this.$store.dispatch('setLyric', this.playlist[this.currentIndex].id)
+    },
+    beforeMount() {
+        
+        console.log(this.playlist[this.currentIndex].ar);
     },
     beforeUnmount() {
         clearInterval(this.$store.state.intervalId)
@@ -76,9 +82,6 @@ export default {
     justify-content: space-between;
     align-items: center;
     background: #fff;
-    // position: fixed;
-    // left: 0;
-    // bottom: 1rem;
     .left {
         display: flex;
         align-items: center;

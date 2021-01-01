@@ -16,6 +16,9 @@
 </template>
 <style lang="less">
     .top-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
         display: flex;
         width: 7.5rem;
         height: 1rem;

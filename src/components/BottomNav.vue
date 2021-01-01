@@ -21,13 +21,21 @@
             <span class="yuncun">云村</span>
         </div>
     </div>
+  
+
 </template>
+<script>
+import { Tabbar, TabbarItem } from 'vant';
+export default {
+    
+}
+</script>
 <style lang="less" scoped>
 .bottom-nav {
     height: 1rem;
     width: 7.5rem;
     display: flex;
-    
+
     .nav-item {
         flex: 1;
         display: flex;
@@ -42,7 +50,7 @@
         }
     }
     .active {
-        color: #ff5000
+        color: #ff5000;
     }
 }
 </style>

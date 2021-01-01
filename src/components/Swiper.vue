@@ -85,6 +85,7 @@ export default {
 <style lang="less">
 #swiper-com {
     width: 100%;
+    margin-top: 1rem;
     .swiper-container {
         width: 100%;
         height: 150px;

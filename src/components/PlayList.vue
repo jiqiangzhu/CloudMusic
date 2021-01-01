@@ -3,7 +3,7 @@
         <div class="before">
            <div class="left">
                <span class="iconfont icon-tx-wubianxing"></span>
-               <span class="vipCount">含{{}}首VIP专享歌曲</span>
+               <span class="vipCount">含{{2}}首VIP专享歌曲</span>
            </div>
            <span class="right">首开VIP仅5元></span>
         </div>
