@@ -29,7 +29,7 @@ export default {
 </script>
 <style lang="less" scoped>
 #bottom {
-    width: 100vw;
+    width: 7.5rem;
     position: fixed;
     left: 0;
     bottom: 0;
