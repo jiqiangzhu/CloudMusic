@@ -3,6 +3,10 @@
         <div class="i-list">
             <div class="list-item">
                 <div class="icon-item">
+                    <!-- <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-zhibo" />
+                    </svg> -->
+                    <!-- <span class="iconfont">&#xe631;</span> -->
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-rili"></use>
                     </svg>
@@ -12,7 +16,7 @@
             <div class="list-item">
                 <div class="icon-item">
                     <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-FM_weixuanze"></use>
+                        <use xlink:href="#icon-FM_weixuanze" />
                     </svg>
                 </div>
                 <span class="txt">私人FM</span>
@@ -20,7 +24,7 @@
             <div class="list-item">
                 <div class="icon-item">
                     <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-gedan"></use>
+                        <use xlink:href="#icon-gedan" />
                     </svg>
                 </div>
                 <span class="txt">歌单</span>
@@ -28,7 +32,7 @@
             <div class="list-item">
                 <div class="icon-item">
                     <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-biaoqiankuozhan_paihang-128"></use>
+                        <use xlink:href="#icon-biaoqiankuozhan_paihang-128" />
                     </svg>
                 </div>
                 <span class="txt">排行榜</span>
@@ -36,7 +40,7 @@
             <div class="list-item">
                 <div class="icon-item">
                     <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-zhibo"></use>
+                        <use xlink:href="#icon-zhibo" />
                     </svg>
                 </div>
                 <span class="txt">直播</span>
@@ -49,18 +53,18 @@
 
 
 export default {
-  data() {
-      return {
-          
-      }
-  },
-  components: {
-    
-  },
-  async mounted() {
- 
+    data() {
+        return {
 
-  }
+        }
+    },
+    components: {
+
+    },
+    async mounted() {
+
+
+    }
 }
 </script>
 
@@ -101,7 +105,6 @@ export default {
                 font-size: 0.2rem;
                 // padding-top: 0.15rem;
             }
-            
         }
     }
     .icon-bottom-line {

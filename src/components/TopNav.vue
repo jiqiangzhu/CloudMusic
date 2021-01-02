@@ -19,12 +19,14 @@
         position: fixed;
         top: 0;
         left: 0;
+        z-index: 10;
         display: flex;
         width: 7.5rem;
         height: 1rem;
         justify-content: space-between;
         padding: 0 0.2rem;
         align-items: center;
+        background-color:#efefef;
         .iconfont {
             width: 0.5rem;
             height: 0.5rem;

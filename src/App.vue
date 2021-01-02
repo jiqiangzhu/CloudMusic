@@ -26,10 +26,10 @@ export default {
   box-sizing: border-box;
   // background: #efefef;
 }
-.iconfont {
-  width: 0.3rem;
-  height: 0.3rem;
-}
+// .iconfont {
+//   width: 0.3rem;
+//   height: 0.3rem;
+// }
 a {
   color: #333;
   text-decoration: none;

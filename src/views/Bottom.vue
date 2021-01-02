@@ -29,7 +29,7 @@ export default {
 </script>
 <style lang="less" scoped>
 #bottom {
-    width: 7.5rem;
+    width: 100vw;
     position: fixed;
     left: 0;
     bottom: 0;
@@ -37,5 +37,6 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    background-color: #efefef;
 }
 </style>

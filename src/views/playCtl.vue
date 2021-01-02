@@ -81,7 +81,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #fff;
+    background: #efefef;
     .left {
         display: flex;
         align-items: center;

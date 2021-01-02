@@ -10,6 +10,8 @@
     </Swiper>
     <IconList />
     <SetupMusicList />
+    <SetupMusicList />
+    <SetupMusicList />
     <!-- <button @click="$refs.mySwiper.swiper.slideNext()">下一页</button> -->
 
     <!-- <playCtl :tracks="$store.state.playlist" v-if="true" class="play-ctl" /> -->
