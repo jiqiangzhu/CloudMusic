@@ -1,17 +1,17 @@
 <template>
     <div class="top-nav">
-        <div class="top-left">
+        <!-- <div class="top-left"> -->
             <span class="iconfont icon-liebiao1"></span>
-        </div>
+        <!-- </div> -->
         <div class="top-center">
             <div class="search-box" @click="$router.push({path: '/search'})">
                 <span class="iconfont icon-sousuo"></span>
                 <input type="text" placeholder="大家都在搜 狼殿下">
             </div>
         </div>
-        <div class="top-right">
+        <!-- <div class="top-right"> -->
             <span class="iconfont icon-maikefeng-tianchong"></span>
-        </div>
+        <!-- </div> -->
     </div>
 </template>
 <style lang="less">
