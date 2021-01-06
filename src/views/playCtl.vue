@@ -72,7 +72,7 @@ export default {
             }, 1000)            
         },
         toPlayPageFn() {
-            isShow=!isShow
+            this.isShow=!this.isShow
             // this.$router.push({path: '/playPage', musicDetail: this.playlist[this.currentIndex]})
         }
     }

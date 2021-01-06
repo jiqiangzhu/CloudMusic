@@ -2,7 +2,7 @@
     <div class="play-page" >
         <div class="bg" :style="{backgroundImage: `url(${musicDetail.al.picUrl})`}" ></div>
         <div class="p-top">
-            <span class="iconfont icon-jiantou8" @click="$router.go(-1)"></span>
+            <span class="iconfont icon-jiantou8" @click="$emit('back')"></span>
             <div class="name">
                 <!-- <marquee behavior="scroll" direction="left">{{musicDetail.al.name}}</marquee> -->
                 <span class="brief">{{musicDetail.al.name}}</span>
