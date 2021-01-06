@@ -45,3 +45,8 @@ export function phoneLogin(phone, password) {
 export function getUserDetail(uid) {
     return axios.get(`${baseUrl}/user/detail?uid=${uid}`)
 }
+
+// 获取段子
+export function getDuanzi() {
+    return axios.get(`https://api.apiopen.top/getJoke?page=${1}&count=10&&type=video`)
+}

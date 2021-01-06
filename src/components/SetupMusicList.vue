@@ -1,7 +1,7 @@
 <template>
     <div id="music-list">
         <div class="music-top">
-            <span class="title">推荐歌单</span>
+            <span class="title">推荐你听</span>
             <span class="more">更多></span>
         </div>
         <div class="music-content">

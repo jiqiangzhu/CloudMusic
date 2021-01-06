@@ -2,7 +2,7 @@
     <div class="play-page" >
         <div class="bg" :style="{backgroundImage: `url(${musicDetail.al.picUrl})`}" ></div>
         <div class="p-top">
-            <span class="iconfont icon-jiantou8" @click="$emit('back')"></span>
+            <span class="iconfont icon-jiantou8" @click="$router.go(-1)"></span>
             <div class="name">
                 <!-- <marquee behavior="scroll" direction="left">{{musicDetail.al.name}}</marquee> -->
                 <span class="brief">{{musicDetail.al.name}}</span>
@@ -74,7 +74,8 @@ export default {
         }
     },
     mounted() {
-        
+        this.$store.commit('setPlayFlag', {playControlFlag: false, navBarFlag: false});
+        // this.musicDetail = this.$router.musicDetail
     },
     watch: {
         currentTime: function(value) {
@@ -228,7 +229,7 @@ export default {
             width: 7.5rem;
             position: absolute;
             left: 0;
-            bottom: 0.6rem;
+            bottom: 1rem;
             display: flex;
             flex-direction: column;
             align-items: center;

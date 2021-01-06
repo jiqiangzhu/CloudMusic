@@ -1,6 +1,6 @@
 <template>
     <div class="play-contro">
-        <div class="left" @click="isShow=!isShow">
+        <div class="left" @click="toPlayPageFn">
             <!-- {{playlist[0].al.name}} -->
             <img :src="playlist[currentIndex].al.picUrl" :alt="playlist[currentIndex].al.name">
             <span class="title">{{playlist[currentIndex].al.name}}</span>
@@ -70,6 +70,10 @@ export default {
                 this.$store.commit('setCurrentTime', this.$refs.audio.currentTime)
                 // console.log(this.$refs.audio.currentTime);
             }, 1000)            
+        },
+        toPlayPageFn() {
+            isShow=!isShow
+            // this.$router.push({path: '/playPage', musicDetail: this.playlist[this.currentIndex]})
         }
     }
 }
@@ -83,6 +87,7 @@ export default {
     align-items: center;
     background: #efefef;
     .left {
+        flex: 1;
         display: flex;
         align-items: center;
         padding: 0 0.2rem;
@@ -104,6 +109,8 @@ export default {
     .right {
         display: flex;
         align-items: center;
+        width: 1.8rem;
+        margin-right: 0.1rem;
         .iconfont {
             font-size: 0.4rem;
             margin: 0 0.25rem;

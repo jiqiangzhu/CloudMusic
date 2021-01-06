@@ -1,33 +1,54 @@
 <template>
     <div class="bottom-nav">
-        <div class="nav-item active" >
-            <span class="iconfont icon-icon--" @click="$router.push('/')"></span>
-            <span class="see">发现</span>
-        </div>
-        <div class="nav-item">
-            <span class="iconfont icon-_gongguanchuanbo"></span>
-            <span class="boke">播客</span>
-        </div>
-        <div class="nav-item">
-            <span class="iconfont icon-yinyue" @click="$router.push('/me')"></span>
-            <span class="my">我的</span>
-        </div>
-        <div class="nav-item">
-            <span class="iconfont icon-maikefeng"></span>
-            <span class="kge">K歌</span>
-        </div>
-        <div class="nav-item">
-            <span class="iconfont icon-daohanglan-05"></span>
-            <span class="yuncun">云村</span>
+        <div
+            class="nav-item"
+            :class="item.isActive"
+            @click="navFn(i)"
+            v-for="(item, i) in navArr"
+            :key="i"
+        >
+            <span class="iconfont" :class="item.icon"></span>
+            <span :class="item.txt">{{ item.text }}</span>
         </div>
     </div>
-  
-
 </template>
 <script>
 import { Tabbar, TabbarItem } from 'vant';
 export default {
-    
+    data() {
+        return {
+            isActive: "active",
+            navArr: [
+                { icon: "icon-icon--", txt: "see", text: "首页", isActive: "active" },
+                { icon: "icon-_gongguanchuanbo", txt: "boke", text: "小视频", isActive: "" },
+                { icon: "icon-yinyue", txt: "game", text: "小游戏", isActive: "" },
+                { icon: "icon-daohanglan-05", txt: "my", text: "我的", isActive: "" }
+            ]
+        }
+    },
+    methods: {
+        navFn(i) {
+            this.navArr.forEach((item, index) => {
+                if (i==index) {
+                    item.isActive = "active"
+                } else {
+                    item.isActive = ""
+                }
+            })
+            if(i==0) {
+                this.$router.push('/');
+            } else if(i==1) {
+                this.$router.push({ path: '/duanzi' });
+            } else if(i==2) {
+                this.$router.push({ path: '/games' });
+            } else if(i==3) {
+                this.$router.push({ path: '/me' });
+            }
+        }
+    },
+    mounted() {
+        
+    }
 }
 </script>
 <style lang="less" scoped>

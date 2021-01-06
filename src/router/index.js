@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import store from '@/store/index.js'
+import Games from '../views/Games.vue'
 const routes = [
   {
     path: '/',
@@ -11,6 +12,16 @@ const routes = [
     path: '/search',
     name: 'Search',
     component: () => import(/* webpackChunkName: "about" */ '../views/Search.vue')
+  },
+  {
+    path: '/games',
+    name: 'Games',
+    component: Games
+  },
+  {
+    path: '/hitPlane',
+    name: 'HitPlane',
+    component: () => import(/* webpackChunkName: "about" */ '../components/HitPlane.vue')
   },
   {
     path: '/me',
@@ -31,9 +42,19 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
   },
   {
+    path: '/duanzi',
+    name: 'Duanzi',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Duanzi.vue')
+  },
+  {
     path: '/playlistDetail',
     name: 'PlaylistDetail',
     component: () => import(/* webpackChunkName: "about" */ '../views/PlaylistDetail.vue')
+  },
+  {
+    path: '/playPage',
+    name: 'PlayPage',
+    component: () => import(/* webpackChunkName: "about" */ '../components/PlayPage.vue')
   },
   {
     path: '/about',

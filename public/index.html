@@ -4,10 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=375,initial-scale=1.0">
+  <meta name="viewport" content="width=375,user-scalable=no">
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-  <!-- <link rel="stylesheet" href="//at.alicdn.com/t/font_2231277_4hxifxozrfb.css"> -->
-  <!-- <script src="//at.alicdn.com/t/font_2231277_pxnsjgzydec.js"></script> -->
   <title>
     <%= htmlWebpackPlugin.options.title %>
   </title>
@@ -21,8 +19,45 @@
         Please enable it to continue.</strong>
   </noscript>
   <div id="app"></div>
-
+  <script src="./static/mui.min.js"></script>
+  <script>
+    // 引入mui.min.js 前提下
+    mui.init({
+      keyEventBind: {
+        backbutton: true //关闭back按键监听
+      }
+    });
+    // 定义初始值
+    var first = null;
+    // 重写后退方法
+    mui.back = function () {
+      // 如果当前是首页
+      if (window.location.hash == "#/") {
+        // 第一次按
+        if (!first) {
+          // 记录第一次按下回退键的时间
+          first = new Date().getTime();
+          //给出提示
+          mui.toast("再按一次退出应用");
+          setTimeout(function () {
+            //1s中后清除
+            first = null;
+          }, 1000);
+          // 不是第一次按后退
+        } else {
+          if (new Date().getTime() - first < 500) {
+            //如果两次按下的时间小于0.5s，
+            plus.runtime.quit(); //那么就退出app
+          }
+        }
+      } else {
+        // 控制vue 后退
+        history.back();
+      }
+    }
+  </script>
   <script src="<%= BASE_URL %>js/rem.js"></script>
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
 </body>
 
 </html>
