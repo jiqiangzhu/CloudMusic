@@ -45,6 +45,10 @@ const routes = [
     path: '/duanzi',
     name: 'Duanzi',
     component: () => import(/* webpackChunkName: "about" */ '../views/Duanzi.vue')
+  },{
+    path: '/playdz',
+    name: 'PlayDZ',
+    component: () => import(/* webpackChunkName: "about" */ '../components/PlayDZ.vue')
   },
   {
     path: '/playlistDetail',

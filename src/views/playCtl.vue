@@ -2,29 +2,40 @@
     <div class="play-contro">
         <div class="left" @click="toPlayPageFn">
             <!-- {{playlist[0].al.name}} -->
-            <img :src="playlist[currentIndex].al.picUrl" :alt="playlist[currentIndex].al.name">
-            <span class="title">{{playlist[currentIndex].al.name}}</span>
+            <img :src="playlist[currentIndex].al.picUrl" :alt="playlist[currentIndex].al.name" />
+            <span class="title">{{ playlist[currentIndex].name }}</span>
             <span>-</span>
             <!-- {{playlist[currentIndex].ar}} -->
-            <span class="author"><span v-for="(item, i) in playlist[currentIndex].ar" :key="i">{{item.name}}  </span></span>
+            <span class="author">
+                <span v-for="(item, i) in playlist[currentIndex].ar" :key="i">{{ item.name }}</span>
+            </span>
         </div>
         <div class="right">
             <span v-if="paused" @click="changeStateFn" class="iconfont icon-icon-"></span>
             <span v-else @click="changeStateFn" class="iconfont icon-zanting"></span>
             <span class="iconfont icon-liebiao"></span>
         </div>
-        <PlayPage :paused="paused" :play="changeStateFn" @back="isShow=!isShow" :musicDetail="playlist[currentIndex]" v-show="isShow"/>
-        <audio ref="audio" :src="`https://music.163.com/song/media/outer/url?id=${playlist[currentIndex].id}.mp3`"></audio>
+        <PlayPage
+            :paused="paused"
+            :play="changeStateFn"
+            @back="isShow = !isShow"
+            :musicDetail="playlist[currentIndex]"
+            v-show="isShow"
+        />
+        <audio
+            ref="audio"
+            :src="`https://music.163.com/song/media/outer/url?id=${playlist[currentIndex].id}.mp3`"
+        ></audio>
     </div>
 </template>
 <script>
 import { onMounted, reactive, inject } from 'vue'
-import {mapState, mapMutations, mapGetters, mapActions} from 'vuex'
+import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
 import PlayPage from '@/components/PlayPage.vue'
 
 export default {
     props: ["tracks"],
-    data() {       
+    data() {
         return {
             paused: true,
             isShow: false
@@ -37,26 +48,33 @@ export default {
         ...mapState(['currentIndex', "playlist"])
     },
     watch: {
-        
+
     },
     updated() {
         this.$store.dispatch('setLyric', this.playlist[this.currentIndex].id)
-        
-        
+
+
     },
     mounted() {
+
+
+
         // this.$store.dispatch('setLyric', this.playlist[this.currentIndex].id)
     },
     beforeMount() {
-        
-        console.log(this.playlist[this.currentIndex].ar);
+        // let tempList = JSON.parse(localStorage.playlist);
+        // console.log(tempList);
+        // if (tempList) {
+        //     this.$store.commit("setPlayList", { playList: tempList })
+        // }
+        console.log(this.playlist);
     },
     beforeUnmount() {
         clearInterval(this.$store.state.intervalId)
     },
     methods: {
         changeStateFn() {
-            if(this.paused == true) {  
+            if (this.paused == true) {
                 this.$refs.audio.play()
                 this.updateTime()
             } else {
@@ -66,13 +84,13 @@ export default {
             this.paused = !this.paused
         },
         updateTime() {
-            this.$store.state.intervalId = setInterval(()=>{
+            this.$store.state.intervalId = setInterval(() => {
                 this.$store.commit('setCurrentTime', this.$refs.audio.currentTime)
                 // console.log(this.$refs.audio.currentTime);
-            }, 1000)            
+            }, 1000)
         },
         toPlayPageFn() {
-            this.isShow=!this.isShow
+            this.isShow = !this.isShow
             // this.$router.push({path: '/playPage', musicDetail: this.playlist[this.currentIndex]})
         }
     }

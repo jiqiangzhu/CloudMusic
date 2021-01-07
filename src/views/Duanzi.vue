@@ -12,7 +12,7 @@
 			<div class="play-item" v-for="(item ,i) in dzList" :key="i">
 				<!-- <div class="img" :style="{backgroundImage: url(item.thumbnail)"></div> -->
 				<img :src="item.thumbnail" alt="thumbnail" class="img" />
-				<button class="play-btn" @click="playFn" :data-index="index"></button>
+				<button class="play-btn" @click="playFn(i)" :data-index="index"></button>
 				<div class="play-bottom">
 					<span class="type">原创</span>
 					<span class="play-num">{{ item.up }}</span>万次播放
@@ -27,38 +27,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="see-more">加载更多</div>
-		<div class="brief">
-			<button class="download2">
-				<span class="hicon"></span>
-				祝静静生日快乐
-			</button>
-			<div class="main">
-				<div class="m-top">
-					<span class="title">「个人集锦」手感不佳！亚当斯28投9中砍下39分8助攻！</span>
-					<span class="xhicon"></span>
-				</div>
-				<!-- div.content>(div.item>(span.item-icon+span.txt))*5 -->
-			</div>
-		</div>
-	</div>
-	<div class="video">
-		<video
-			id="my-video"
-			class="video-js vjs-default-skin"
-			controls
-			preload="auto"
-			style="width:700px;height:400px"
-		>
-			<source src="https:xxx.m3u8" type="application/x-mpegURL" />
-		</video>
-		<!-- <video :src="videoUrl" controls="controls" loop="loop"></video> -->
-		<div class="close"></div>
+		<div class="see-more" @click="seeMore">加载更多</div>
 	</div>
 </template>
 <script>
-import videojs from 'video.js'
-import 'videojs-contrib-hls'
 import { getDuanzi } from '../api/index.js'
 export default {
 	name: "HaoKan",
@@ -69,25 +41,28 @@ export default {
 		}
 	},
 	methods: {
-		playFn() {
-			videojs("my-video",
-				function() {
-					this.play();
-				});
+		playFn(i) {
+			this.$router.push({ path: "/playdz", query: { index: i } });
+			this.$store.commit("setVideoList", { videoList: this.dzList })
+		},
+		async initList(num=10) {
+			let data = await getDuanzi(num);
+			console.log(data);
+			let tempList = data.data.result;
+			// console.log(this.dzList);
+			// this.videoUrl = this.dzList[0].video;
+			// console.log(this.videoUrl);
+			return tempList;
+		},
+		async seeMore() {
+			let num = this.dzList.length + 10;
+			// let num = this.dzList.length==10?this.dzList.length:10
+			this.dzList = await this.initList(num)
 		}
 	},
 	async mounted() {
 		this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: true });
-		let data = await getDuanzi();
-		console.log(data);
-		this.dzList = data.data.result;
-		console.log(this.dzList);
-		this.videoUrl = this.dzList[0].video;
-		console.log(this.videoUrl);
-		videojs("my-video",
-			function() {
-				this.play();
-			});
+		this.dzList = await this.initList();
 
 	}
 }
@@ -99,6 +74,8 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
+	overflow: hidden;
+	padding-bottom: 1rem;
 }
 
 #haokan .header {
@@ -168,7 +145,7 @@ export default {
 .play-area {
 	width: 7.5rem;
 	/* height: 2.11rem; */
-	background-color: #000;
+	/* background-color: #000; */
 	position: relative;
 	margin-top: 1.04rem;
 }

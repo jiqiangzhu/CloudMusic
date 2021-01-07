@@ -8,7 +8,7 @@
            <span class="right">首开VIP仅5元></span>
         </div>
         <div class="list-top">
-            <div class="left">
+            <div class="left" @click="playAllFn">
                 <span class="iconfont icon-bofang2"></span>
                 <div class="all">
                     <span class="txt">播放全部</span>
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="list-content">
-            <div class="list-item" v-for="(item, i) in playlist.tracks" :key="i">
+            <div class="list-item" @click="playSongFn(i)" v-for="(item, i) in playlist.tracks" :key="i">
                 <div class="left">
                     <span class="index">{{i+1}}</span>
                     <div class="content">
@@ -48,7 +48,14 @@ export default {
     props: ['playlist'],
     
     methods: {
-        ...mapMutations(['setCurrentIndex'])
+        ...mapMutations(['setCurrentIndex']),
+        playAllFn() {
+            console.log(this.playlist.tracks);
+            this.$store.commit('setPlayList', this.playlist.tracks)
+        },
+        playSongFn(i) {
+            
+        }
     }
 }
 </script>

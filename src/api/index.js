@@ -47,6 +47,7 @@ export function getUserDetail(uid) {
 }
 
 // 获取段子
-export function getDuanzi() {
-    return axios.get(`https://api.apiopen.top/getJoke?page=${1}&count=10&&type=video`)
+export function getDuanzi(num=10) {
+    let pageNum = Math.floor(Math.random()*27)+1;
+    return axios.get(`https://api.apiopen.top/getJoke?page=${pageNum}&count=${num}&&type=video`)
 }

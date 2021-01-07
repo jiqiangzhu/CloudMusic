@@ -86,6 +86,8 @@ export default {
 #photo-wrap {
     perspective: 400px;
     width: 375px;
+    margin-top: -30px;
+    margin-left: -15px;
 }
 .container {
     width: 400px;

@@ -46,7 +46,7 @@ export default {
             // console.log("PlaylistDetail: ", data);
             state.playlist = data.playlist
             console.log(data.playlist);
-            store.commit('setPlayList', data.playlist.tracks)
+            // store.commit('setPlayList', data.playlist.tracks)
             store.commit('setPlayFlag', {playControlFlag: true, navBarFlag: false})
             // console.log("setPlayList-tracks: ", data.playlist.tracks);
             state.avatarUrl = data.playlist.creator.avatarUrl

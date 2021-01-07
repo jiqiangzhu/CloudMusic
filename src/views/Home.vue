@@ -12,7 +12,7 @@
     </Swiper>
     <IconList />
     <SetupMusicList />
-    <CSS3D class="css-3d"/>
+    <CSS3D class="css-3d" />
     <!-- <SetupMusicList />
     <SetupMusicList />-->
     <!-- <button @click="$refs.mySwiper.swiper.slideNext()">下一页</button> -->
@@ -69,16 +69,10 @@ export default {
     // this.$store.commit('setPlayFlag', {playControlFlag: true, navBarFlag: false})
   },
   mounted() {
-    // 如果支持 popstate 一般移动端都支持了
-    if (window.history && window.history.pushState) {
-      // 往历史记录里面添加一条新的当前页面的url
-      history.pushState(null, null, document.URL);
-      // 给 popstate 绑定一个方法 监听页面刷新
-      window.addEventListener('popstate', this.backChange, false);//false阻止默认事件
-    }
+
   },
   unmounted() {
-    window.removeEventListener('popstate', this.backChange, false);//false阻止默认事件
+
   }
 
 }
@@ -91,6 +85,7 @@ export default {
   padding-bottom: 2rem;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   // position: fixed;
   // left: 0;
   // top: 1rem;

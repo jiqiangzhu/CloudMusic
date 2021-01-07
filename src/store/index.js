@@ -6,14 +6,15 @@ export default createStore({
     navBarFlag: true,
     playlist: [{
       al: {
-        id: 98799011,
-        name: "耗尽",
-        pic: 109951165498613440,
-        picUrl: "http://p4.music.126.net/yITtaf5rX2hOXQSBn60opA==/109951165498613448.jpg",
-        pic_str: "109951165498613448"
-      }
-    }
-    ],
+        id: 91888443,
+        name: "是想你的声音啊",
+        pic: 109951165109878600,
+        picUrl: "http://p3.music.126.net/cIR63lyPGgQ4mAyuOTg8lA==/109951165109878587.jpg",
+        pic_str: "109951165109878587",
+      },
+      id: 1807500165
+    }],
+    videoList: [],
     currentIndex: 0,
     lyric: '',
     currentTime: 0,
@@ -25,6 +26,9 @@ export default createStore({
   },
   getters: {
     listLyric(state) {
+      if (state.lyric == null) {
+        return
+      }
       let arr1 = state.lyric.split(/\n/);
       let arr2 = arr1.filter((item, index) => {
         if (item == null || item == "") {
@@ -75,7 +79,11 @@ export default createStore({
       state.navBarFlag = flag.navBarFlag;
     },
     setPlayList(state, list) {
-      state.playlist = list
+      state.playlist = list;
+      localStorage.playlist = JSON.stringify(state.playlist)
+    },
+    setToPlayList(state, value) {
+
     },
     setCurrentIndex(state, index) {
       state.currentIndex = index
@@ -88,6 +96,10 @@ export default createStore({
     },
     setUser(state, value) {
       state.user = value
+    },
+    setVideoList(state, value) {
+      console.log(value);
+      state.videoList = value.videoList
     }
   },
   actions: {
@@ -105,13 +117,11 @@ export default createStore({
       if (result.data.code == 200) {
         context.state.user.isLogin = true
         context.state.user.userAccount = result.data.account
-
         // 获取用户详情
         let userDetail = await getUserDetail(result.data.account.id)
         context.state.user.userDetail = userDetail.data
         context.commit('setUser', context.state.user)
         // 本地存储
-
         localStorage.userInfo = JSON.stringify(context.state.user)
       }
       return result
