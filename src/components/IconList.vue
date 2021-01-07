@@ -1,22 +1,21 @@
 <template>
     <div id="icon-list">
         <div class="i-list">
-            <div class="list-item" v-for="(item, i) in iconlist" :key="i">
+            <!-- <div class="list-item" v-for="(item, i) in iconlist" :key="i">
                 <div class="icon-item">
                     <img :src="item.pic" alt="icon" class="birth" />
                 </div>
-                <!-- <span class="txt">{{item.txt}}</span> -->
-            </div>
+            </div>-->
 
             <!-- <div class="txt">Happy Birthday</div> -->
-            <!-- <div class="list-item">
+            <div class="list-item">
                 <div class="icon-item">
                     <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-rili"></use>
+                        <use xlink:href="#icon-rili" />
                     </svg>
-                    <img :src="iconlist[0].pic" alt="icon" class="birth" />
+                    <!-- <img :src="iconlist[0].pic" alt="icon" class="birth" /> -->
                 </div>
-                <span class="txt">生</span>
+                <span class="txt">推荐</span>
             </div>
             <div class="list-item">
                 <div class="icon-item">
@@ -24,7 +23,7 @@
                         <use xlink:href="#icon-FM_weixuanze" />
                     </svg>
                 </div>
-                <span class="txt">日</span>
+                <span class="txt">FM</span>
             </div>
             <div class="list-item">
                 <div class="icon-item">
@@ -32,7 +31,7 @@
                         <use xlink:href="#icon-gedan" />
                     </svg>
                 </div>
-                <span class="txt">快</span>
+                <span class="txt">歌单</span>
             </div>
             <div class="list-item">
                 <div class="icon-item">
@@ -40,16 +39,16 @@
                         <use xlink:href="#icon-biaoqiankuozhan_paihang-128" />
                     </svg>
                 </div>
-                <span class="txt">乐</span>
-            </div>-->
-            <!-- <div class="list-item">
+                <span class="txt">排行</span>
+            </div>
+            <div class="list-item">
                 <div class="icon-item">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-zhibo" />
                     </svg>
                 </div>
                 <span class="txt">直播</span>
-            </div>-->
+            </div>
         </div>
         <!-- <div class="txt">静静，生日快乐呀</div> -->
         <div class="icon-bottom-line"></div>
@@ -118,21 +117,22 @@ export default {
                     height: 0.6rem;
                 }
             }
+            .txt {
+                // position: absolute;
+                // left: 0;
+                // bottom: 0.1rem;
+                // width: 7.5rem;
+                text-align: center;
+                // height: 0.8rem;
+                // line-height: 0.8rem;
+                font-size: 0.2rem;
+                // color: #ff0000;
+
+                // padding-top: 0.15rem;
+            }
         }
     }
-    .txt {
-        position: absolute;
-        left: 0;
-        bottom: 0.1rem;
-        width: 7.5rem;
-        text-align: center;
-        // height: 0.8rem;
-        // line-height: 0.8rem;
-        font-size: 0.4rem;
-        color: #ff0000;
 
-        // padding-top: 0.15rem;
-    }
     .icon-bottom-line {
         width: 100%;
         height: 0.02rem;

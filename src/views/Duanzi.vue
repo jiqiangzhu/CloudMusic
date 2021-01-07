@@ -11,18 +11,18 @@
 		<div class="play-area">
 			<div class="play-item" v-for="(item ,i) in dzList" :key="i">
 				<!-- <div class="img" :style="{backgroundImage: url(item.thumbnail)"></div> -->
-				<img :src="item.thumbnail" alt="thumbnail" class="img">
-				<button class="play-btn" :data-index="index"></button>
+				<img :src="item.thumbnail" alt="thumbnail" class="img" />
+				<button class="play-btn" @click="playFn" :data-index="index"></button>
 				<div class="play-bottom">
 					<span class="type">原创</span>
-					<span class="play-num">{{item.up}}</span>万次播放
+					<span class="play-num">{{ item.up }}</span>万次播放
 				</div>
 				<div class="play-foot">
 					<!-- <div class="avator" style="background-image: url(${item.header});"></div> -->
-					<img :src="item.header" alt="header" class="avator">
+					<img :src="item.header" alt="header" class="avator" />
 					<div class="play-brief">
-						<div class="author">{{item.name}}</div>
-						<div class="brief">{{item.text}}</div>
+						<div class="author">{{ item.name }}</div>
+						<div class="brief">{{ item.text }}</div>
 					</div>
 				</div>
 			</div>
@@ -42,14 +42,38 @@
 			</div>
 		</div>
 	</div>
+	<div class="video">
+		<video
+			id="my-video"
+			class="video-js vjs-default-skin"
+			controls
+			preload="auto"
+			style="width:700px;height:400px"
+		>
+			<source src="https:xxx.m3u8" type="application/x-mpegURL" />
+		</video>
+		<!-- <video :src="videoUrl" controls="controls" loop="loop"></video> -->
+		<div class="close"></div>
+	</div>
 </template>
 <script>
+import videojs from 'video.js'
+import 'videojs-contrib-hls'
 import { getDuanzi } from '../api/index.js'
 export default {
 	name: "HaoKan",
 	data() {
 		return {
-			dzList: []
+			dzList: [],
+			videoUrl: ""
+		}
+	},
+	methods: {
+		playFn() {
+			videojs("my-video",
+				function() {
+					this.play();
+				});
 		}
 	},
 	async mounted() {
@@ -58,6 +82,13 @@ export default {
 		console.log(data);
 		this.dzList = data.data.result;
 		console.log(this.dzList);
+		this.videoUrl = this.dzList[0].video;
+		console.log(this.videoUrl);
+		videojs("my-video",
+			function() {
+				this.play();
+			});
+
 	}
 }
 </script>
@@ -154,7 +185,7 @@ export default {
 
 .play-area .play-item {
 	width: 7.5rem;
-	height: 4.8rem;
+	height: 5rem;
 	position: relative;
 	margin-bottom: 0.1rem;
 }
@@ -179,7 +210,7 @@ export default {
 	height: 0.22rem;
 	position: absolute;
 	right: 0.2rem;
-	bottom: 0.7rem;
+	bottom: 1rem;
 	text-align: right;
 	color: #fff;
 }

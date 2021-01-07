@@ -12,6 +12,7 @@
     </Swiper>
     <IconList />
     <SetupMusicList />
+    <CSS3D class="css-3d"/>
     <!-- <SetupMusicList />
     <SetupMusicList />-->
     <!-- <button @click="$refs.mySwiper.swiper.slideNext()">下一页</button> -->
@@ -29,7 +30,8 @@ import Bottom from '@/views/Bottom.vue'
 import Swiper from '@/components/Swiper.vue'
 import IconList from '@/components/IconList.vue'
 import RecMusicList from '@/components/RecMusicList.vue'
-import SetupMusicList from '@/components/SetupMusicList.vue'
+import SetupMusicList from '@/components/SetupMusicList.vue';
+import CSS3D from '@/components/CSS3D.vue';
 import playCtl from '@/views/playCtl.vue'
 import { getBanner } from '../api/index'
 import { mapMutations } from 'vuex'
@@ -43,7 +45,8 @@ export default {
     IconList,
     RecMusicList,
     SetupMusicList,
-    playCtl
+    playCtl,
+    CSS3D
   },
   data() {
     return {
