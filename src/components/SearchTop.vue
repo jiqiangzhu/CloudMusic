@@ -15,7 +15,7 @@
         </div>
         <div class="l-content" v-if="contentShow">
             <!--  v-for="(item, i) in resultSongs" :key="i" -->
-            <div class="list-item" v-for="(item, i) in resultSongs" :key="i">
+            <div class="list-item" v-for="(item, i) in resultSongs" @click="playSong($event, i)" :key="i">
                 <div class="left">
                     <span class="index"></span>
                     <div class="content">
@@ -73,7 +73,7 @@ export default {
             this.isShow = false
             this.contentShow = true
             console.log(this.resultSongs);
-            this.$store.commit('setPlayList', this.resultSongs)
+            // this.$store.commit('setPlayList', this.resultSongs)
         },
         async enterEvent(event) {
             if(this.keyword != '') {
@@ -88,7 +88,7 @@ export default {
             // 获取关键词搜索结果集
             let result = await getSearchResults(this.keyword)
             this.resultSongs = result.data.result.songs
-            this.$store.commit('setPlayList', this.resultSongs)
+            // this.$store.commit('setPlayList', this.resultSongs)
             // 清空搜索框
             this.keyword = ''
         },
@@ -101,6 +101,7 @@ export default {
             console.log(this.resultSongs);
             this.$store.commit('setPlayList', this.resultSongs)
             this.$store.commit('setCurrentIndex', i)
+            this.$store.commit("setPausedFlag", {paused: false})
         }
     }
 }

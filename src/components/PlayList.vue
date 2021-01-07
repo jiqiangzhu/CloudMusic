@@ -45,16 +45,22 @@
 <script>
 import { mapMutations } from 'vuex'
 export default {
-    props: ['playlist'],
+    props: ['playlist', "paused"],
     
     methods: {
         ...mapMutations(['setCurrentIndex']),
         playAllFn() {
-            console.log(this.playlist.tracks);
             this.$store.commit('setPlayList', this.playlist.tracks)
+            // 设置播放index
+            this.$store.commit('setCurrentIndex', 0)
+            this.$store.commit("setPausedFlag", {paused: false})
         },
         playSongFn(i) {
-            
+            // 设置播放列表
+            this.$store.commit('setPlayList', this.playlist.tracks)
+            // 设置播放index
+            this.$store.commit('setCurrentIndex', i)
+            this.$store.commit("setPausedFlag", {paused: false})
         }
     }
 }

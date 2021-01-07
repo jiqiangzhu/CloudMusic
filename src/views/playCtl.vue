@@ -2,7 +2,7 @@
     <div class="play-contro">
         <div class="left" @click="toPlayPageFn">
             <!-- {{playlist[0].al.name}} -->
-            <img :src="playlist[currentIndex].al.picUrl" :alt="playlist[currentIndex].al.name" />
+            <img :src="playlist[currentIndex].al.picUrl" :alt="playlist[currentIndex].name" />
             <span class="title">{{ playlist[currentIndex].name }}</span>
             <span>-</span>
             <!-- {{playlist[currentIndex].ar}} -->
@@ -37,40 +37,9 @@ export default {
     props: ["tracks"],
     data() {
         return {
-            paused: true,
+            // paused: true,
             isShow: false
         }
-    },
-    components: {
-        PlayPage
-    },
-    computed: {
-        ...mapState(['currentIndex', "playlist"])
-    },
-    watch: {
-
-    },
-    updated() {
-        this.$store.dispatch('setLyric', this.playlist[this.currentIndex].id)
-
-
-    },
-    mounted() {
-
-
-
-        // this.$store.dispatch('setLyric', this.playlist[this.currentIndex].id)
-    },
-    beforeMount() {
-        // let tempList = JSON.parse(localStorage.playlist);
-        // console.log(tempList);
-        // if (tempList) {
-        //     this.$store.commit("setPlayList", { playList: tempList })
-        // }
-        console.log(this.playlist);
-    },
-    beforeUnmount() {
-        clearInterval(this.$store.state.intervalId)
     },
     methods: {
         changeStateFn() {
@@ -81,7 +50,7 @@ export default {
                 this.$refs.audio.pause()
                 clearInterval(this.$store.state.intervalId)
             }
-            this.paused = !this.paused
+            this.$store.commit("setPausedFlag", {paused: !this.paused})
         },
         updateTime() {
             this.$store.state.intervalId = setInterval(() => {
@@ -92,6 +61,31 @@ export default {
         toPlayPageFn() {
             this.isShow = !this.isShow
             // this.$router.push({path: '/playPage', musicDetail: this.playlist[this.currentIndex]})
+        }
+    },
+    components: {
+        PlayPage
+    },
+    computed: {
+        ...mapState(['currentIndex', "playlist", "paused"])
+    },
+    // watch: {
+    //     paused1(newValue, oldValue) {
+    //         this.paused = this.paused1
+    //         if(newValue == false) {
+    //             this.$refs.audio.play()
+    //         } else {
+    //             this.$refs.audio.pause()
+    //         }
+    //     }
+    // },
+    mounted() {
+        console.log(this.playlist[this.currentIndex]);
+    },
+    updated() {
+        this.$store.dispatch('setLyric', this.playlist[this.currentIndex].id)
+        if(!this.paused) {
+            this.$refs.audio.play()
         }
     }
 }

@@ -61,9 +61,15 @@ export default {
     ...mapMutations(['setPlayFlag'])
   },
   async beforeMount() {
-    let res = await getBanner(1)
+    let res = await getBanner(1);
     this.imgList = res.data.banners;
-    this.$store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: true })
+    this.$store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: true });
+    
+    if(localStorage.playlist) {
+      let localPlayList = JSON.parse(localStorage.playlist);
+      console.log(localPlayList);
+      this.$store.commit("setPlayList", localPlayList)
+    }
   },
   beforeUnmount() {
     // this.$store.commit('setPlayFlag', {playControlFlag: true, navBarFlag: false})

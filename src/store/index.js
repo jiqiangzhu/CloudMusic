@@ -12,7 +12,9 @@ export default createStore({
         picUrl: "http://p3.music.126.net/cIR63lyPGgQ4mAyuOTg8lA==/109951165109878587.jpg",
         pic_str: "109951165109878587",
       },
-      id: 1807500165
+      id: 1807500165,
+      name: "是你的声音啊",
+      ar: [{name: "傲七爷"}]
     }],
     videoList: [],
     currentIndex: 0,
@@ -22,7 +24,8 @@ export default createStore({
       isLogin: false,
       userDetail: {},
       userAccount: {}
-    }
+    },
+    paused: true
   },
   getters: {
     listLyric(state) {
@@ -74,13 +77,18 @@ export default createStore({
     }
   },
   mutations: {
+    setPausedFlag(state, value) {
+      state.paused = value.paused
+    },
     setPlayFlag(state, flag) {
       state.playControlFlag = flag.playControlFlag;
       state.navBarFlag = flag.navBarFlag;
     },
     setPlayList(state, list) {
-      state.playlist = list;
-      localStorage.playlist = JSON.stringify(state.playlist)
+      if(list) {
+        state.playlist = list;
+        localStorage.playlist = JSON.stringify(list);
+      }
     },
     setToPlayList(state, value) {
 
