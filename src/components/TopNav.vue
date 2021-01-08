@@ -1,7 +1,7 @@
 <template>
     <div class="top-nav">
         <!-- <div class="top-left"> -->
-            <span class="iconfont icon-liebiao1"></span>
+            <span class="iconfont icon-liebiao1" @click="$router.push('/homeMunu')"></span>
         <!-- </div> -->
         <div class="top-center">
             <div class="search-box" @click="$router.push({path: '/search'})">
@@ -10,7 +10,7 @@
             </div>
         </div>
         <!-- <div class="top-right"> -->
-            <span class="iconfont icon-maikefeng-tianchong"></span>
+            <span class="iconfont icon-maikefeng-tianchong" @click="$router.push('/listen')"></span>
         <!-- </div> -->
     </div>
 </template>

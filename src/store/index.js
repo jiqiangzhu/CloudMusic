@@ -14,7 +14,7 @@ export default createStore({
       },
       id: 1807500165,
       name: "是你的声音啊",
-      ar: [{name: "傲七爷"}]
+      ar: [{ name: "傲七爷" }]
     }],
     videoList: [],
     currentIndex: 0,
@@ -25,7 +25,13 @@ export default createStore({
       userDetail: {},
       userAccount: {}
     },
-    paused: true
+    paused: true,
+    navArr: [
+      { icon: "icon-icon--", txt: "see", text: "首页", isActive: "active" },
+      { icon: "icon-_gongguanchuanbo", txt: "boke", text: "小视频", isActive: "" },
+      { icon: "icon-yinyue", txt: "game", text: "小游戏", isActive: "" },
+      { icon: "icon-daohanglan-05", txt: "my", text: "我的", isActive: "" }
+    ]
   },
   getters: {
     listLyric(state) {
@@ -77,15 +83,29 @@ export default createStore({
     }
   },
   mutations: {
+    // 导航栏切换
+    setNavArr(state, value) {
+      state.navArr.forEach((item, index) => {
+        if (value.index == index) {
+          item.isActive = "active"
+        } else {
+          item.isActive = ""
+        }
+      })
+      // state.navArr = value.navArr
+    },
+    // 控制音乐播放
     setPausedFlag(state, value) {
       state.paused = value.paused
     },
+    // 状态栏音乐控制器显示控制
     setPlayFlag(state, flag) {
       state.playControlFlag = flag.playControlFlag;
       state.navBarFlag = flag.navBarFlag;
     },
+    // 设置播放列表
     setPlayList(state, list) {
-      if(list) {
+      if (list) {
         state.playlist = list;
         localStorage.playlist = JSON.stringify(list);
       }
@@ -93,6 +113,7 @@ export default createStore({
     setToPlayList(state, value) {
 
     },
+    // 设置当前播放索引
     setCurrentIndex(state, index) {
       state.currentIndex = index
     },
@@ -106,7 +127,7 @@ export default createStore({
       state.user = value
     },
     setVideoList(state, value) {
-      console.log(value);
+      console.log(state.videoList);
       state.videoList = value.videoList
     }
   },

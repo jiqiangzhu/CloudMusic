@@ -15,13 +15,13 @@
             <span v-else @click="changeStateFn" class="iconfont icon-zanting"></span>
             <span class="iconfont icon-liebiao"></span>
         </div>
-        <PlayPage
+        <!-- <PlayPage
             :paused="paused"
             :play="changeStateFn"
             @back="isShow = !isShow"
             :musicDetail="playlist[currentIndex]"
             v-show="isShow"
-        />
+        /> -->
         <audio
             ref="audio"
             :src="`https://music.163.com/song/media/outer/url?id=${playlist[currentIndex].id}.mp3`"
@@ -59,8 +59,9 @@ export default {
             }, 1000)
         },
         toPlayPageFn() {
-            this.isShow = !this.isShow
-            // this.$router.push({path: '/playPage', musicDetail: this.playlist[this.currentIndex]})
+            // this.isShow = !this.isShow
+            console.log(this.playlist);
+            this.$router.push({path: '/playPage'});
         }
     },
     components: {

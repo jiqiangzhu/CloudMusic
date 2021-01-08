@@ -1,19 +1,19 @@
 <template>
     <div class="play-page" >
-        <div class="bg" :style="{backgroundImage: `url(${musicDetail.al.picUrl})`}" ></div>
+        <div class="bg" :style="{backgroundImage: `url(${playlist[currentIndex].al.picUrl})`}" ></div>
         <div class="p-top">
-            <span class="iconfont icon-jiantou8" @click="$emit('back')"></span>
+            <span class="iconfont icon-jiantou8" @click="playPageBackFn"></span>
             <div class="name">
                 <!-- <marquee behavior="scroll" direction="left">{{musicDetail.al.name}}</marquee> -->
-                <span class="brief">{{musicDetail.al.name}}</span>
-                <span class="detail">{{musicDetail.al.name}}-xxx</span>
+                <span class="brief">{{playlist[currentIndex].al.name}}</span>
+                <span class="detail">{{playlist[currentIndex].al.name}}-xxx</span>
             </div>
             <span class="iconfont icon-fenxiang"></span>
         </div>
         <div class="content" v-show="!isLyric" @click="isLyric=!isLyric">
             <img src="@/assets/img/needle-ip6.png" alt="" :class="{active: !paused}" class="handler">
             <img src="@/assets/img/disc_black.png" alt="" class="disc">
-            <img :src="musicDetail.al.picUrl" alt="" class="play-img">
+            <img :src="playlist[currentIndex].al.picUrl" alt="" class="play-img">
         </div>
         <div class="lyric" v-show="isLyric" @click="isLyric=!isLyric" ref="playLrc">
             <div class="scroll-lrc" >
@@ -46,7 +46,7 @@
 import {getLyric} from '@/api/index'
 import { mapGetters, mapMutations, mapState } from 'vuex';
 export default {
-    props: ['musicDetail', 'paused', 'play'],
+    // props: ['musicDetail', 'paused', 'play'],
     data() {
         return {
             isLyric: false,
@@ -54,7 +54,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(['lyric', 'currentTime', 'playlist', 'currentIndex']),
+        ...mapState(['lyric', 'currentTime', 'playlist', 'currentIndex', 'paused']),
         ...mapGetters(['listLyric'])
     },
     methods: {
@@ -71,6 +71,13 @@ export default {
                 index = 0
             }
             this.$store.commit('setCurrentIndex', index)
+        },
+        playPageBackFn() {
+            // this.$emit('back')
+            this.$router.go(-1)
+        },
+        play() {
+            this.$store.commit("setPausedFlag", {paused: !this.paused})
         }
     },
     mounted() {

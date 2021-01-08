@@ -8,7 +8,7 @@
             </div>-->
 
             <!-- <div class="txt">Happy Birthday</div> -->
-            <div class="list-item">
+            <div class="list-item" @click="$router.push('/recommand')">
                 <div class="icon-item">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-rili" />
@@ -17,7 +17,7 @@
                 </div>
                 <span class="txt">推荐</span>
             </div>
-            <div class="list-item">
+            <div class="list-item" @click="$router.push('/FM')">
                 <div class="icon-item">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-FM_weixuanze" />
@@ -25,7 +25,7 @@
                 </div>
                 <span class="txt">FM</span>
             </div>
-            <div class="list-item">
+            <div class="list-item" @click="$router.push('/playList')">
                 <div class="icon-item">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-gedan" />
@@ -33,7 +33,7 @@
                 </div>
                 <span class="txt">歌单</span>
             </div>
-            <div class="list-item">
+            <div class="list-item" @click="$router.push('/rank')">
                 <div class="icon-item">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-biaoqiankuozhan_paihang-128" />
@@ -41,7 +41,7 @@
                 </div>
                 <span class="txt">排行</span>
             </div>
-            <div class="list-item">
+            <div class="list-item"  @click="$router.push('/live')">
                 <div class="icon-item">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-zhibo" />

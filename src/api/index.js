@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 let baseUrl = "http://188.131.193.21:3000"
-// let baseUrl = "http://music.cpengx.cn"
 
 // 网易云音乐api 调用此接口 , 可获取 banner( 轮播图 ) 数据
 //  type:资源类型,对应以下类型,默认为 0 即PC
@@ -48,6 +47,6 @@ export function getUserDetail(uid) {
 
 // 获取段子
 export function getDuanzi(num=10) {
-    let pageNum = Math.floor(Math.random()*27)+1;
+    let pageNum = Math.floor(Math.random()*20)+1;
     return axios.get(`https://api.apiopen.top/getJoke?page=${pageNum}&count=${num}&&type=video`)
 }

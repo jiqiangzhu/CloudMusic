@@ -4,15 +4,14 @@
 			<div class="logo"></div>
 			<div class="input">
 				<div class="search-icon"></div>
-				<input type="text" id="input" placeholder="请输入内容" />
+				<input type="text" id="input" @keydown.enter="$router.push('/searchVideo')" placeholder="请输入内容" />
 			</div>
-			<!-- <button class="download">下载APP</button> -->
 		</div>
 		<div class="play-area">
-			<div class="play-item" v-for="(item ,i) in dzList" :key="i">
+			<div class="play-item" v-for="(item ,i) in videoList" :key="i">
 				<!-- <div class="img" :style="{backgroundImage: url(item.thumbnail)"></div> -->
 				<img :src="item.thumbnail" alt="thumbnail" class="img" />
-				<button class="play-btn" @click="playFn(i)" :data-index="index"></button>
+				<button class="play-btn" @click="playFn(i)" :data-index="i"></button>
 				<div class="play-bottom">
 					<span class="type">原创</span>
 					<span class="play-num">{{ item.up }}</span>万次播放
@@ -27,42 +26,50 @@
 				</div>
 			</div>
 		</div>
-		<div class="see-more" @click="seeMore">加载更多</div>
+		<div class="see-more" @click="seeMore">换一批</div>
 	</div>
 </template>
 <script>
+import { mapState } from 'vuex';
 import { getDuanzi } from '../api/index.js'
 export default {
 	name: "HaoKan",
 	data() {
 		return {
-			dzList: [],
-			videoUrl: ""
+
 		}
+	},
+	computed: {
+		...mapState(['videoList'])
 	},
 	methods: {
 		playFn(i) {
 			this.$router.push({ path: "/playdz", query: { index: i } });
-			this.$store.commit("setVideoList", { videoList: this.dzList })
 		},
-		async initList(num=10) {
+		async initList(num = 10) {
 			let data = await getDuanzi(num);
-			console.log(data);
 			let tempList = data.data.result;
-			// console.log(this.dzList);
-			// this.videoUrl = this.dzList[0].video;
-			// console.log(this.videoUrl);
 			return tempList;
 		},
 		async seeMore() {
-			let num = this.dzList.length + 10;
-			// let num = this.dzList.length==10?this.dzList.length:10
-			this.dzList = await this.initList(num)
+			// chrome
+			document.body.scrollTop = 0
+			// firefox
+			document.documentElement.scrollTop = 0
+			// safari
+			window.pageYOffset = 0
+			let videoList = await this.initList();
+			this.$store.commit("setVideoList", { videoList: videoList });
 		}
 	},
 	async mounted() {
 		this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: true });
-		this.dzList = await this.initList();
+		this.$store.commit("setNavArr", {index: 1});
+		if (this.videoList.length == 0) {
+			let videoList = await this.initList();
+			console.log(videoList);
+			this.$store.commit("setVideoList", { videoList: videoList })
+		}
 
 	}
 }

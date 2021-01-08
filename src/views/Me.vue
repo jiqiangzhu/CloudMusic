@@ -266,7 +266,8 @@ export default {
         Bottom
     },
     mounted() {
-        console.log(this.$store.state.user.userDetail.profile.avatarUrl);
+        // console.log(this.$store.state.user.userDetail.profile.avatarUrl);
+        this.$store.commit("setNavArr", {index: 3});
     }
 }
 </script>

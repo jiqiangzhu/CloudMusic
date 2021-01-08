@@ -13,28 +13,19 @@
     </div>
 </template>
 <script>
-import { Tabbar, TabbarItem } from 'vant';
+import { mapState } from 'vuex'
 export default {
     data() {
         return {
-            isActive: "active",
-            navArr: [
-                { icon: "icon-icon--", txt: "see", text: "首页", isActive: "active" },
-                { icon: "icon-_gongguanchuanbo", txt: "boke", text: "小视频", isActive: "" },
-                { icon: "icon-yinyue", txt: "game", text: "小游戏", isActive: "" },
-                { icon: "icon-daohanglan-05", txt: "my", text: "我的", isActive: "" }
-            ]
+            isActive: "active"
         }
+    },
+    computed: {
+        ...mapState(['navArr'])
     },
     methods: {
         navFn(i) {
-            this.navArr.forEach((item, index) => {
-                if (i==index) {
-                    item.isActive = "active"
-                } else {
-                    item.isActive = ""
-                }
-            })
+            this.$store.commit("setNavArr", {index: i})
             if(i==0) {
                 this.$router.push('/');
             } else if(i==1) {

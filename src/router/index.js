@@ -67,7 +67,9 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+  },
+  { path: '/:id(.*)', 
+  component: () => import(/* webpackChunkName: "about" */ '../views/NotFound.vue') } //匹配未找到的路径
 ]
 
 const router = createRouter({

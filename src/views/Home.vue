@@ -13,13 +13,6 @@
     <IconList />
     <SetupMusicList />
     <CSS3D class="css-3d" />
-    <!-- <SetupMusicList />
-    <SetupMusicList />-->
-    <!-- <button @click="$refs.mySwiper.swiper.slideNext()">下一页</button> -->
-
-    <!-- <playCtl :tracks="$store.state.playlist" v-if="true" class="play-ctl" /> -->
-    <!-- <Bottom :barFlag="true" :playFlag="false"/> -->
-    <!-- <Bottom /> -->
   </div>
 </template>
 
@@ -64,20 +57,14 @@ export default {
     let res = await getBanner(1);
     this.imgList = res.data.banners;
     this.$store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: true });
-    
+    this.$store.commit("setNavArr", {index: 0});
     if(localStorage.playlist) {
       let localPlayList = JSON.parse(localStorage.playlist);
       console.log(localPlayList);
       this.$store.commit("setPlayList", localPlayList)
     }
   },
-  beforeUnmount() {
-    // this.$store.commit('setPlayFlag', {playControlFlag: true, navBarFlag: false})
-  },
   mounted() {
-
-  },
-  unmounted() {
 
   }
 

@@ -2,7 +2,7 @@
     <div id="music-list">
         <div class="music-top">
             <span class="title">推荐你听</span>
-            <span class="more">更多></span>
+            <span class="more" @click="$router.push('/live')">更多></span>
         </div>
         <div class="music-content">
             <router-link :to="{path: '/playlistDetail', query: {id: item.id}}" class="music-item" v-for="(item, i) in state.musicList" :key="i">

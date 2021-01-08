@@ -12,7 +12,8 @@ export default {
         HitPlane
     },
     beforeMount() {
-        this.$store.commit('setPlayFlag', {playControlFlag: false, navBarFlag: true})
+        this.$store.commit('setPlayFlag', {playControlFlag: false, navBarFlag: true});
+        this.$store.commit("setNavArr", {index: 2});
     },
     data() {
         return {
