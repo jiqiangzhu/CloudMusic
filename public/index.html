@@ -32,7 +32,7 @@
     // 重写后退方法
     mui.back = function () {
       // 如果当前是首页
-      if (window.location.hash == "#/") {
+      if (window.location.hash == "#/" || location.hash == '#/duanzi' || location.hash == '#/me' || location.hash == '#/games' || location.hash == '#/login') {
         // 第一次按
         if (!first) {
           // 记录第一次按下回退键的时间
@@ -50,9 +50,14 @@
             plus.runtime.quit(); //那么就退出app
           }
         }
-      } else {
+      } 
+      // else if ( location.hash == '#/playPage' || location.hash == '#/search') {
+      //   // tab栏点击，返回到首页
+      //   history.go(-history.length + 1)
+      // } 
+      else {
         // 控制vue 后退
-        history.back();
+        history.go(-1);
       }
     }
   </script>

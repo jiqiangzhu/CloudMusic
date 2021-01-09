@@ -10,7 +10,9 @@
 		<div class="play-area">
 			<div class="play-item" v-for="(item ,i) in videoList" :key="i">
 				<!-- <div class="img" :style="{backgroundImage: url(item.thumbnail)"></div> -->
-				<img :src="item.thumbnail" alt="thumbnail" class="img" />
+				<div class="img-wrapper">
+					<img :src="item.thumbnail" alt="thumbnail" class="img" />
+				</div>
 				<button class="play-btn" @click="playFn(i)" :data-index="i"></button>
 				<div class="play-bottom">
 					<span class="type">原创</span>
@@ -64,13 +66,16 @@ export default {
 	},
 	async mounted() {
 		this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: true });
-		this.$store.commit("setNavArr", {index: 1});
+		this.$store.commit("setNavArr", { index: 1 });
 		if (this.videoList.length == 0) {
 			let videoList = await this.initList();
 			console.log(videoList);
 			this.$store.commit("setVideoList", { videoList: videoList })
 		}
 
+	},
+	updated() {
+		this.$store.commit("setNavArr", { index: 1 });
 	}
 }
 </script>
@@ -156,15 +161,23 @@ export default {
 	position: relative;
 	margin-top: 1.04rem;
 }
-
-.play-area .img {
+.play-area .img-wrapper {
 	width: 7.5rem;
+	height: 4.22rem;
+	display: flex;
+	justify-content: center;
+	background: #000;
+}
+.play-area .img {
+	/* width: 7.5rem; */
 	/* width: auto; */
 	height: 4.22rem;
-	background-image: url("../assets/duanzi/bg-img.png");
+	width: auto;
+
+	/* background-image: url("../assets/duanzi/bg-img.png");
 	background-size: auto 100%;
 	background-position: center;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat; */
 }
 
 .play-area .play-item {

@@ -24,6 +24,8 @@
         /> -->
         <audio
             ref="audio"
+            loop
+            @ended="playNext(currentIndex)"
             :src="`https://music.163.com/song/media/outer/url?id=${playlist[currentIndex].id}.mp3`"
         ></audio>
     </div>
@@ -62,6 +64,14 @@ export default {
             // this.isShow = !this.isShow
             console.log(this.playlist);
             this.$router.push({path: '/playPage'});
+        },
+        playNext(index1) {
+            let index = index1 + 1
+            if(index>=this.playlist.length) {
+                index = 0
+            } 
+            this.$store.commit("setCurrentIndex", index);
+            this.$refs.audio.play()
         }
     },
     components: {

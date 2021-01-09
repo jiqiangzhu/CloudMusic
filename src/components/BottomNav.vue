@@ -30,6 +30,7 @@ export default {
                 this.$router.push('/');
             } else if(i==1) {
                 this.$router.push({ path: '/duanzi' });
+                debugger
             } else if(i==2) {
                 this.$router.push({ path: '/games' });
             } else if(i==3) {
@@ -58,7 +59,7 @@ export default {
             font-size: 0.32rem;
         }
         span:nth-child(2) {
-            font-size: 0.12rem;
+            font-size: 0.24rem;
         }
     }
     .active {

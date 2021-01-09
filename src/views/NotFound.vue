@@ -1,6 +1,6 @@
 <template>
     <div class="not-found">
-        <span class="iconfont icon-arrowLeft" @click="$router.push('/')"></span>
+        <span class="iconfont icon-arrowLeft" @click="$router.go(-1)"></span>
         <div class="loading">
             <span></span>
             <span></span>

@@ -5,10 +5,10 @@
             <span class="iconfont icon-jiantou8" @click="playPageBackFn"></span>
             <div class="name">
                 <!-- <marquee behavior="scroll" direction="left">{{musicDetail.al.name}}</marquee> -->
-                <span class="brief">{{playlist[currentIndex].al.name}}</span>
-                <span class="detail">{{playlist[currentIndex].al.name}}-xxx</span>
+                <span class="brief">{{playlist[currentIndex].name}}</span>
+                <span class="detail">{{playlist[currentIndex].al.name}}-{{playlist[currentIndex].ar[0].name}}</span>
             </div>
-            <span class="iconfont icon-fenxiang"></span>
+            <span class="iconfont icon-fenxiang" @click="$router.push('/share')"></span>
         </div>
         <div class="content" v-show="!isLyric" @click="isLyric=!isLyric">
             <img src="@/assets/img/needle-ip6.png" alt="" :class="{active: !paused}" class="handler">
@@ -24,15 +24,15 @@
         </div>
         <div class="footer">
             <div class="f-top">
-                <span class="iconfont icon-xihuan"></span>
-                <span class="iconfont icon-download"></span>
-                <span class="iconfont icon-ziyuan43"></span>
-                <span class="iconfont icon-pinglun"></span>
-                <span class="iconfont icon-ziyuan"></span>
+                <span class="iconfont icon-xihuan" @click="$router.push('/playPage/likes')"></span>
+                <span class="iconfont icon-download" @click="$router.push('/playPage/download')"></span>
+                <span class="iconfont icon-ziyuan43" @click="$router.push('/playPage/share')"></span>
+                <span class="iconfont icon-pinglun" @click="$router.push('/playPage/comment')"></span>
+                <span class="iconfont icon-ziyuan" @click="$router.push('/playPage/moreOptions')"></span>
             </div>
             <div class="jindu"></div>
             <div class="f-bottom">
-                <span class="iconfont icon-xunhuan"></span>
+                <span class="iconfont icon-xunhuan" @click="$router.push('/playPage/mode')"></span>
                 <span class="iconfont icon-48shangyishou" @click="goPlay(-1)"></span>
                 <span v-if="paused" @keyup.space="play" @click="play" class="iconfont icon-iconset0481"></span>
                 <span v-else @click="play" @keyup.space="play" class="iconfont icon-zanting"></span>
@@ -71,6 +71,7 @@ export default {
                 index = 0
             }
             this.$store.commit('setCurrentIndex', index)
+            
         },
         playPageBackFn() {
             // this.$emit('back')
