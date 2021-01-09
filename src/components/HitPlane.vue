@@ -1,6 +1,6 @@
 <template>
     <div class="hit-plane">
-        <div id="startBg">
+        <div id="startBg" @click="startGame">
             <img id="start" src="../assets/plane/start.png" />
         </div>
         <div id="battleground"></div>
@@ -47,9 +47,18 @@
 <script>
 import '../static/cookie.js';
 import '../static/js-me.js';
+import { Toast } from 'vant'
 export default {
     beforeMount() {
-        this.$store.commit('setPlayFlag', {playControlFlag: false, navBarFlag: false})
+        this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: false })
+    },
+    methods: {
+        startGame() {
+            Toast.fail('敬请期待');
+            setTimeout(() => {
+                this.$router.go(-1)
+            }, 1000)
+        }
     }
 }
 </script>
@@ -64,7 +73,6 @@ body {
     position: fixed;
     left: calc(50% - 1.5rem);
     bottom: 2rem;
-    
 }
 #battleground {
     width: 100vw;
@@ -170,6 +178,4 @@ body {
     width: 100vw;
     overflow: hidden;
 }
-
-
 </style>

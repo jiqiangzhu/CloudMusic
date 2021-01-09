@@ -56,7 +56,6 @@ export default {
     display: flex;
     margin: 0 auto;
     flex-direction: column;
-    background: #fff;
     .music-top {
         width: 100%;
         height: 0.66rem;

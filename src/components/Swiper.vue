@@ -51,7 +51,6 @@ export default {
             if(this.swiper) {
                 this.swiper.destroy()
             }
-            console.log(this.swiper);
             this.swiper = new Swiper ('#swiperIndex'+this.id, {
                 // direction: 'vertical', // 垂直切换选项
                 loop: this.loop, // 循环模式选项

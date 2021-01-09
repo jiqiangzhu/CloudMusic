@@ -21,10 +21,12 @@
             @back="isShow = !isShow"
             :musicDetail="playlist[currentIndex]"
             v-show="isShow"
-        /> -->
+        />-->
         <audio
+            @canplay="getDuration"
+            @timeupdate="updateTime"
             ref="audio"
-            loop
+            loop="loopFlag"
             @ended="playNext(currentIndex)"
             :src="`https://music.163.com/song/media/outer/url?id=${playlist[currentIndex].id}.mp3`"
         ></audio>
@@ -39,11 +41,15 @@ export default {
     props: ["tracks"],
     data() {
         return {
-            // paused: true,
-            isShow: false
+            isShow: false,
+            timer: 0,
+            progress: 0
         }
     },
     methods: {
+        getDuration() {
+            this.$store.commit("setDuration", this.$refs.audio.duration)
+        },
         changeStateFn() {
             if (this.paused == true) {
                 this.$refs.audio.play()
@@ -52,24 +58,21 @@ export default {
                 this.$refs.audio.pause()
                 clearInterval(this.$store.state.intervalId)
             }
-            this.$store.commit("setPausedFlag", {paused: !this.paused})
+            this.$store.commit("setPausedFlag", { paused: !this.paused })
         },
         updateTime() {
-            this.$store.state.intervalId = setInterval(() => {
-                this.$store.commit('setCurrentTime', this.$refs.audio.currentTime)
-                // console.log(this.$refs.audio.currentTime);
-            }, 1000)
+            this.$store.commit('setCurrentTime', this.$refs.audio.currentTime)
+            let progress = this.currentTime / this.duration
+            this.$store.commit("setProgress", progress)
         },
         toPlayPageFn() {
-            // this.isShow = !this.isShow
-            console.log(this.playlist);
-            this.$router.push({path: '/playPage'});
+            this.$router.push({ path: '/playPage' });
         },
         playNext(index1) {
             let index = index1 + 1
-            if(index>=this.playlist.length) {
+            if (index >= this.playlist.length) {
                 index = 0
-            } 
+            }
             this.$store.commit("setCurrentIndex", index);
             this.$refs.audio.play()
         }
@@ -78,25 +81,20 @@ export default {
         PlayPage
     },
     computed: {
-        ...mapState(['currentIndex', "playlist", "paused"])
+        ...mapState(['currentIndex', 'loopFlag', "playlist", "paused", "currentTime", 'duration'])
     },
-    // watch: {
-    //     paused1(newValue, oldValue) {
-    //         this.paused = this.paused1
-    //         if(newValue == false) {
-    //             this.$refs.audio.play()
-    //         } else {
-    //             this.$refs.audio.pause()
-    //         }
-    //     }
-    // },
+    watch: {
+        
+    },
     mounted() {
-        console.log(this.playlist[this.currentIndex]);
+
     },
     updated() {
         this.$store.dispatch('setLyric', this.playlist[this.currentIndex].id)
-        if(!this.paused) {
+        if (!this.paused) {
             this.$refs.audio.play()
+        } else {
+            this.$refs.audio.pause()
         }
     }
 }
@@ -108,7 +106,8 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #efefef;
+    // background: transparent;
+    background: rgba(239,239,239, 0.3);
     .left {
         flex: 1;
         display: flex;

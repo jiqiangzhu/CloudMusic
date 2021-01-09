@@ -4,6 +4,9 @@ export default createStore({
   state: {
     playControlFlag: true,
     navBarFlag: true,
+    loopFlag: false,
+    // 进度条
+    progress: "0.00%",
     playlist: [{
       al: {
         id: 91888443,
@@ -20,6 +23,7 @@ export default createStore({
     currentIndex: 0,
     lyric: '',
     currentTime: 0,
+    duration: 0.00,
     user: {
       isLogin: false,
       userDetail: {},
@@ -83,6 +87,20 @@ export default createStore({
     }
   },
   mutations: {
+    // 音乐总时长
+    setDuration(state, value) {
+      state.duration = value
+    },
+    // 设置进度条
+    setProgress(state, value) {
+      // console.log((value * 100).toFixed(2));
+      
+      state.progress = (value * 100).toFixed(2) + "%"
+    },
+    // 设置是否循环播放
+    setLoopFlag(state) {
+      state.loopFlag = ! state.loopFlag;
+    },
     // 导航栏切换
     setNavArr(state, value) {
       state.navArr.forEach((item, index) => {
@@ -92,7 +110,6 @@ export default createStore({
           item.isActive = ""
         }
       })
-      // state.navArr = value.navArr
     },
     // 控制音乐播放
     setPausedFlag(state, value) {
@@ -110,9 +127,6 @@ export default createStore({
         localStorage.playlist = JSON.stringify(list);
       }
     },
-    setToPlayList(state, value) {
-
-    },
     // 设置当前播放索引
     setCurrentIndex(state, index) {
       state.currentIndex = index
@@ -127,7 +141,6 @@ export default createStore({
       state.user = value
     },
     setVideoList(state, value) {
-      console.log(state.videoList);
       state.videoList = value.videoList
     }
   },

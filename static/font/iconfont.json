@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2767709",
+      "name": "单曲循环",
+      "font_class": "icon-1",
+      "unicode": "e649",
+      "unicode_decimal": 58953
+    },
+    {
       "icon_id": "2116276",
       "name": "删除",
       "font_class": "dustbin_icon",

@@ -1,33 +1,24 @@
 <template>
-    <div id="photo-wrap">
+    <div id="photo-wrap" @click="bgMusicPlay">
         <!-- 舞台 -->
         <div class="container">
             <!-- 容器 -->
-            <img :src="iconlist[3].pic" alt="" class="img">
-            <img v-for="(item, i) in iconlist" :key="i" :src="item.pic" class="img" :class="item.txt" alt="item.txt">
-            <!-- <img src="" alt="" class="img img01">
-            <img src="" alt="" class="img img02">
-            <img src="" alt="" class="img img03">
-            <img src="" alt="" class="img img04">
-            <img src="" alt="" class="img img05">
-            <img src="" alt="" class="img img06">
-            <img src="" alt="" class="img img07">
-            <img src="" alt="" class="img img08">
-            <img src="" alt="" class="img img09"> -->
-            <!-- <div class="img"></div>
-            <div class="img img01"></div>
-            <div class="img img02"></div>
-            <div class="img img03"></div>
-            <div class="img img04"></div>
-            <div class="img img05"></div>
-            <div class="img img06"></div>
-            <div class="img img07"></div>
-            <div class="img img08"></div>
-            <div class="img img09"></div> -->
+            <img :src="iconlist[3].pic" alt class="img" />
+            <img
+                v-for="(item, i) in iconlist"
+                :key="i"
+                :src="item.pic"
+                class="img"
+                :class="item.txt"
+                alt="item.txt"
+            />
         </div>
+
+        <HappyBirthDay class="bgm"/>
     </div>
 </template>
 <script>
+import HappyBirthDay from '@/views/HappyBirthDay.vue'
 export default {
     name: "CSS3D",
     data() {
@@ -43,6 +34,14 @@ export default {
                 { pic: require('../assets/iconlist/8.jpg'), txt: "img08" },
                 { pic: require('../assets/iconlist/4.jpg'), txt: "img09" }
             ]
+        }
+    },
+    components: {
+        HappyBirthDay
+    },
+    methods: {
+        bgMusicPlay() {
+            
         }
     }
 }
@@ -147,5 +146,12 @@ export default {
 }
 .img09 {
     transform: rotateY(320deg) translateZ(150px);
+}
+.bgm {
+    width: 100%;
+    height: 4rem;
+    position: absolute;
+    left: 0;
+    top: 0.8rem;
 }
 </style>

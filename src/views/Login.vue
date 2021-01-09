@@ -6,27 +6,43 @@
         <div class="form-group">
             <div class="form-item">
                 <label for="username">
-                    <img src="../assets/img/user.png">
+                    <img src="../assets/img/user.png" />
                 </label>
-                <input v-model="phone" id="username" type="text" placeholder="请输入账号" autocomplete="new-password">
+                <input
+                    v-model="phone"
+                    id="username"
+                    type="text"
+                    placeholder="请输入账号"
+                    autocomplete="new-password"
+                />
             </div>
             <div class="form-item">
                 <label for="password">
-                    <img src="../assets/img/password.png" alt="">
+                    <img src="../assets/img/password.png" alt />
                 </label>
-                <input v-model="password" id="password" type="password" placeholder="请输入密码" autocomplete="new-password">
+                <input
+                    v-model="password"
+                    id="password"
+                    type="password"
+                    placeholder="请输入密码"
+                    autocomplete="new-password"
+                />
             </div>
         </div>
         <div class="button-group">
             <button class="login-btn" id="doLogin" @click="loginEvent">登录</button>
         </div>
-
         <div class="order-login">
             <p class="order-login-line">其他登录方式</p>
             <div class="order-login-box">
                 <div>
                     <a href="#">
-                        <img src="../assets/img/wechat-login.png" alt="" style="width: 45px;height: 45px;">
+                        <img
+                            src="../assets/img/wechat-login.png"
+                            @click="weixinLogin"
+                            alt
+                            style="width: 45px;height: 45px;"
+                        />
                         <p>微信登录</p>
                     </a>
                 </div>
@@ -35,6 +51,7 @@
     </div>
 </template>
 <script>
+import { Toast } from "vant"
 export default {
     data() {
         return {
@@ -44,17 +61,29 @@ export default {
     },
     methods: {
         async loginEvent() {
-            let result = await this.$store.dispatch('phoneLogin', {phone: this.phone, password: this.password})
-            if(result.data.code == 200) {
+            let result = await this.$store.dispatch('phoneLogin', { phone: this.phone, password: this.password })
+            if (result.data.code == 200) {
                 this.$router.push('/me')
             }
+        },
+        weixinLogin() {
+            Toast("敬请期待...")
         }
+    },
+    mounted() {
+        // console.log(this.$store.state.user.userDetail.profile.avatarUrl);
+        this.$store.commit("setNavArr", { index: 3 });
+        this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: true });
+    },
+    updated() {
+        this.$store.commit("setNavArr", { index: 3 });
+        this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: true });
     }
 }
 </script>
 <style lang="less" scoped>
-
-a, li {
+a,
+li {
     list-style: none;
 }
 a {
@@ -62,7 +91,8 @@ a {
     color: black;
 }
 .login-bg {
-    background: #ff0000;
+    // background: #ff0000;
+    background: url(../assets/iconlist/1.png);
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -84,7 +114,7 @@ a {
     font-weight: bold;
     text-align: center;
     letter-spacing: 2px;
-    text-shadow: 0.1em 0.15em 0.1em #74C3CA
+    text-shadow: 0.1em 0.15em 0.1em #74c3ca;
 }
 .login-logo {
     padding: 5%;
@@ -106,9 +136,9 @@ a {
 }
 .form-group .form-item {
     margin-top: 5%;
-    padding:0 10px;
+    padding: 0 10px;
     border-radius: 20px;
-    background-color: #B3DFE2;
+    background-color: #b3dfe2;
 }
 .form-group .form-item input {
     outline: none;
@@ -171,9 +201,8 @@ a {
 }
 .button-group .login-btn {
     background-color: #ffffff;
-    color: #74C3CA;
+    color: #74c3ca;
 }
-
 .order-login {
     padding: 5%;
 }
@@ -186,7 +215,7 @@ a {
 }
 .order-login-line:before,
 .order-login-line:after {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     background: #ffffff;
@@ -202,14 +231,14 @@ a {
 .order-login-box {
     display: flex;
     width: 100%;
-    justify-content:center;
+    justify-content: center;
     margin-top: 20px;
 }
-.order-login-box div{
+.order-login-box div {
     flex: 1;
     text-align: center;
 }
-.order-login-box div p{
+.order-login-box div p {
     text-align: center;
     font-size: 14px;
     color: #ffffff;

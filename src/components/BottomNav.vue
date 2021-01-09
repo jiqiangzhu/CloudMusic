@@ -30,7 +30,6 @@ export default {
                 this.$router.push('/');
             } else if(i==1) {
                 this.$router.push({ path: '/duanzi' });
-                debugger
             } else if(i==2) {
                 this.$router.push({ path: '/games' });
             } else if(i==3) {
@@ -48,7 +47,7 @@ export default {
     height: 1rem;
     width: 7.5rem;
     display: flex;
-
+    background: rgba(239,239,239, 0.9);
     .nav-item {
         flex: 1;
         display: flex;

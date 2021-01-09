@@ -1,7 +1,7 @@
 <template>
-    <div class="playdz">
+    <div class="playdz" @click="changeState">
         <!-- <button @click="playClick" :class="{hide: isPlay}">点击播放</button> -->
-        -->
+
         <!--class="video-js vjs-default-skin vjs-big-play-centered" -->
         <video
             ref="video"
@@ -10,11 +10,10 @@
             width="375"
             loop
             align="center"
-            :controls="controls"
-            :autoplay="autoplay"
-            @click="playVideo"
+            autoplay
+            :controls="false"
         >
-            <source :src="videoSrc" type="video/mp4" />
+            <source :src="videoList[index].video" type="video/mp4" />
         </video>
         <img :src="closeIcon" @click="$router.go(-1)" alt="关闭" />
     </div>
@@ -23,38 +22,36 @@
 import { mapState } from 'vuex';
 export default {
     name: 'PlayDZ',
-    methods: { 
-        playVideo() {
-            this.$refs.video.play()
+    methods: {
+        changeState() {
+            if (this.$refs.video.paused) {
+                this.$refs.video.play()
+            } else {
+                this.$refs.video.pause()
+            }
         }
     },
-    computed:{
+    computed: {
         ...mapState(['videoList'])
     },
     data() {
         return {
             videoSrc: '',
             videoImg: '',
-            playStatus: '',
-            muteStatus: '',
-            isMute: true,
-            isPlay: false,
             width: '375', // 设置视频播放器的显示宽度（以像素为单位）
             height: '220', // 设置视频播放器的显示高度（以像素为单位）
             preload: 'auto', //  建议浏览器是否应在<video>加载元素后立即开始下载视频数据。
             controls: true, // 确定播放器是否具有用户可以与之交互的控件。没有控件，启动视频播放的唯一方法是使用autoplay属性或通过Player API。
-            autoplay: '',
             index: 0,
             closeIcon: require('../assets/duanzi/close.png')
         }
     },
-    beforeMount() {  
-        // this.$store.commit("setNav", {index: 1})
+    beforeMount() {
+
     },
     mounted() {
         this.index = this.$route.query.index;
-        this.videoSrc = this.videoList[this.index].video;
-        console.log(this.videoSrc);
+        console.log(this.videoList);
         this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: false })
     }
 
@@ -71,6 +68,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
     img {
         width: 30px;
         height: 30px;

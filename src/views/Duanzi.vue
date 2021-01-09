@@ -4,7 +4,7 @@
 			<div class="logo"></div>
 			<div class="input">
 				<div class="search-icon"></div>
-				<input type="text" id="input" @keydown.enter="$router.push('/searchVideo')" placeholder="请输入内容" />
+				<input type="text" id="input" readonly @click="$router.push('/searchVideo')" placeholder="请输入内容" />
 			</div>
 		</div>
 		<div class="play-area">
@@ -34,6 +34,7 @@
 <script>
 import { mapState } from 'vuex';
 import { getDuanzi } from '../api/index.js'
+import { Toast } from 'vant';
 export default {
 	name: "HaoKan",
 	data() {
@@ -54,14 +55,19 @@ export default {
 			return tempList;
 		},
 		async seeMore() {
+			Toast.loading({
+				message: '加载中...',
+				forbidClick: true,
+			});
+
+			let videoList = await this.initList();
+			this.$store.commit("setVideoList", { videoList: videoList });
 			// chrome
 			document.body.scrollTop = 0
 			// firefox
 			document.documentElement.scrollTop = 0
 			// safari
 			window.pageYOffset = 0
-			let videoList = await this.initList();
-			this.$store.commit("setVideoList", { videoList: videoList });
 		}
 	},
 	async mounted() {
