@@ -26,7 +26,7 @@
         justify-content: space-between;
         padding: 0 0.2rem;
         align-items: center;
-        background-color:#efefef;
+        background-color:rgba(239,239,239);
         .iconfont {
             width: 0.5rem;
             height: 0.5rem;

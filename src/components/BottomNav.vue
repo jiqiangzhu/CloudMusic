@@ -47,7 +47,7 @@ export default {
     height: 1rem;
     width: 7.5rem;
     display: flex;
-    background: rgba(239,239,239, 0.9);
+    background: rgba(239,239,239);
     .nav-item {
         flex: 1;
         display: flex;

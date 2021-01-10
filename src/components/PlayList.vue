@@ -16,8 +16,8 @@
                 </div>
             </div>
             <div class="right">
-                <span class="iconfont icon-download"></span>
-                <span class="iconfont icon-plus-checkbox"></span>
+                <span class="iconfont icon-download" @click="$router.push('/download')"></span>
+                <span class="iconfont icon-plus-checkbox" @click="$router.push('/chooseAll')"></span>
             </div>
         </div>
         <div class="list-content">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="right">
                     <span class="iconfont icon-iconset0481" @click="setCurrentIndex(i)"></span>
-                    <span class="iconfont icon-ziyuan"></span>
+                    <span class="iconfont icon-ziyuan" @click="moreFn(i)"></span>
                 </div>                
             </div>
         </div>
@@ -43,11 +43,15 @@
     </div>
 </template>
 <script>
+import { Toast } from 'vant'
 import { mapMutations } from 'vuex'
 export default {
     props: ['playlist', "paused"],
     
     methods: {
+        moreFn(i) {
+            Toast("敬请期待")
+        },
         ...mapMutations(['setCurrentIndex']),
         playAllFn() {
             this.$store.commit('setPlayList', this.playlist.tracks)

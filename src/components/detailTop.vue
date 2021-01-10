@@ -37,17 +37,17 @@
         </div>
         <div id="bottom">
             <div class="bottom">
-                <div class="played">
+                <div class="played" @click="addToplay">
                     <span class="iconfont icon-tianjiazengjiajia"></span>
                     <span class="count">{{playlist.subscribedCount}}</span>
                 </div>
                 
-                <div class="comment">
+                <div class="comment" @click="commontFn">
                     <span class="iconfont icon-pinglun"></span>
                     <span class="count">{{playlist.commentCount}}</span>
                 </div>
                 
-                <div class="shared">
+                <div class="shared" @click="shareFn">
                     <span class="iconfont icon-fenxiang"></span>
                     <span class="count">{{playlist.shareCount}}</span>
                 </div>
@@ -58,8 +58,20 @@
 </template>
 
 <script>
+import {Toast} from 'vant'
     export default{
         props: ['playlist'],
+        methods: {
+            addToplay() {
+                Toast("敬请期待...");
+            },
+            commontFn() {
+                Toast("敬请期待...");
+            },
+            shareFn() {
+                Toast("敬请期待...");
+            }
+        },
         setup() {
             function changeValue(num) {
                 let res = 0

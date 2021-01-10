@@ -46,11 +46,14 @@ export default {
             width: 100%;
             height: auto;
             z-index: 10;
+            border-radius: 0.5rem;
         }
         .pull-box {
             width: 100%;
             height: 100%;
             z-index: 10;
+            border-radius: 0.5rem;
+            
         }
         .game-name {
             position: absolute;

@@ -122,10 +122,11 @@ export default {
                 // left: 0;
                 // bottom: 0.1rem;
                 // width: 7.5rem;
+                color: #fff;
                 text-align: center;
                 // height: 0.8rem;
                 // line-height: 0.8rem;
-                font-size: 0.2rem;
+                font-size: 0.28rem;
                 // color: #ff0000;
 
                 // padding-top: 0.15rem;

@@ -66,6 +66,7 @@ export default {
             padding-left: 0.25rem;
             font-size: 0.4rem;
             font-weight: 900;
+            color: #fff;
         }
         .more {
             width: 1.2rem;
@@ -76,6 +77,7 @@ export default {
             font-size: 0.25rem;
             border: 0.01rem solid #ddd;
             border-radius: 0.3rem;
+            color: #fff;
         }
     }
     .music-content {
@@ -117,6 +119,7 @@ export default {
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 font-size: 0.2rem;
+                color: #fff;
             }
         }
     }

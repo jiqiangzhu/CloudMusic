@@ -3,6 +3,7 @@
     <div class="scroll">
       <TopNav class="top-nav" />
       <Swiper
+        @click="swiperFn"
         ref="mySwiper"
         class="swiper"
         :imgList="imgList"
@@ -20,8 +21,11 @@
       <IconList class="iconlist" />
       <SetupMusicList class="musiclist" />
       <CSS3D class="css-3d" />
-
       <img src="../assets/iconlist/3.png" alt=" " class="bg" />
+    </div>
+    <div class="dialog" v-show="birthFlag" @click.stop="closeFn">
+      <img src="../assets/duanzi/close1.png" @click.stop="closeFn" class="close" alt="关闭">
+      <BGMCom class="birth" />
     </div>
   </div>
 </template>
@@ -37,7 +41,9 @@ import SetupMusicList from '@/components/SetupMusicList.vue';
 import CSS3D from '@/components/CSS3D.vue';
 import playCtl from '@/views/playCtl.vue'
 import { getBanner } from '../api/index'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex';
+import { Toast, Overlay } from 'vant';
+import BGMCom from '@/components/BGMCom.vue'
 
 export default {
   name: 'Home',
@@ -49,10 +55,12 @@ export default {
     RecMusicList,
     SetupMusicList,
     playCtl,
-    CSS3D
+    CSS3D,
+    BGMCom
   },
   data() {
     return {
+      // birthFlag: true,
       imgList: [
         { pic: require('../assets/img/swiper1.jpg') },
         { pic: require('../assets/img/swiper2.jpg') },
@@ -60,8 +68,19 @@ export default {
       ]
     }
   },
+  computed: {
+    ...mapState(['birthFlag']),
+  },
   methods: {
-    ...mapMutations(['setPlayFlag'])
+    ...mapMutations(['setPlayFlag']),
+    swiperFn() {
+      Toast("敬请期待...");
+    },
+    closeFn() {
+      // this.birthFlag = false;
+      this.$store.commit("setBirthFlag")
+    }
+    
   },
   async beforeMount() {
     let res = await getBanner(1);
@@ -81,6 +100,31 @@ export default {
 </script>
 <style lang="less">
 .home {
+  .dialog {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: rgba(239,239,239,0.3);
+    .close {
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      top: 4rem;
+      right: 0.5rem;
+      z-index: 10000;
+    }
+    // .birth {
+    //   width: 7.5rem;
+    //   height: auto;
+    // }
+  }
   .scroll {
     width: 7.5rem;
     font-family: "微软雅黑";

@@ -1,5 +1,5 @@
 <template>
-    <div class="happy-mp3" @click="playBgm">
+    <div class="happy-mp3" @click.stop="playBgm">
         <!-- 弹出层 -->
         <audio
             ref="audio"

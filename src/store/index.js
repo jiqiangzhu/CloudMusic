@@ -5,6 +5,7 @@ export default createStore({
     playControlFlag: true,
     navBarFlag: true,
     loopFlag: false,
+    birthFlag: true,
     // 进度条
     progress: "0.00%",
     playlist: [{
@@ -87,6 +88,10 @@ export default createStore({
     }
   },
   mutations: {
+    // 首页播放生日快乐
+    setBirthFlag(state) {
+      state.birthFlag = false;
+    },
     // 音乐总时长
     setDuration(state, value) {
       state.duration = value
