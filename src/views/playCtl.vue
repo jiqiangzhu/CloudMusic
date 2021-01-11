@@ -26,7 +26,7 @@
             @canplay="getDuration"
             @timeupdate="updateTime"
             ref="audio"
-            loop="loopFlag"
+            :loop="loopFlag"
             @ended="playNext(currentIndex)"
             :src="`https://music.163.com/song/media/outer/url?id=${playlist[currentIndex].id}.mp3`"
         ></audio>

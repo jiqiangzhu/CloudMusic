@@ -28,11 +28,16 @@
       }
     });
     // 定义初始值
-    var first = null;
+    let first = null;
     // 重写后退方法
     mui.back = function () {
+      let locationHash = window.location.hash;
+      console.log(locationHash)
+      let playDzReg = /^.*playdz.*$/;
+      let hitPlaneReg = /^.*hitPlane.*$/;
+      let pullBoxReg = /^.*pullBox.*$/;
       // 如果当前是首页
-      if (window.location.hash == "#/" || location.hash == '#/duanzi' || location.hash == '#/me' || location.hash == '#/games' || location.hash == '#/login') {
+      if (locationHash == "#/") {
         // 第一次按
         if (!first) {
           // 记录第一次按下回退键的时间
@@ -50,12 +55,13 @@
             plus.runtime.quit(); //那么就退出app
           }
         }
-      } 
-      // else if ( location.hash == '#/playPage' || location.hash == '#/search') {
-      //   // tab栏点击，返回到首页
-      //   history.go(-history.length + 1)
-      // } 
-      else {
+      } else if (locationHash.match(playDzReg)) {
+        // 视频播放页面
+        history.go("#/duanzi");
+      } else if (locationHash.match(hitPlaneReg) || locationHash.match(pullBoxReg)) {
+        // 游戏
+        history.go("#/games");
+      } else {
         // 控制vue 后退
         history.go(-1);
       }

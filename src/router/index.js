@@ -24,6 +24,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../components/HitPlane.vue')
   },
   {
+    path: '/pullBox',
+    name: 'PullBox',
+    component: () => import(/* webpackChunkName: "about" */ '../components/PullBox.vue')
+  },
+  {
     path: '/me',
     name: 'Me',
     beforeEnter: (to, from, next)=> {
@@ -73,8 +78,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  // history: createWebHashHistory(process.env.BASE_URL),
+  // history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
   routes
 })
 

@@ -14,7 +14,18 @@ export default {
   async mounted() {
     if(localStorage.userInfo != "" && localStorage.userInfo != undefined) {
       this.$store.state.user = JSON.parse(localStorage.userInfo)
-      
+    }
+    if(window.history && window.history.pushState) {
+      history.pushState(null, null, document.URL);
+      window.addEventListener("popstate", this.goBack, false);
+    }
+  },
+  unmounted() {
+    window.removeEventListener("popstate", this.goBack, false);
+  },
+  methods: {
+    goBack() {
+      this.$router.replace({path: '/'});
     }
   }
 }
