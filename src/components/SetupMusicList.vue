@@ -5,7 +5,7 @@
             <span class="more" @click="$router.push('/live')">更多></span>
         </div>
         <div class="music-content">
-            <router-link :to="{path: '/playlistDetail', query: {id: item.id}}" class="music-item" v-for="(item, i) in state.musicList" :key="i">
+            <router-link :to="{ path: '/playlistDetail', query: {id: item.id}}" class="music-item" v-for="(item, i) in state.musicList" :key="i">
                 <div class="rel-item">
                     <span class="iconfont icon-icon-"></span>
                     <span class="count">{{changeVlue(item.playCount)}}</span>

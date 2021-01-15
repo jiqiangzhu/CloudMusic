@@ -95,24 +95,24 @@ export default {
             if (this.playlist.length == 1) {
                 Toast("列表中没有更多歌曲了")
             }
-            let index = this.currentIndex + num
+            let index = this.currentIndex + num;
             if (index < 0) {
-                index = this.playlist.length - 1
+                index = this.playlist.length - 1;
             } else if (index > this.playlist.length - 1) {
-                index = 0
+                index = 0;
             }
-            this.$store.commit('setCurrentIndex', index)
+            this.$store.commit('setCurrentIndex', index);
 
         },
         playPageBackFn() {
-            // this.$emit('back')
-            this.$router.go(-1)
+            console.log(this.$router);
+            this.$router.go(-1);
         },
         play() {
-            this.$store.commit("setPausedFlag", { paused: !this.paused })
+            this.$store.commit("setPausedFlag", { paused: !this.paused });
         },
         changeLoopState() {
-            this.$store.commit("setLoopFlag")
+            this.$store.commit("setLoopFlag");
         }
     },
     mounted() {
@@ -121,11 +121,11 @@ export default {
     },
     watch: {
         currentTime: function(value) {
-            let activeP = document.querySelector('p.active')
+            let activeP = document.querySelector('p.active');
             if (activeP == null) {
                 return
             }
-            this.$refs.playLrc.scrollTop = activeP.offsetTop
+            this.$refs.playLrc.scrollTop = activeP.offsetTop;
 
         }
     }

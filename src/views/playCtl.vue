@@ -107,7 +107,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     // background: transparent;
-    background: rgba(239,239,239, 0.3);
+    background: rgba(239,239,239, 0.9);
     .left {
         flex: 1;
         display: flex;
@@ -124,7 +124,7 @@ export default {
         }
         .author {
             font-size: 0.2rem;
-            color: #999;
+            // color: #999;
             padding-top: 0.06rem;
         }
     }

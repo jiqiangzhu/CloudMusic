@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-let baseUrl = "http://188.131.193.21:3000"
+// let baseUrl = "http://188.131.193.21:3000";
+let baseUrl = "http://121.5.9.142:3000"
+// let baseUrl = "https://binaryify.github.io/NeteaseCloudMusicApi"
 
 // 网易云音乐api 调用此接口 , 可获取 banner( 轮播图 ) 数据
 //  type:资源类型,对应以下类型,默认为 0 即PC
@@ -13,6 +15,12 @@ export function getBanner(type=0) {
 // limit: 取出数量 , 默认为 30 (不支持 offset)
 export function getRecMusicList(limit=30) {
     return axios.get(`${baseUrl}/personalized?limit=${limit}`)
+}
+// 推荐歌单 /personalized?limit=1  调用此接口 , 可获取推荐歌单
+// limit: 取出数量 , 默认为 30 (不支持 offset)
+export function getDayRecomMusicList() {
+    console.log(`${baseUrl}/recommend/resource`);
+    return axios.get(`${baseUrl}/recommend/songs`)
 }
 
 // 歌单详情页api

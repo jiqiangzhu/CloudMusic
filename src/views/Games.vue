@@ -71,7 +71,7 @@ export default {
         left: 0;
         top: 0;
         z-index: 1;
-        width: 100vw;
+        width: 7.5rem;
         height: 100vh;
         filter: blur(2px);
     }

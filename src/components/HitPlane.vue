@@ -45,8 +45,6 @@
     </div>
 </template>
 <script>
-import '../static/cookie.js';
-import '../static/js-me.js';
 import { Toast } from 'vant'
 export default {
     beforeMount() {
