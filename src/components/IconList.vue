@@ -17,7 +17,7 @@
                 </div>
                 <span class="txt">推荐</span>
             </div>
-            <div class="list-item" @click="$router.push('/FM')">
+            <div class="list-item" @click="$router.push('/personalFM')">
                 <div class="icon-item">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-FM_weixuanze" />

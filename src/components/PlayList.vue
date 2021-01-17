@@ -67,6 +67,10 @@ export default {
             this.$store.commit("setPausedFlag", {paused: false})
         }
     }
+    // ,
+    // mounted() {
+    //     console.log(this.playlist);
+    // }
 }
 </script>
 <style lang="less" scoped>

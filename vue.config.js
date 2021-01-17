@@ -4,7 +4,7 @@ module.exports = {
     pages: {
         index: {
             entry: 'src/main.js',
-            title: '音乐'
+            title: 'QG音乐'
         }
     },
     devServer: {

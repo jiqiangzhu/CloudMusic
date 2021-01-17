@@ -151,8 +151,7 @@ export default createStore({
   },
   actions: {
     async setLyric(context, params) {
-      let result = await getLyric(params)
-      // console.log(result.data.lrc.lyric);
+      let result = await getLyric(params);
       if (!result.data.lrc) {
         context.commit('setLyricList', '')
       } else {
