@@ -22,6 +22,11 @@ export default {
         this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: true });
         this.$store.commit("setNavArr", { index: 2 });
     },
+    mounted() {
+        mui.back = function() {
+            window.history.go(-1);
+        }
+    },
     data() {
         return {
 

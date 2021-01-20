@@ -1,8 +1,9 @@
 <template>
     <div class="day-recomm">
+        <!-- <detailTop :playlist="state.playlist" class="detail-top"></detailTop> -->
     </div>
 </template>
-<script>
+<script>q1
 import { getDayRecomMusicList } from '@/api/index.js';
 import detailTop from './detailTop.vue';
 import PlayList from './PlayList.vue';
@@ -12,6 +13,16 @@ import { Toast } from 'vant';
 export default {
     components: {
         detailTop, PlayList
+    },
+    async mounted() {
+        this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: false });
+        try {
+            let result = await getDayRecomMusicList();
+            state.playlist.tracks = result.data.recommend;
+            console.log(result.data);
+        } catch (e) {
+            console.log(e);
+        }
     }
     // setup() {
     //     const state = reactive({
@@ -35,7 +46,7 @@ export default {
     //         } catch(e) {
     //             console.log(e);
     //         }
-            
+
     //     })
     //     return {state};
     // }

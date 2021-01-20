@@ -105,7 +105,7 @@ export default {
 
         },
         playPageBackFn() {
-            console.log(this.$router);
+            // console.log(this.$router);
             this.$router.go(-1);
         },
         play() {
@@ -117,7 +117,9 @@ export default {
     },
     mounted() {
         this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: false });
-        // this.musicDetail = this.$router.musicDetail
+        mui.back = function() {
+            window.history.go(-1);
+        }
     },
     watch: {
         currentTime: function(value) {

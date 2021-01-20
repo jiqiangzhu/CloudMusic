@@ -9,6 +9,11 @@ import HappyBirthDay from '@/views/HappyBirthDay.vue'
 export default {
     components: {
         HappyBirthDay
+    },
+    mounted() {
+        mui.back = function() {
+            window.history.go(-1);
+        }
     }
 }
 </script>

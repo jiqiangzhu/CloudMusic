@@ -39,6 +39,11 @@ export default {
     components: {
         HappyBirthDay
     },
+    mounted() {
+        mui.back = function() {
+            window.history.go(-1);
+        }
+    },
     methods: {
         bgMusicPlay() {
             

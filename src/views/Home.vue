@@ -23,15 +23,22 @@
       <CSS3D class="css-3d" />
       <img src="../assets/iconlist/3.png" alt=" " class="bg" />
     </div>
-    <div class="dialog" v-show="birthFlag" @click.stop="closeFn">
-      <img src="../assets/duanzi/close1.png" @click.stop="closeFn" class="close" alt="关闭">
+    <div class="dialog" v-show="birthFlag">
+      <img src="../assets/duanzi/close1.png" @click.stop="closeFn" class="close" alt="关闭" />
       <BGMCom class="birth" />
+      
+      <!-- <div class="show-dialog-flag" @click="neverShow" >
+        <input type="checkbox" :checked="showDialogFlag" id="showDialogFlag">
+        以后不再显示
+      </div> -->
     </div>
+    <van-checkbox v-show="birthFlag" :icon-size="25" :shape="'square'" class="show-dialog" checked-color="#ee0a24" v-model="showDialogFlag">不再显示</van-checkbox>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import { Checkbox, CheckboxGroup } from 'vant';
 import TopNav from '@/components/TopNav.vue'
 import Bottom from '@/views/Bottom.vue'
 import Swiper from '@/components/Swiper.vue'
@@ -56,33 +63,45 @@ export default {
     SetupMusicList,
     playCtl,
     CSS3D,
-    BGMCom
+    BGMCom, "van-checkbox": Checkbox
   },
   data() {
     return {
-      // birthFlag: true,
+      birthFlag: true,
       imgList: [
         { pic: require('../assets/img/swiper1.jpg') },
         { pic: require('../assets/img/swiper2.jpg') },
         { pic: require('../assets/img/swiper3.jpg') }
-      ]
+      ],
+      showDialogFlag: false
     }
   },
   computed: {
-    ...mapState(['birthFlag']),
+    // ...mapState(['birthFlag']),
   },
   methods: {
     ...mapMutations(['setPlayFlag']),
+    neverShow() {
+      this.showDialogFlag = !this.showDialogFlag
+    },
     swiperFn() {
       Toast("敬请期待...");
     },
     closeFn() {
+      console.log("======>>>>>>>this.showDialogFlag>>>>>>=====", this.showDialogFlag);
+      if(this.showDialogFlag) {
+        localStorage.showDialogFlag = this.showDialogFlag;
+      }
+      this.birthFlag = !this.birthFlag;
       // this.birthFlag = false;
-      this.$store.commit("setBirthFlag")
+      // this.$store.commit("setBirthFlag");
     }
-    
+
   },
   async beforeMount() {
+    if(localStorage.showDialogFlag) {
+      this.birthFlag = false;
+    }
     let res = await getBanner(1);
     this.imgList = res.data.banners;
     this.$store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: true });
@@ -93,7 +112,26 @@ export default {
     }
   },
   mounted() {
+    this.$store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: true });
+    this.$store.commit("setNavArr", { index: 0 });
+    var clickNum = 0;
+    mui.back = function(event) {
+      clickNum++;
+      if (clickNum > 1) {
+        plus.runtime.quit();
+      } else {
+        mui.toast("再按一次退出应用");
+      }
+      setTimeout(function() {
+        clickNum = 0
+      }, 2000);
+      return false;
+    }
 
+  },
+  updated() {
+    this.$store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: true });
+    this.$store.commit("setNavArr", { index: 0 });
   }
 
 }
@@ -101,7 +139,7 @@ export default {
 <style lang="less">
 .home {
   .dialog {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     z-index: 1000;
@@ -111,7 +149,7 @@ export default {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    background: rgba(239,239,239,0.3);
+    background: rgba(159, 159, 159, 0.7);
     .close {
       width: 1rem;
       height: 1rem;
@@ -156,8 +194,17 @@ export default {
       z-index: 1;
       width: 7.5rem;
       height: 100vh;
-      filter: blur(2px);
+      filter: blur(15px);
     }
+  }
+}
+.show-dialog {
+  position: fixed;
+  z-index: 10000;
+  right: 0.5rem;
+  bottom: 4.5rem;
+  span {
+    color: #333;
   }
 }
 .icon {

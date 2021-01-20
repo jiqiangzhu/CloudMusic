@@ -13,6 +13,9 @@ export default {
         }
     },
     async mounted() {
+        mui.back = function() {
+            window.history.go(-1);
+        }
         let result = await getPersonalFM();
         console.log(result);
     },

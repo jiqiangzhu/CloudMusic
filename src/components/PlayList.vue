@@ -66,11 +66,12 @@ export default {
             this.$store.commit('setCurrentIndex', i)
             this.$store.commit("setPausedFlag", {paused: false})
         }
+    },
+    mounted() {
+        mui.back = function() {
+            window.history.go(-1);
+        }
     }
-    // ,
-    // mounted() {
-    //     console.log(this.playlist);
-    // }
 }
 </script>
 <style lang="less" scoped>

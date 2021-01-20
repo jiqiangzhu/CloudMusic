@@ -4,7 +4,13 @@
 			<div class="logo"></div>
 			<div class="input">
 				<div class="search-icon"></div>
-				<input type="text" id="input" readonly @click="$router.push('/searchVideo')" placeholder="请输入内容" />
+				<input
+					type="text"
+					id="input"
+					readonly
+					@click="$router.push('/searchVideo')"
+					placeholder="请输入内容"
+				/>
 			</div>
 		</div>
 		<div class="play-area">
@@ -71,6 +77,9 @@ export default {
 		}
 	},
 	async mounted() {
+		mui.back = function() {
+			window.history.go(-1);
+		}
 		this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: true });
 		this.$store.commit("setNavArr", { index: 1 });
 		if (this.videoList.length == 0) {

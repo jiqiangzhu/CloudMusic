@@ -5,21 +5,26 @@
             <span class="more" @click="$router.push('/live')">更多></span>
         </div>
         <div class="music-content">
-            <router-link :to="{ path: '/playlistDetail', query: {id: item.id}}" class="music-item" v-for="(item, i) in state.musicList" :key="i">
+            <router-link
+                :to="{ path: '/playlistDetail', query: { id: item.id } }"
+                class="music-item"
+                v-for="(item, i) in state.musicList"
+                :key="i"
+            >
                 <div class="rel-item">
                     <span class="iconfont icon-icon-"></span>
-                    <span class="count">{{changeVlue(item.playCount)}}</span>
+                    <span class="count">{{ changeVlue(item.playCount) }}</span>
                 </div>
-                <img :src="item.picUrl" :alt="item.name">
-                <span class="brief">{{item.name}}</span>
+                <img :src="item.picUrl" :alt="item.name" />
+                <span class="brief">{{ item.name }}</span>
             </router-link>
         </div>
     </div>
 </template>
 <script>
-import {getRecMusicList} from '@/api/index'
-import {onMounted, reactive} from 'vue'
-import {mapMutations} from 'vuex'
+import { getRecMusicList } from '@/api/index'
+import { onMounted, reactive } from 'vue'
+import { mapMutations } from 'vuex'
 export default {
     // methods: {
     //     ...mapMutations(['setIsShow']),
@@ -28,21 +33,24 @@ export default {
     //     }
     // },
     setup() {
-        let state = reactive({musiclist: []})
+        let state = reactive({ musiclist: [] })
         function changeVlue(num) {
             let res = 0
-            if(num >= 100000000) {
+            if (num >= 100000000) {
                 res = (num / 100000000).toFixed(1) + '亿'
-            } else if(num >= 10000) {
-                res = (num /10000).toFixed(0) + '万'
+            } else if (num >= 10000) {
+                res = (num / 10000).toFixed(0) + '万'
             }
             return res
         }
-        
-        onMounted(async()=>{
+
+        onMounted(async () => {
+            mui.back = function() {
+                window.history.go(-1);
+            }
             let result = await getRecMusicList(10)
             state.musicList = result.data.result
-        }) 
+        })
         return {
             state,
             changeVlue
@@ -110,7 +118,7 @@ export default {
                 background: rgba(58, 57, 57, 0.2);
                 border-radius: 0.4rem;
             }
-            
+
             .brief {
                 width: 90%;
                 height: 0.5rem;

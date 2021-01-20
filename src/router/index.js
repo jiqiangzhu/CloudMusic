@@ -77,22 +77,24 @@ const routes = [
         next();
       } else {
         Toast("请先登录");
-  //       next('/login');
-  //     }
+        setTimeout(() => {
+          next('/login');
+        }, 1000)
+        //     }
 
-  //   }
-  // },
-  // {//私人FM
-  //   path: '/personalFM',
-  //   name: 'PersonalFM',
-  //   component: () => import(/* webpackChunkName: "about" */ '../components/PersonalFM.vue'),
-  //   beforeEnter: (from, to, next) => {
-  //     // 检查用户是否登录，未登录不能进入
-  //     if (store.state.user.isLogin) {
-  //       next();
-  //     } else {
-  //       Toast("请先登录");
-  //       next('/login');
+        //   }
+        // },
+        // {//私人FM
+        //   path: '/personalFM',
+        //   name: 'PersonalFM',
+        //   component: () => import(/* webpackChunkName: "about" */ '../components/PersonalFM.vue'),
+        //   beforeEnter: (from, to, next) => {
+        //     // 检查用户是否登录，未登录不能进入
+        //     if (store.state.user.isLogin) {
+        //       next();
+        //     } else {
+        //       Toast("请先登录");
+        //       next('/login');
       }
 
     }

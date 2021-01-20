@@ -66,6 +66,7 @@ export default {
             this.$store.commit("setProgress", progress)
         },
         toPlayPageFn() {
+            console.log(this.$router);
             this.$router.push({ path: '/playPage' });
         },
         playNext(index1) {
@@ -87,7 +88,7 @@ export default {
         
     },
     mounted() {
-
+        
     },
     updated() {
         this.$store.dispatch('setLyric', this.playlist[this.currentIndex].id)

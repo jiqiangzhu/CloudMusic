@@ -39,6 +39,7 @@ export default {
         })
 
         onMounted(async () => {
+            console.log("============>>>>>>>>>>playlistDetail>>>>>>", route);
             let id = route.query.id;
             let result = await getPlaylistDetail(id);
             let data = result.data;
@@ -47,7 +48,10 @@ export default {
             // store.commit('setPlayList', data.playlist.tracks)
             store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: false })
             // console.log("setPlayList-tracks: ", data.playlist.tracks);
-            state.avatarUrl = data.playlist.creator.avatarUrl
+            state.avatarUrl = data.playlist.creator.avatarUrl;
+            mui.back = function() {
+                window.history.go(-1);
+            }
 
         })
         return {

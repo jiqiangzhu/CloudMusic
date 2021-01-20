@@ -5,7 +5,7 @@
 <script>
 import SearchTop from '@/components/SearchTop.vue'
 import { useStore } from 'vuex'
-import { onBeforeMount } from 'vue';
+import { onBeforeMount, onMounted } from 'vue';
 export default {
     components: {
         SearchTop
@@ -14,6 +14,11 @@ export default {
         const store = useStore();
         onBeforeMount(()=>{
             store.commit('setPlayFlag', {playControlFlag: true, navBarFlag: false})
+        });
+        onMounted(()=>{
+            mui.back = function() {
+            window.history.go(-1);
+        }
         })
     }
 }

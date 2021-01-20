@@ -15,8 +15,10 @@ export default {
             
         }
     },
-    beforeMount() {
-        console.log(this.playlist);
+    mounted() {
+        mui.back = function() {
+            window.history.go(-1);
+        }
     },
     computed: {
         ...mapState(['playControlFlag', 'navBarFlag', 'playlist'])
