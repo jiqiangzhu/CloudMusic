@@ -49,9 +49,6 @@ export default {
             store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: false })
             // console.log("setPlayList-tracks: ", data.playlist.tracks);
             state.avatarUrl = data.playlist.creator.avatarUrl;
-            mui.back = function() {
-                window.history.go(-1);
-            }
 
         })
         return {

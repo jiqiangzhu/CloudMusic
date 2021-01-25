@@ -116,3 +116,12 @@ export function getPersonalFM() {
         withCredentials: true //关键
     })
 }
+
+// 私人FM
+export function getPersonalF() {
+    return axios({
+        baseURL: baseUrl,
+        url: `/personal_fm`,
+        withCredentials: true //关键
+    })
+}

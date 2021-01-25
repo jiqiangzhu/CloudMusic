@@ -45,9 +45,6 @@ export default {
         }
 
         onMounted(async () => {
-            mui.back = function() {
-                window.history.go(-1);
-            }
             let result = await getRecMusicList(10)
             state.musicList = result.data.result
         })

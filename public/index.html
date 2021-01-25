@@ -20,17 +20,35 @@
   </noscript>
   <div id="app"></div>
   <script src="./static/mui.min.js"></script>
- 
-  <script type="text/javascript" charset="utf-8">
-    mui.init({
-      //监听Android手机的back、menu按键
-      keyEventBind: {
-        backbutton: true,  //Boolean(默认true)关闭back按键监听
-        menubutton: true   //Boolean(默认true)关闭menu按键监听
-      },    
-    });  
-   
+  <script>
+    // this.fanhui(){
+    this.mui.init({
+      KeyEventBind: {
+        backbutton: true  // 关闭back按键
+      }
+    })
+    if ('Android' == plus.os.name) {
+      var t = null;
+      this.mui.back = function () {
+        if (!t) {
+          first = new Date().getTime();  //记录第一次按下返回键的时间
+          mui.toast('再按一次退出应用');
+          history.go(-1);  // 返回上一页
+          setTimeout(function () {
+            t = null;   //一秒后清除按下的时间 
+          }, 1000);
+        } else {
+          if (new Date().getTime() - first < 1000) {
+            plus.runtime.quit();  //如果两次按下的时间小于1秒是  退出应用  
+          }
+        }
+      }
+    }
+        // }
   </script>
+  
+  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script>
   <script src="<%= BASE_URL %>js/rem.js"></script>
   <!-- <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script> -->
 </body>

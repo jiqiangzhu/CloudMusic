@@ -114,20 +114,6 @@ export default {
   mounted() {
     this.$store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: true });
     this.$store.commit("setNavArr", { index: 0 });
-    var clickNum = 0;
-    mui.back = function(event) {
-      clickNum++;
-      if (clickNum > 1) {
-        plus.runtime.quit();
-      } else {
-        mui.toast("再按一次退出应用");
-      }
-      setTimeout(function() {
-        clickNum = 0
-      }, 2000);
-      return false;
-    }
-
   },
   updated() {
     this.$store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: true });

@@ -53,9 +53,7 @@ export default {
         this.index = this.$route.query.index;
         console.log(this.videoList);
         this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: false });
-        mui.back = function() {
-            window.history.go(-1);
-        }
+        
     }
 
     // 自动播放属性,muted:静音播放

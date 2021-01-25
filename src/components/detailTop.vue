@@ -78,9 +78,6 @@ export default {
     },
     setup() {
         onMounted(() => {
-            mui.back = function() {
-                window.history.go(-1);
-            }
         })
         function changeValue(num) {
             let res = 0

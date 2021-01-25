@@ -269,9 +269,6 @@ export default {
         // console.log(this.$store.state.user.userDetail.profile.avatarUrl);
         this.$store.commit("setNavArr", {index: 3});
         this.$store.commit('setPlayFlag', {playControlFlag: false, navBarFlag: true});
-        mui.back = function() {
-            window.history.go(-1);
-        }
     },
     updated() {
         this.$store.commit("setNavArr", {index: 3});

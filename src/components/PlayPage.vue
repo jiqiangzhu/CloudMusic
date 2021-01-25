@@ -117,9 +117,7 @@ export default {
     },
     mounted() {
         this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: false });
-        mui.back = function() {
-            window.history.go(-1);
-        }
+        
     },
     watch: {
         currentTime: function(value) {
