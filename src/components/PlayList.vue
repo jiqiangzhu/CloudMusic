@@ -68,9 +68,7 @@ export default {
         }
     },
     mounted() {
-        mui.back = function() {
-            window.history.go(-1);
-        }
+        
     }
 }
 </script>

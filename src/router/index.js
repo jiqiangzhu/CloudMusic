@@ -69,10 +69,12 @@ const routes = [
   },
   {//每日推荐
     path: '/recommand',
-    name: 'Recommand',
-    component: () => import(/* webpackChunkName: "about" */ '../components/DayRecomm.vue'),
+    name: 'DayRecomm',
+    component: () => import (/* webpackChunkName: "about" */ '../components/DayRecomm.vue'),
     beforeEnter: (from, to, next) => {
       // 检查用户是否登录，未登录不能进入
+      debugger;
+      console.log(store.state.user)
       if (store.state.user.isLogin) {
         next();
       } else {
@@ -80,21 +82,6 @@ const routes = [
         setTimeout(() => {
           next('/login');
         }, 1000)
-        //     }
-
-        //   }
-        // },
-        // {//私人FM
-        //   path: '/personalFM',
-        //   name: 'PersonalFM',
-        //   component: () => import(/* webpackChunkName: "about" */ '../components/PersonalFM.vue'),
-        //   beforeEnter: (from, to, next) => {
-        //     // 检查用户是否登录，未登录不能进入
-        //     if (store.state.user.isLogin) {
-        //       next();
-        //     } else {
-        //       Toast("请先登录");
-        //       next('/login');
       }
 
     }

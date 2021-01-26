@@ -10,7 +10,6 @@
     <%= htmlWebpackPlugin.options.title %>
   </title>
   <script src="./static/iconfont.js"></script>
-  <!-- <title>网易云音乐</title> -->
 </head>
 
 <body>
@@ -20,17 +19,17 @@
   </noscript>
   <div id="app"></div>
   <script src="./static/mui.min.js"></script>
- 
-  <script type="text/javascript" charset="utf-8">
+  <script>
+    // 引入mui.min.js 前提下
     mui.init({
-      //监听Android手机的back、menu按键
       keyEventBind: {
-        backbutton: true,  //Boolean(默认true)关闭back按键监听
-        menubutton: true   //Boolean(默认true)关闭menu按键监听
-      },    
-    });  
-   
+        backbutton: true //关闭back按键监听
+      }
+    });
   </script>
+
+  <!-- <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script> -->
   <script src="<%= BASE_URL %>js/rem.js"></script>
   <!-- <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script> -->
 </body>

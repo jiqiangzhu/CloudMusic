@@ -77,9 +77,6 @@ export default {
 		}
 	},
 	async mounted() {
-		mui.back = function() {
-			window.history.go(-1);
-		}
 		this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: true });
 		this.$store.commit("setNavArr", { index: 1 });
 		if (this.videoList.length == 0) {

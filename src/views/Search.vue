@@ -16,9 +16,7 @@ export default {
             store.commit('setPlayFlag', {playControlFlag: true, navBarFlag: false})
         });
         onMounted(()=>{
-            mui.back = function() {
-            window.history.go(-1);
-        }
+            
         })
     }
 }

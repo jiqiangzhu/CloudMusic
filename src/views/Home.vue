@@ -21,16 +21,11 @@
       <IconList class="iconlist" />
       <SetupMusicList class="musiclist" />
       <CSS3D class="css-3d" />
-      <img src="../assets/iconlist/3.png" alt=" " class="bg" />
+      <img src="../assets/iconlist/3.png" :alt="'背景图'" class="bg" />
     </div>
     <div class="dialog" v-show="birthFlag">
       <img src="../assets/duanzi/close1.png" @click.stop="closeFn" class="close" alt="关闭" />
       <BGMCom class="birth" />
-      
-      <!-- <div class="show-dialog-flag" @click="neverShow" >
-        <input type="checkbox" :checked="showDialogFlag" id="showDialogFlag">
-        以后不再显示
-      </div> -->
     </div>
     <van-checkbox v-show="birthFlag" :icon-size="25" :shape="'square'" class="show-dialog" checked-color="#ee0a24" v-model="showDialogFlag">不再显示</van-checkbox>
   </div>
@@ -39,18 +34,18 @@
 <script>
 // @ is an alias to /src
 import { Checkbox, CheckboxGroup } from 'vant';
-import TopNav from '@/components/TopNav.vue'
-import Bottom from '@/views/Bottom.vue'
-import Swiper from '@/components/Swiper.vue'
-import IconList from '@/components/IconList.vue'
-import RecMusicList from '@/components/RecMusicList.vue'
+import TopNav from '@/components/TopNav.vue';
+import Bottom from '@/views/Bottom.vue';
+import Swiper from '@/components/Swiper.vue';
+import IconList from '@/components/IconList.vue';
+import RecMusicList from '@/components/RecMusicList.vue';
 import SetupMusicList from '@/components/SetupMusicList.vue';
 import CSS3D from '@/components/CSS3D.vue';
-import playCtl from '@/views/playCtl.vue'
-import { getBanner } from '../api/index'
+import playCtl from '@/views/playCtl.vue';
+import { getBanner } from '../api/index';
 import { mapMutations, mapState } from 'vuex';
 import { Toast, Overlay } from 'vant';
-import BGMCom from '@/components/BGMCom.vue'
+import BGMCom from '@/components/BGMCom.vue';
 
 export default {
   name: 'Home',
@@ -114,20 +109,6 @@ export default {
   mounted() {
     this.$store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: true });
     this.$store.commit("setNavArr", { index: 0 });
-    var clickNum = 0;
-    mui.back = function(event) {
-      clickNum++;
-      if (clickNum > 1) {
-        plus.runtime.quit();
-      } else {
-        mui.toast("再按一次退出应用");
-      }
-      setTimeout(function() {
-        clickNum = 0
-      }, 2000);
-      return false;
-    }
-
   },
   updated() {
     this.$store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: true });
@@ -158,10 +139,6 @@ export default {
       right: 0.5rem;
       z-index: 10000;
     }
-    // .birth {
-    //   width: 7.5rem;
-    //   height: auto;
-    // }
   }
   .scroll {
     width: 7.5rem;

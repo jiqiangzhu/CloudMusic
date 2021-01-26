@@ -16,9 +16,7 @@ export default {
         }
     },
     mounted() {
-        mui.back = function() {
-            window.history.go(-1);
-        }
+        
     },
     computed: {
         ...mapState(['playControlFlag', 'navBarFlag', 'playlist'])

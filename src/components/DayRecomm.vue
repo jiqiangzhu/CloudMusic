@@ -3,7 +3,7 @@
         <!-- <detailTop :playlist="state.playlist" class="detail-top"></detailTop> -->
     </div>
 </template>
-<script>q1
+<script>
 import { getDayRecomMusicList } from '@/api/index.js';
 import detailTop from './detailTop.vue';
 import PlayList from './PlayList.vue';
@@ -11,6 +11,7 @@ import { onMounted, reactive } from 'vue';
 import store from '@/store/index.js';
 import { Toast } from 'vant';
 export default {
+    name: "DayRecomm",
     components: {
         detailTop, PlayList
     },
@@ -18,8 +19,7 @@ export default {
         this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: false });
         try {
             let result = await getDayRecomMusicList();
-            state.playlist.tracks = result.data.recommend;
-            console.log(result.data);
+            console.log(result);
         } catch (e) {
             console.log(e);
         }

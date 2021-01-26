@@ -72,7 +72,7 @@ export default {
         playNext(index1) {
             let index = index1 + 1
             if (index >= this.playlist.length) {
-                index = 0
+                index = 0;
             }
             this.$store.commit("setCurrentIndex", index);
             this.$refs.audio.play()

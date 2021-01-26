@@ -46,9 +46,6 @@ export default {
         document.getElementById('musicMp3').pause()
         this.changeProgress()
         this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: false });
-        mui.back = function() {
-            window.history.go(-1);
-        }
     },
     methods: {
         changeStart: function() {

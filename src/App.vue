@@ -1,9 +1,8 @@
 <template>
-<div class="app">
-  <Bottom />
-  <router-view/>
-</div>
-  
+  <div class="app">
+    <Bottom />
+    <router-view />
+  </div>
 </template>
 <script>
 import Bottom from './views/Bottom.vue'
@@ -12,21 +11,17 @@ export default {
     Bottom
   },
   async mounted() {
-    if(localStorage.userInfo != "" && localStorage.userInfo != undefined) {
-      this.$store.state.user = JSON.parse(localStorage.userInfo)
+    if (localStorage.userInfo) {
+      this.$store.commit("setUser", JSON.parse(localStorage.userInfo));
+      console.log("====>>>>>>>>localStorage.userInfo>>>>>>=====", this.$store.state.user);
     }
-    if(window.history && window.history.pushState) {
-      history.pushState(null, null, document.URL);
-      window.addEventListener("popstate", this.goBack, false);
-    }
+    
   },
   unmounted() {
-    window.removeEventListener("popstate", this.goBack, false);
+
   },
   methods: {
-    goBack() {
-      this.$router.replace({path: '/'});
-    }
+    
   }
 }
 </script>
