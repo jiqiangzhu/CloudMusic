@@ -1,9 +1,7 @@
-import axios from 'axios'
+import axios from 'axios';
 
-
-// let baseUrl = "http://188.131.193.21:3000";
 // 121腾讯云服务器api接口
-let baseUrl = "http://121.5.9.142:3000"
+let baseUrl = "http://121.5.9.142:3000";
 // 本地api
 // let baseUrl = "http://localhost:3000"
 
