@@ -73,6 +73,8 @@ const routes = [
     component: () => import (/* webpackChunkName: "about" */ '../components/DayRecomm.vue'),
     beforeEnter: (from, to, next) => {
       // 检查用户是否登录，未登录不能进入
+      debugger;
+      console.log(store.state.user)
       if (store.state.user.isLogin) {
         next();
       } else {

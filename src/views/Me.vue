@@ -1,19 +1,19 @@
 <template>
     <section class="aui-scrollView">
-		<div class="aui-head-read">
-			<div class="aui-flex">
-				<div class="aui-read-img">
-					<img :src="$store.state.user.userDetail.profile.avatarUrl" alt="">
-				</div>
-				<div class="aui-flex-box">
-					<h2>limonkey8</h2>
-				</div>
-				<div class="aui-arrow aui-arrow-one">
-					<span>去赚钱</span>
-				</div>
-			</div>
-		</div>
-		<div class="aui-white-box">
+        <div class="aui-head-read">
+            <div class="aui-flex">
+                <div class="aui-read-img">
+                    <img :src="$store.state.user.userDetail.profile.avatarUrl" alt />
+                </div>
+                <div class="aui-flex-box">
+                    <h2>limonkey8</h2>
+                </div>
+                <div class="aui-arrow aui-arrow-one">
+                    <span @click="quitFn">退出登录</span>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="aui-white-box">
 			<div class="aui-palace aui-palace-one">
 				<a href="#" class="aui-palace-grid">
 					<div class="aui-palace-grid-text">
@@ -253,10 +253,8 @@
 					</div>
 				</a>
 			</div>
-		</div>
-
-
-	</section>
+        </div>-->
+    </section>
     <Bottom :barFlag="true" :playFlag="false" />
 </template>
 <script>
@@ -265,19 +263,34 @@ export default {
     components: {
         Bottom
     },
+    methods: {
+        quitFn() {
+            console.log(JSON.parse(localStorage.userInfo));
+            localStorage.userInfo = JSON.stringify({
+                isLogin: false,
+                userDetail: {},
+                userAccount: {}
+            });
+            this.$store.commit("setUser", {
+                isLogin: false,
+                userDetail: {},
+                userAccount: {}
+            });
+            this.$router.replace('/login');
+        }
+    },
     mounted() {
         // console.log(this.$store.state.user.userDetail.profile.avatarUrl);
-        this.$store.commit("setNavArr", {index: 3});
-        this.$store.commit('setPlayFlag', {playControlFlag: false, navBarFlag: true});
+        this.$store.commit("setNavArr", { index: 3 });
+        this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: true });
     },
     updated() {
-        this.$store.commit("setNavArr", {index: 3});
-        this.$store.commit('setPlayFlag', {playControlFlag: false, navBarFlag: true});
+        this.$store.commit("setNavArr", { index: 3 });
+        this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: true });
     }
 }
 </script>
 <style lang="less" scoped>
-
 a {
     text-decoration: none;
     color: #08acee;
@@ -291,7 +304,11 @@ img {
     border: 0;
 }
 
-button,input,optgroup,select,textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
     margin: 0;
     font: inherit;
     color: inherit;
@@ -327,13 +344,13 @@ a {
 }
 
 .r-line:after {
-    content: '';
+    content: "";
     position: absolute;
     z-index: 0;
     top: 0;
     right: 0;
     height: 100%;
-    border-right: 1px solid #D9D9D9;
+    border-right: 1px solid #d9d9d9;
     -webkit-transform: scaleX(0.5);
     transform: scaleX(0.5);
     -webkit-transform-origin: 100% 0;
@@ -345,7 +362,7 @@ a {
 }
 
 .b-line:after {
-    content: '';
+    content: "";
     position: absolute;
     z-index: 2;
     bottom: 0;
@@ -358,14 +375,14 @@ a {
     -webkit-transform-origin: 0 100%;
     transform-origin: 0 100%;
 }
-.aui-arrow{
-    position:relative;
-    padding-right:0.26rem;
+.aui-arrow {
+    position: relative;
+    padding-right: 0.26rem;
 }
 
-.aui-arrow span{
-    font-size:0.26rem;
-    color:#9b9b9b;
+.aui-arrow span {
+    font-size: 0.26rem;
+    color: #9b9b9b;
 }
 
 .aui-arrow:after {
@@ -433,7 +450,7 @@ a {
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     position: relative;
-    padding-bottom:58px;
+    padding-bottom: 58px;
 }
 
 .aui-navBar {
@@ -533,9 +550,8 @@ a {
     background-repeat: no-repeat;
 }
 
-.icon-return{
+.icon-return {
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAACh0lEQVRoQ+3ZMW8TMRQH8PcOsTBQISExVCIRCwgWFvZ+hZYBpIrEcTYkBsTGlI2VDamL3YEBpWJoR1BJaOlXYEzyDYp0bMRGRjnJoDuWs/1e3EbKeHf55b33vzsb4YJ98IJ54RKce8XZV1gIcQ8AviDiD2vtC631pzZFYQ2WUt611p4CwM0VcqqU2soSXIN1ztdKqTfZgRuw75RSz9tg3bHsWjomlh04NpYVOAWWDbjf7z8oimLipbH7bUopJdvO7L/Hk8+wwyLiCSLe8H6cww4BwGYFTo0lbWkKLBmYCksCrsNaa99rrZ/FmFnS0GrCdrvd3mg0MqEDqu58yVKaAzZZSwshHgLAsX/rcW2csrJVtaNXeIWdIuL16qJU2OgVrsMCwEGn03mSamaThVYTtizLp+PxeJkioJKFFldslJbmjA0O5o4NCm7AHpZluUM5s1FCSwjxCAA++7ceADiczWaPJ5PJL6qAihJaUspdY8w+Il7xLsASG6SlhRA/EfGa91BxNJ/Pd7hVNtiT1mAwOAeADXdCa637Hi0Wi3zBUsptY8wHRLzqwIh/nlbzbWmna0roLEOrmo11QQd9W1oHdFDwOrR3cLCH/uuFn0uQRQE7dMPKJHl6RwNzRUcF/w9N9VIRHVyhazbLDihWP5KAHbphOzQ5OhmYCzopmAM6OZgaTQL20FMAuOUtHESfaTLwCn3HWnuWEk0KpkCTg1OjWYArtDHmKyJu+jMdeh+KDdghh8NhZ7lcfvPRoXcaWYFToNmBY6NZgj20m+nb3pr3W631yzY7GWzBDtXr9TaLojjz0N+VUvezBXvoPQBw0Fda649Zg9vg6o5l3dKhse58l+AY/yqnc/4GvNDoTFOq8FwAAAAASUVORK5CYII=");
-
 }
 .m-slider {
     overflow-x: hidden;
@@ -604,7 +620,7 @@ a {
     height: 8px;
     display: inline-block;
     border-radius: 100%;
-    background-color: rgba(255,255,255,0.4);
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .slider-pagination > .slider-pagination-item.slider-pagination-item-active {
@@ -655,88 +671,103 @@ a {
     font-weight: normal;
     color: #666666;
 }
-.aui-head-read{
-    background: -webkit-linear-gradient(left, #fd673d , #ff1e0f); /* Safari 5.1 - 6.0 */
-    background: -o-linear-gradient(right, #fd673d , #ff1e0f); /* Opera 11.1 - 12.0 */
-    background: -moz-linear-gradient(right, #fd673d , #ff1e0f); /* Firefox 3.6 - 15 */
-    background: linear-gradient(to right, #fd673d , #ff1e0f); /* 鏍囧噯鐨勮娉� */
-    background-color:#fd673d;
-    padding-bottom:1rem;
-    padding-top:0.33rem;
+.aui-head-read {
+    background: -webkit-linear-gradient(
+        left,
+        #fd673d,
+        #ff1e0f
+    ); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(
+        right,
+        #fd673d,
+        #ff1e0f
+    ); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(
+        right,
+        #fd673d,
+        #ff1e0f
+    ); /* Firefox 3.6 - 15 */
+    background: linear-gradient(
+        to right,
+        #fd673d,
+        #ff1e0f
+    ); /* 鏍囧噯鐨勮娉� */
+    background-color: #fd673d;
+    padding-bottom: 1rem;
+    padding-top: 0.33rem;
 }
-.aui-read-img{
-    width:50px;
-    height:50px;
-    border-radius:100%;
-    overflow:hidden;
-    margin-right:0.13rem;
-    border:2px solid rgba(255,255,255,0.3);
+.aui-read-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-right: 0.13rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     img {
         width: 50px;
         height: 50px;
     }
 }
 
-.aui-flex-box h2{
-    color:#fff;
-    font-weight:normal;
+.aui-flex-box h2 {
+    color: #fff;
+    font-weight: normal;
 }
 
-.aui-arrow-one span{
-    color:white;
+.aui-arrow-one span {
+    color: white;
 }
-.aui-arrow-one:after{
-    border-color:white;
-    margin-top:-3px;
-}
-
-.aui-white-box{
-    width:94%;
-    background:white;
-    border-radius:0.1rem;
-    margin:-0.8rem auto 0.26rem;
-
-}
-.aui-palace-one .aui-palace-grid{
-    width:33.333%;
+.aui-arrow-one:after {
+    border-color: white;
+    margin-top: -3px;
 }
 
-.aui-palace-one h1{
-    color:#ff3d22;
-    font-size:0.33rem;
+.aui-white-box {
+    width: 94%;
+    background: white;
+    border-radius: 0.1rem;
+    margin: -0.8rem auto 0.26rem;
+}
+.aui-palace-one .aui-palace-grid {
+    width: 33.333%;
+}
+
+.aui-palace-one h1 {
+    color: #ff3d22;
+    font-size: 0.33rem;
     -webkit-text-stroke: 1px #ff3b23;
-    color:#ff3b23;
-    letter-spacing:1px;
-    margin-bottom:0.1rem;
+    color: #ff3b23;
+    letter-spacing: 1px;
+    margin-bottom: 0.1rem;
 }
 
-.aui-palace-one h1 em{
-    color:#7f7f7f;
-    font-weight:normal;
-    font-style:normal;
-    font-size:0.26rem;
+.aui-palace-one h1 em {
+    color: #7f7f7f;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 0.26rem;
     -webkit-text-stroke: 0 #7f7f7f;
-    color:#7f7f7f;
+    color: #7f7f7f;
 }
 
-.aui-white-box-clear{
-    margin:0 auto 0.26rem;
+.aui-white-box-clear {
+    margin: 0 auto 0.26rem;
 }
 
-.aui-flex-box h3{
-    font-size:0.3rem;
-    font-weight:normal;
+.aui-flex-box h3 {
+    font-size: 0.3rem;
+    font-weight: normal;
 }
 
-.aui-palace-two .aui-palace-grid{
-    width:25%;
+.aui-palace-two .aui-palace-grid {
+    width: 25%;
 }
 
-.aui-palace-line{
-    position:relative;
+.aui-palace-line {
+    position: relative;
 }
-.aui-palace-line .aui-palace-grid:not(:nth-child(4n)):before{
-    content: '';
+.aui-palace-line .aui-palace-grid:not(:nth-child(4n)):before {
+    content: "";
     position: absolute;
     z-index: 0;
     top: 0;
@@ -748,5 +779,4 @@ a {
     -webkit-transform-origin: 100% 0;
     transform-origin: 100% 0;
 }
-
 </style>
