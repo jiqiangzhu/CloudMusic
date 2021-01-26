@@ -98,11 +98,6 @@ export function getUserDetail(uid) {
 // 获取段子
 export function getDuanzi(num = 10) {
     let pageNum = Math.floor(Math.random() * 20) + 1;
-    // return axios({
-    //     baseURL: "https://api.apiopen.top",
-    //     url: `/getJoke?page=${pageNum}&count=${num}&&type=video`,
-    //     withCredentials: true //关键
-    // })
     return axios.get(`https://api.apiopen.top/getJoke?page=${pageNum}&count=${num}&&type=video`)
 }
 
