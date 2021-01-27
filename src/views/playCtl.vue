@@ -88,7 +88,7 @@ export default {
         
     },
     mounted() {
-        
+        console.log(this.tracks);
     },
     updated() {
         this.$store.dispatch('setLyric', this.playlist[this.currentIndex].id)
