@@ -112,6 +112,11 @@ export default {
             this.$store.commit("setPausedFlag", { paused: !this.paused });
         },
         changeLoopState() {
+            if(this.loopFlag) {
+                Toast("列表循环");
+            } else {
+                Toast("单曲循环");
+            }
             this.$store.commit("setLoopFlag");
         }
     },
