@@ -2,6 +2,7 @@
 node_modules
 /dist
 *.config.js
+/api
 
 # local env files
 .env.local
