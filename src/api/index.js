@@ -85,7 +85,7 @@ export function phoneLogin(phone, password) {
 }
 
 // 获取用户详情 
-// /search?keywords= 海阔天空
+// /search?keywords= 
 export function getUserDetail(uid) {
     return axios({
         baseURL: baseUrl,
@@ -103,15 +103,6 @@ export function getDuanzi(num = 10) {
 
 // 私人FM
 export function getPersonalFM() {
-    return axios({
-        baseURL: baseUrl,
-        url: `/personal_fm`,
-        withCredentials: true //关键
-    })
-}
-
-// 私人FM
-export function getPersonalF() {
     return axios({
         baseURL: baseUrl,
         url: `/personal_fm`,

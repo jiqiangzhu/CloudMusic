@@ -52,18 +52,18 @@ export default {
         },
         changeStateFn() {
             if (this.paused == true) {
-                this.$refs.audio.play()
-                this.updateTime()
+                this.$refs.audio.play();
+                this.updateTime();
             } else {
-                this.$refs.audio.pause()
-                clearInterval(this.$store.state.intervalId)
+                this.$refs.audio.pause();
+                clearInterval(this.$store.state.intervalId);
             }
-            this.$store.commit("setPausedFlag", { paused: !this.paused })
+            this.$store.commit("setPausedFlag", { paused: !this.paused });
         },
         updateTime() {
-            this.$store.commit('setCurrentTime', this.$refs.audio.currentTime)
-            let progress = this.currentTime / this.duration
-            this.$store.commit("setProgress", progress)
+            this.$store.commit('setCurrentTime', this.$refs.audio.currentTime);
+            let progress = this.currentTime / this.duration;
+            this.$store.commit("setProgress", progress);
         },
         toPlayPageFn() {
             console.log(this.$router);
@@ -75,7 +75,7 @@ export default {
                 index = 0;
             }
             this.$store.commit("setCurrentIndex", index);
-            this.$refs.audio.play()
+            this.$refs.audio.play();
         }
     },
     components: {
@@ -88,7 +88,7 @@ export default {
         
     },
     mounted() {
-        
+        console.log(this.tracks);
     },
     updated() {
         this.$store.dispatch('setLyric', this.playlist[this.currentIndex].id)
