@@ -14,11 +14,10 @@
             <span class="iconfont icon-dustbin_icon" @click="clearEvent"></span>
         </div>
         <div class="l-content" v-if="contentShow">
-            <!--  v-for="(item, i) in resultSongs" :key="i" -->
             <div class="list-item" v-for="(item, i) in resultSongs" @click="playSong($event, i)" :key="i">
                 <div class="left">
                     <span class="index"></span>
-                    <div class="content">
+                    <div class="content van-ellipsis">
                         <span class="title">{{item.name}}-</span>
                         <span class="author" v-for="(prop, index) in item.ar" :key="index">
                             {{prop.name}}
@@ -201,6 +200,7 @@ export default {
                 .content {
                     display: flex;                    
                     .title {
+                        // width: 4rem;
                         font-size: 0.28rem;
                         font-weight: 500;
                         margin-bottom: 0.05rem;

@@ -13,8 +13,11 @@
         <div class="right">
             <span v-if="paused" @click="changeStateFn" class="iconfont icon-icon-"></span>
             <span v-else @click="changeStateFn" class="iconfont icon-zanting"></span>
-            <span class="iconfont icon-liebiao"></span>
+            <span class="iconfont icon-liebiao" @click="showPopupFn"></span>
         </div>
+        <van-popup v-model:show="showPopupFlag" closeable round position="bottom" duration="0.4">
+            <PopupList />
+        </van-popup>
         <!-- <PlayPage
             :paused="paused"
             :play="changeStateFn"
@@ -33,17 +36,18 @@
     </div>
 </template>
 <script>
-import { onMounted, reactive, inject } from 'vue'
-import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
-import PlayPage from '@/components/PlayPage.vue'
-
+import { Popup } from 'vant';
+import { onMounted, reactive, inject } from 'vue';
+import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
+import PlayPage from '@/components/PlayPage.vue';
+import PopupList from '@/components/PopupList.vue';
 export default {
-    props: ["tracks"],
     data() {
         return {
             isShow: false,
             timer: 0,
-            progress: 0
+            progress: 0,
+            showPopupFlag: false
         }
     },
     methods: {
@@ -76,19 +80,24 @@ export default {
             }
             this.$store.commit("setCurrentIndex", index);
             this.$refs.audio.play();
+        },
+        showPopupFn() {
+            this.showPopupFlag = !this.showPopupFlag;
         }
     },
     components: {
-        PlayPage
+        PlayPage,
+        PopupList,
+        "van-popup": Popup
     },
     computed: {
         ...mapState(['currentIndex', 'loopFlag', "playlist", "paused", "currentTime", 'duration'])
     },
     watch: {
-        
+
     },
     mounted() {
-        console.log(this.tracks);
+        // console.log("---->>>>this.playlist--->>>", this.playlist);
     },
     updated() {
         this.$store.dispatch('setLyric', this.playlist[this.currentIndex].id)
@@ -108,7 +117,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     // background: transparent;
-    background: rgba(239,239,239, 0.9);
+    background: rgba(239, 239, 239, 0.9);
     .left {
         flex: 1;
         display: flex;

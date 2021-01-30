@@ -44,23 +44,31 @@
                 <span v-if="paused" @click="play" class="iconfont icon-iconset0481"></span>
                 <span v-else @click="play" class="iconfont icon-zanting"></span>
                 <span class="iconfont icon-xiayigexiayishou" @click="goPlay(1)"></span>
-                <span class="iconfont icon-liebiao"></span>
+                <span class="iconfont icon-liebiao" @click="showPopupFn"></span>
             </div>
         </div>
+        <van-popup v-model:show="showPopupFlag" closeable round position="bottom" duration="0.4">
+            <PopupList />
+        </van-popup>
     </div>
 </template>
 <script>
-import { getLyric } from '@/api/index'
+import { getLyric } from '@/api/index';
+import PopupList from '@/components/PopupList.vue';
+import { Popup } from 'vant';
 import { mapGetters, mapMutations, mapState } from 'vuex';
 import { Toast } from 'vant';
 export default {
     components: {
-        Toast
+        Toast,
+        PopupList,
+        "van-popup": Popup
     },
     data() {
         return {
             isLyric: false,
-            top: 1
+            top: 1,
+            showPopupFlag: false
         }
     },
     computed: {
@@ -118,6 +126,9 @@ export default {
                 Toast("单曲循环");
             }
             this.$store.commit("setLoopFlag");
+        },
+        showPopupFn() {
+            this.showPopupFlag = !this.showPopupFlag;
         }
     },
     mounted() {

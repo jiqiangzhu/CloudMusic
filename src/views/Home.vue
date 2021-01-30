@@ -150,7 +150,7 @@ export default {
     flex-direction: column;
     overflow: hidden;
     .top-nav {
-      z-index: 100;
+      z-index: 20;
     }
     .swiper {
       z-index: 10;

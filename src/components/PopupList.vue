@@ -1,58 +1,74 @@
 <template>
-    <div id="play-list">
-        <div class="before">
-           <div class="left">
-               <span class="iconfont icon-tx-wubianxing"></span>
-               <span class="vipCount">含{{2}}首VIP专享歌曲</span>
-           </div>
-           <span class="right">首开VIP仅5元></span>
-        </div>
-        <div class="list-top">
-            <div class="left" @click="playAllFn">
-                <span class="iconfont icon-bofang2"></span>
-                <div class="all">
-                    <span class="txt">播放全部</span>
-                    <span class="num">({{playlist.trackCount}})</span>
-                </div>
-            </div>
-            <div class="right">
-                <span class="iconfont icon-download" @click="$router.push('/download')"></span>
-                <span class="iconfont icon-plus-checkbox" @click="$router.push('/chooseAll')"></span>
-            </div>
-        </div>
-        <div class="list-content">
-            <div class="list-item" @click="playSongFn(i)" v-for="(item, i) in playlist.tracks" :key="i">
-                <div class="left">
-                    <span class="index">{{i+1}}</span>
-                    <div class="content">
-                        <span class="title van-ellipsis">{{item.name}}</span>
-                        <span class="tag"></span>
-                        <div class="name">
-                            <span v-for="(name, index) in item.ar" :key="index">{{name.name}}</span>
+    <div class="popup">
+        <!-- <van-popup
+            v-model:show="showPopupFlag"
+            closeable
+            round
+            position="bottom"
+            duration="0.4"
+        > -->
+            <div id="popup-list">
+                <div class="list-top">
+                    <div class="left" @click="playAllFn">
+                        <span class="iconfont icon-bofang2"></span>
+                        <div class="all">
+                            <span class="txt">播放全部</span>
+                            <span class="num">({{ playlist.length }})</span>
                         </div>
-                        
+                    </div>
+                    <!-- <div class="right">
+                        <span class="iconfont icon-download" @click="$router.push('/download')"></span>
+                        <span
+                            class="iconfont icon-plus-checkbox"
+                            @click="$router.push('/chooseAll')"
+                        ></span>
+                    </div>-->
+                </div>
+                <div class="list-content">
+                    <div
+                        class="list-item"
+                        @click="playSongFn(i)"
+                        v-for="(item, i) in playlist"
+                        :key="i"
+                    >
+                        <div class="left">
+                            <span class="index">{{ i + 1 }}</span>
+                            <div class="content">
+                                <span class="title van-ellipsis">{{ item.name }}</span>
+                                <span class="tag"></span>
+                                <div class="name">
+                                    <span
+                                        v-for="(name, index) in item.ar"
+                                        :key="index"
+                                    >{{ name.name }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <span class="iconfont icon-iconset0481" @click="setCurrentIndex(i)"></span>
+                            <span class="iconfont icon-ziyuan" @click="moreFn(i)"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="right">
-                    <span class="iconfont icon-iconset0481" @click="setCurrentIndex(i)"></span>
-                    <span class="iconfont icon-ziyuan" @click="moreFn(i)"></span>
-                </div>                
             </div>
-        </div>
-        
+        <!-- </van-popup> -->
     </div>
 </template>
 <script>
-import { Toast } from 'vant'
-import { mapMutations } from 'vuex'
+import { mapState } from 'vuex';
 export default {
-    props: ['playlist', "paused"],
-    
+    props: ['showPopupFlag'],
+    components: {
+        
+    },
+    computed: {
+        ...mapState(['playlist'])
+    },
     methods: {
-        moreFn(i) {
-            Toast("敬请期待")
+        closeFn() {
+            debugger
+            this.$emit("setShowPopupFlag")
         },
-        ...mapMutations(['setCurrentIndex']),
         playAllFn() {
             this.$store.commit('setPlayList', this.playlist.tracks)
             // 设置播放index
@@ -66,51 +82,20 @@ export default {
             this.$store.commit('setCurrentIndex', i)
             this.$store.commit("setPausedFlag", {paused: false})
         }
-    },
-    mounted() {
-        
     }
+
 }
 </script>
 <style lang="less" scoped>
-#play-list {
-    width: 7.5rem;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-top-right-radius: 0.3rem;
-    border-top-left-radius: 0.3rem;
-    
-    .before {
-        width: 7.1rem;
-        height: 0.8rem;
-        line-height: 0.8rem;
-        display: flex;
-        justify-content: space-between;
-        padding: 0 0.2rem;
-        margin-top: 0.1rem;
-        border: 0.01rem solid #ddd;
-        border-radius: 0.4rem;
-        .left {
-            .iconfont {
-                color: orangered;
-                margin-right: 0.1rem;
-            }
-            .vipCount {
-                font-size: 0.24rem;
-            }
-        }
-        .right {
-            color: #999;
-            font-size: 0.24rem;
-        }
-        
-    }
+
+#popup-list {
+    height: 9rem;
+    position: relative;
     .list-top {
-        width: 7.1rem;
+        width: 7.5rem;
         display: flex;
-        margin-top: 0.4rem;
+        margin-top: 0.3rem;
+        margin-left: 0.15rem;
         justify-content: space-between;
         align-items: center;
         .left {
@@ -132,7 +117,6 @@ export default {
                     font-size: 0.2rem;
                 }
             }
-            
         }
         .right {
             display: flex;
@@ -149,7 +133,7 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-bottom: 1rem;
+        // padding-bottom: 1rem;
         .list-item {
             width: 7.1rem;
             height: 0.8rem;
@@ -166,11 +150,12 @@ export default {
                 .content {
                     display: flex;
                     flex-direction: column;
-                    
+                    align-items: flex-start;
                     .title {
-                        width: 4rem;
+                        width: 5rem;
                         font-size: 0.28rem;
                         font-weight: 500;
+                        margin: 0;
                         margin-bottom: 0.05rem;
                     }
                     .name {
