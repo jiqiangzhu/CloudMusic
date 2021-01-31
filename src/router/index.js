@@ -86,6 +86,11 @@ const routes = [
 
     }
   },
+  {//网友精选碟歌单
+    path: '/goodPlaylist',
+    name: 'GoodPlaylist',
+    component: () => import (/* webpackChunkName: "about" */ '../components/GoodPlaylist.vue')
+  },
   {
     path: '/about',
     name: 'About',
