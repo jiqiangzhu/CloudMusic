@@ -203,6 +203,7 @@ export default {
         .list-item {
             width: 7.1rem;
             height: 0.8rem;
+            margin-bottom: 0.2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;

@@ -89,7 +89,7 @@ export default {
 <style lang="less" scoped>
 
 #popup-list {
-    height: 9rem;
+    min-height: 3rem;
     position: relative;
     .list-top {
         width: 7.5rem;
