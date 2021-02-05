@@ -3,41 +3,56 @@
         <div class="top">
             <span class="iconfont icon-arrowLeft" @click="$router.go(-1)"></span>
             <div class="input">
-                <input type="text" v-model="keyword" placeholder="狼殿下最近很火哦" @keydown.enter="enterEvent">
+                <input
+                    type="text"
+                    v-model="keyword"
+                    placeholder="狼殿下最近很火哦"
+                    @keydown.enter="enterEvent"
+                />
             </div>
         </div>
         <div class="history" v-if="isShow">
-            <span class="tag" >历史</span>
+            <span class="tag">历史</span>
             <div class="left">
-                <span class="h-item" @click="searchEvent(item)" v-for="(item, i) in historyList" :key="i">{{item}}</span>
+                <span
+                    class="h-item"
+                    @click="searchEvent(item)"
+                    v-for="(item, i) in historyList"
+                    :key="i"
+                >{{ item }}</span>
             </div>
             <span class="iconfont icon-dustbin_icon" @click="clearEvent"></span>
         </div>
         <div class="l-content" v-if="contentShow">
-            <!--  v-for="(item, i) in resultSongs" :key="i" -->
-            <div class="list-item" v-for="(item, i) in resultSongs" @click="playSong($event, i)" :key="i">
+            <div
+                class="list-item"
+                v-for="(item, i) in resultSongs"
+                @click="playSong($event, i)"
+                :key="i"
+            >
                 <div class="left">
-                    <span class="index"></span>
-                    <div class="content">
-                        <span class="title">{{item.name}}-</span>
-                        <span class="author" v-for="(prop, index) in item.ar" :key="index">
-                            {{prop.name}}
-                        </span>                            
+                    <!-- <span class="index"></span> -->
+                    <div class="content van-ellipsis">
+                        <span class="title">{{ item.name }}-</span>
+                        <span
+                            class="author"
+                            v-for="(prop, index) in item.ar"
+                            :key="index"
+                        >{{ prop.name }}</span>
                     </div>
                 </div>
                 <div class="right">
                     <span class="iconfont icon-iconset0481" @click="playSong($event, i)"></span>
                     <span class="iconfont icon-ziyuan"></span>
-                </div>                
+                </div>
             </div>
-            
         </div>
         <playCtl :tracks="resultSongs" v-if="contentShow" class="play-ctl" />
     </div>
 </template>
 <script>
 import { mapState } from 'vuex'
-import {getSearchResults} from '@/api/index'
+import { getSearchResults } from '@/api/index'
 import playCtl from '@/views/playCtl.vue'
 export default {
     data() {
@@ -50,13 +65,13 @@ export default {
         }
     },
     computed: {
-        
+
     },
     components: {
         playCtl
     },
     beforeMount() {
-        if(localStorage.historyList != undefined && localStorage.historyList != "") {
+        if (localStorage.historyList != undefined && localStorage.historyList != "") {
             this.historyList = JSON.parse(localStorage.historyList)
             this.historyList = this.historyList.reverse()
             this.isShow = true
@@ -76,7 +91,7 @@ export default {
             // this.$store.commit('setPlayList', this.resultSongs)
         },
         async enterEvent(event) {
-            if(this.keyword != '') {
+            if (this.keyword != '') {
                 console.log(this.historyList);
                 this.historyList.push(this.keyword)
                 this.historyList = Array.from(new Set(this.historyList))
@@ -101,7 +116,7 @@ export default {
             console.log(this.resultSongs);
             this.$store.commit('setPlayList', this.resultSongs)
             this.$store.commit('setCurrentIndex', i)
-            this.$store.commit("setPausedFlag", {paused: false})
+            this.$store.commit("setPausedFlag", { paused: false })
         }
     }
 }
@@ -188,19 +203,24 @@ export default {
         .list-item {
             width: 7.1rem;
             height: 0.8rem;
+            margin-bottom: 0.2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
             .left {
+                width: 6rem;
                 display: flex;
                 align-items: center;
+                padding-left: 0.4rem;
                 .index {
                     width: 0.6rem;
                     color: #999;
                 }
                 .content {
-                    display: flex;                    
+                    display: flex;
                     .title {
+                        // width: 4rem;
                         font-size: 0.28rem;
                         font-weight: 500;
                         margin-bottom: 0.05rem;
@@ -219,6 +239,10 @@ export default {
                 }
             }
             .right {
+                position: absolute;
+                top: 0.22rem;
+                right: 0;
+                width: 1.3rem;
                 display: flex;
                 align-items: center;
                 .iconfont {

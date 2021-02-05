@@ -19,7 +19,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 10;
+        // z-index: 10;
         display: flex;
         width: 7.5rem;
         height: 1rem;

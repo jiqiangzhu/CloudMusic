@@ -1,4 +1,5 @@
 <template>
+  <!-- <van-skeleton title :row="8" :loading="loading"> -->
   <div class="home">
     <div class="scroll">
       <TopNav class="top-nav" />
@@ -27,8 +28,16 @@
       <img src="../assets/duanzi/close1.png" @click.stop="closeFn" class="close" alt="关闭" />
       <BGMCom class="birth" />
     </div>
-    <van-checkbox v-show="birthFlag" :icon-size="25" :shape="'square'" class="show-dialog" checked-color="#ee0a24" v-model="showDialogFlag">不再显示</van-checkbox>
+    <van-checkbox
+      v-show="birthFlag"
+      :icon-size="25"
+      :shape="'square'"
+      class="show-dialog"
+      checked-color="#ee0a24"
+      v-model="showDialogFlag"
+    >不再显示</van-checkbox>
   </div>
+  <!-- </van-skeleton> -->
 </template>
 
 <script>
@@ -44,7 +53,7 @@ import CSS3D from '@/components/CSS3D.vue';
 import playCtl from '@/views/playCtl.vue';
 import { getBanner } from '../api/index';
 import { mapMutations, mapState } from 'vuex';
-import { Toast, Overlay } from 'vant';
+import { Toast, Overlay, Skeleton as VanSkeleton } from 'vant';
 import BGMCom from '@/components/BGMCom.vue';
 
 export default {
@@ -57,12 +66,13 @@ export default {
     RecMusicList,
     SetupMusicList,
     playCtl,
-    CSS3D,
+    CSS3D, VanSkeleton,
     BGMCom, "van-checkbox": Checkbox
   },
   data() {
     return {
       birthFlag: true,
+      loading: true,
       imgList: [
         { pic: require('../assets/img/swiper1.jpg') },
         { pic: require('../assets/img/swiper2.jpg') },
@@ -84,7 +94,7 @@ export default {
     },
     closeFn() {
       console.log("======>>>>>>>this.showDialogFlag>>>>>>=====", this.showDialogFlag);
-      if(this.showDialogFlag) {
+      if (this.showDialogFlag) {
         localStorage.showDialogFlag = this.showDialogFlag;
       }
       this.birthFlag = !this.birthFlag;
@@ -94,7 +104,7 @@ export default {
 
   },
   async beforeMount() {
-    if(localStorage.showDialogFlag) {
+    if (localStorage.showDialogFlag) {
       this.birthFlag = false;
     }
     let res = await getBanner(1);
@@ -109,6 +119,7 @@ export default {
   mounted() {
     this.$store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: true });
     this.$store.commit("setNavArr", { index: 0 });
+    this.loading = false;
   },
   updated() {
     this.$store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: true });
@@ -150,7 +161,7 @@ export default {
     flex-direction: column;
     overflow: hidden;
     .top-nav {
-      z-index: 100;
+      z-index: 20;
     }
     .swiper {
       z-index: 10;

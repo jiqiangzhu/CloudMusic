@@ -35,7 +35,7 @@
                 <span class="iconfont icon-ziyuan" @click="seeMoreFn"></span>
             </div>
             <div class="jindu">
-                <div class="process" :style="{ width: progress }"></div>
+                <div class="process" :style="{ width: tempRate}"></div>
             </div>
             <div class="f-bottom">
                 <span class="iconfont icon-xunhuan" v-if="!loopFlag" @click="changeLoopState"></span>
@@ -44,23 +44,32 @@
                 <span v-if="paused" @click="play" class="iconfont icon-iconset0481"></span>
                 <span v-else @click="play" class="iconfont icon-zanting"></span>
                 <span class="iconfont icon-xiayigexiayishou" @click="goPlay(1)"></span>
-                <span class="iconfont icon-liebiao"></span>
+                <span class="iconfont icon-liebiao" @click="showPopupFn"></span>
             </div>
         </div>
+        <van-popup v-model:show="showPopupFlag" closeable round position="bottom" duration="0.4">
+            <PopupList />
+        </van-popup>
     </div>
 </template>
 <script>
-import { getLyric } from '@/api/index'
+import { getLyric } from '@/api/index';
+import PopupList from '@/components/PopupList.vue';
+import { Popup } from 'vant';
 import { mapGetters, mapMutations, mapState } from 'vuex';
 import { Toast } from 'vant';
 export default {
     components: {
-        Toast
+        Toast,
+        PopupList,
+        "van-popup": Popup
     },
     data() {
         return {
+            tempRate: 0,
             isLyric: false,
-            top: 1
+            top: 1,
+            showPopupFlag: false
         }
     },
     computed: {
@@ -91,7 +100,6 @@ export default {
             Toast.fail('开发中，敬请期待');
         },
         goPlay(num) {
-            // console.log(this.playlist, this.currentIndex);
             if (this.playlist.length == 1) {
                 Toast("列表中没有更多歌曲了")
             }
@@ -105,19 +113,26 @@ export default {
 
         },
         playPageBackFn() {
-            // console.log(this.$router);
             this.$router.go(-1);
         },
         play() {
             this.$store.commit("setPausedFlag", { paused: !this.paused });
         },
         changeLoopState() {
+            if (this.loopFlag) {
+                Toast("列表循环");
+            } else {
+                Toast("单曲循环");
+            }
             this.$store.commit("setLoopFlag");
+        },
+        showPopupFn() {
+            this.showPopupFlag = !this.showPopupFlag;
         }
     },
     mounted() {
         this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: false });
-        
+        console.log(this.progress);
     },
     watch: {
         currentTime: function(value) {
@@ -127,6 +142,11 @@ export default {
             }
             this.$refs.playLrc.scrollTop = activeP.offsetTop;
 
+        },
+        progress(newV, oldV) {
+            if(this.progress != "NAN" && this.progress) {
+                this.tempRate = this.progress + "%";
+            }
         }
     }
 }

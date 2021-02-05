@@ -1,6 +1,6 @@
 <template>
     <div id="bottom">
-        <playCtl :tracks="playlist" v-show="playControlFlag" /> 
+        <playCtl v-show="playControlFlag" /> 
 
         <BottomNav class="bottom-bar" v-show="navBarFlag" />
     </div>
@@ -16,7 +16,7 @@ export default {
         }
     },
     mounted() {
-        
+        console.log(this.playlist);
     },
     computed: {
         ...mapState(['playControlFlag', 'navBarFlag', 'playlist'])
