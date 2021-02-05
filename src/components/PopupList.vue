@@ -90,6 +90,7 @@ export default {
 
 #popup-list {
     min-height: 3rem;
+    max-height: 9rem;
     position: relative;
     .list-top {
         width: 7.5rem;

@@ -27,7 +27,7 @@
                     <div class="content">
                         <span class="title van-ellipsis">{{item.name}}</span>
                         <span class="tag"></span>
-                        <div class="name">
+                        <div class="name van-ellipsis">
                             <span v-for="(name, index) in item.ar" :key="index">{{name.name}}</span>
                         </div>
                         
@@ -174,6 +174,7 @@ export default {
                         margin-bottom: 0.05rem;
                     }
                     .name {
+                        width: 5rem;
                         flex-direction: row;
                         color: #999;
                         font-size: 0.24rem;

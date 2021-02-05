@@ -35,7 +35,7 @@
                 <span class="iconfont icon-ziyuan" @click="seeMoreFn"></span>
             </div>
             <div class="jindu">
-                <div class="process" :style="{ width: progress }"></div>
+                <div class="process" :style="{ width: tempRate}"></div>
             </div>
             <div class="f-bottom">
                 <span class="iconfont icon-xunhuan" v-if="!loopFlag" @click="changeLoopState"></span>
@@ -66,6 +66,7 @@ export default {
     },
     data() {
         return {
+            tempRate: 0,
             isLyric: false,
             top: 1,
             showPopupFlag: false
@@ -99,7 +100,6 @@ export default {
             Toast.fail('开发中，敬请期待');
         },
         goPlay(num) {
-            // console.log(this.playlist, this.currentIndex);
             if (this.playlist.length == 1) {
                 Toast("列表中没有更多歌曲了")
             }
@@ -113,14 +113,13 @@ export default {
 
         },
         playPageBackFn() {
-            // console.log(this.$router);
             this.$router.go(-1);
         },
         play() {
             this.$store.commit("setPausedFlag", { paused: !this.paused });
         },
         changeLoopState() {
-            if(this.loopFlag) {
+            if (this.loopFlag) {
                 Toast("列表循环");
             } else {
                 Toast("单曲循环");
@@ -133,7 +132,7 @@ export default {
     },
     mounted() {
         this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: false });
-        
+        console.log(this.progress);
     },
     watch: {
         currentTime: function(value) {
@@ -143,6 +142,11 @@ export default {
             }
             this.$refs.playLrc.scrollTop = activeP.offsetTop;
 
+        },
+        progress(newV, oldV) {
+            if(this.progress != "NAN" && this.progress) {
+                this.tempRate = this.progress + "%";
+            }
         }
     }
 }
