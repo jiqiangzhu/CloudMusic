@@ -161,37 +161,44 @@ export default {
             border-radius: 0.5rem;
         }
         .title {
-            width: 2rem;
+            max-width: 2rem;
             margin: 0 0.2rem 0 0.2rem;
             font-size: 0.18rem;
         }
         .author {
-            width: 2rem;
+            max-width: 2rem;
             font-size: 0.2rem;
             // color: #999;
             padding-top: 0.06rem;
         }
     }
     .right {
+        position: relative;
         display: flex;
         align-items: center;
+        justify-content: flex-start;
         width: 1.8rem;
         margin-right: 0.1rem;
         .circle-process {
-            // position: relative;
-            margin-top: 0.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            // margin-top: 0.1rem;
             .iconfont {
                 position: absolute;
-                right: 1.05rem;
-                top: 0.3rem;
+                // right: 1.05rem;
+                // top: 0.3rem;
                 z-index: 100;
-                font-size: 0.4rem;
-                margin: 0 0.25rem;
+                // font-size: 0.4rem;
+                // margin: 0 0.25rem;
             }
         }
-        .iconfont {
+        .icon-liebiao {
             font-size: 0.4rem;
             margin: 0 0.25rem;
+            position: absolute;
+            right: 0.1rem;
         }
     }
 }
