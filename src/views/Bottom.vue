@@ -16,7 +16,7 @@ export default {
         }
     },
     mounted() {
-        console.log(this.playlist);
+        // console.log(this.playlist);
     },
     computed: {
         ...mapState(['playControlFlag', 'navBarFlag', 'playlist'])

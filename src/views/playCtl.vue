@@ -3,7 +3,7 @@
         <div class="left" @click="toPlayPageFn">
             <img :src="playlist[currentIndex].al.picUrl" :alt="playlist[currentIndex].name" />
             <span class="title van-ellipsis">{{ playlist[currentIndex].name }}</span>
-            <span>-</span>
+            <!-- <span>-</span> -->
             <span class="author van-ellipsis">
                 <span v-for="(item, i) in playlist[currentIndex].ar" :key="i">{{ item.name }}</span>
             </span>
@@ -41,8 +41,7 @@
 </template>
 <script>
 import { Popup, Circle as VanCircle } from 'vant';
-import { onMounted, reactive, inject } from 'vue';
-import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import PlayPage from '@/components/PlayPage.vue';
 import PopupList from '@/components/PopupList.vue';
 export default {
@@ -71,13 +70,17 @@ export default {
             }
             this.$store.commit("setPausedFlag", { paused: !this.paused });
         },
-        updateTime() {//更新当前播放时间
+        updateTime() {//播放时更新当前播放时间
             if (this.paused) {
                 return;
             }
+            if(localStorage.duration != "NAN" && localStorage.duration && !this.duration) {
+                this.duration = localStorage.duration;
+            }
+            // 设置当前播放时间
             this.$store.commit('setCurrentTime', this.$refs.audio.currentTime);
             let progress = this.currentTime / this.duration;
-
+            // 设置进度条
             this.$store.commit("setProgress", progress);
         },
         toPlayPageFn() {//进入播放页
@@ -94,6 +97,14 @@ export default {
         },
         showPopupFn() {//列表弹出层
             this.showPopupFlag = !this.showPopupFlag;
+        },
+        setProgress() {// 播放进度条
+            let progress = this.$refs.audio.currentTime / localStorage.duration;
+            this.$store.commit("setProgress", progress);
+            console.log("进度条百分比率----------------", progress);
+            progress = parseInt(progress * 100)
+            this.tempRate = progress;
+            this.rate = this.tempRate;
         }
     },
     components: {
@@ -114,23 +125,35 @@ export default {
         }
     },
     beforeMount() {
+        // 若本地存储中播放列表有值，那么取本地存储的播放列表
+        if (localStorage.playlist) {
+            let localPlayList = JSON.parse(localStorage.playlist);
+            this.$store.commit("setPlayList", localPlayList)
+        }
 
+        // 设置索引
+        if (localStorage.currentIndex != "NAN" && localStorage.currentIndex != "undefined" && localStorage.currentIndex) {
+            console.log("localStorage.currentIndex-------------", localStorage.currentIndex);
+            this.$store.commit("setCurrentIndex", localStorage.currentIndex)
+        }
+
+        // 获取歌词
+        this.$store.dispatch('setLyric', this.playlist[this.currentIndex].id);
     },
     mounted() {
         // 本地存储播放信息 当前播放列表索引 当前歌曲播放时间点 进度
         if (localStorage.currentTime != "NAN" && localStorage.currentTime != "undefined" && localStorage.currentTime) {
+            // 设置当前播放的时间
             this.$refs.audio.currentTime = localStorage.currentTime;
             this.$store.commit('setCurrentTime', this.$refs.audio.currentTime);
+            console.log("------------当前播放时间---单位--秒----------", this.$refs.audio.currentTime);
+            // 设置播放进度条
+            this.setProgress();
         }
-        // if (localStorage.currentIndex != "NAN" && localStorage.currentIndex != "undefined") {
-        //     this.$store.commit("setCurrentIndex", parseInt(localStorage.currentIndex));
-        // }
-
-
     },
 
     updated() {
-        this.$store.dispatch('setLyric', this.playlist[this.currentIndex].id)
+        this.$store.dispatch('setLyric', this.playlist[this.currentIndex].id);
         if (!this.paused) {
             this.$refs.audio.play()
         } else {
@@ -148,7 +171,6 @@ export default {
     align-items: center;
     border-top-left-radius: 0.1rem;
     border-top-right-radius: 0.1rem;
-    // background: transparent;
     background: rgba(239, 239, 239, 0.9);
     .left {
         flex: 1;
@@ -168,7 +190,7 @@ export default {
         .author {
             max-width: 2rem;
             font-size: 0.2rem;
-            // color: #999;
+            padding-left: 0.1rem;
             padding-top: 0.06rem;
         }
     }
@@ -184,14 +206,9 @@ export default {
             align-items: center;
             justify-content: center;
             position: absolute;
-            // margin-top: 0.1rem;
             .iconfont {
                 position: absolute;
-                // right: 1.05rem;
-                // top: 0.3rem;
                 z-index: 100;
-                // font-size: 0.4rem;
-                // margin: 0 0.25rem;
             }
         }
         .icon-liebiao {

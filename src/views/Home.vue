@@ -25,7 +25,7 @@
       <img src="../assets/iconlist/3.png" :alt="'背景图'" class="bg" />
     </div>
     <div class="dialog" v-show="birthFlag">
-      <img src="../assets/duanzi/close1.png" @click.stop="closeFn" class="close" alt="关闭" />
+      <img src="../assets/duanzi/close1.png" @click="closeFn" class="close" alt="关闭" />
       <BGMCom class="birth" />
     </div>
     <van-checkbox
@@ -111,10 +111,10 @@ export default {
     this.imgList = res.data.banners;
     this.$store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: true });
     this.$store.commit("setNavArr", { index: 0 });
-    if (localStorage.playlist) {
-      let localPlayList = JSON.parse(localStorage.playlist);
-      this.$store.commit("setPlayList", localPlayList)
-    }
+    // if (localStorage.playlist) {
+    //   let localPlayList = JSON.parse(localStorage.playlist);
+    //   this.$store.commit("setPlayList", localPlayList)
+    // }
   },
   mounted() {
     this.$store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: true });

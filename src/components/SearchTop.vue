@@ -4,26 +4,31 @@
             <span class="iconfont icon-arrowLeft" @click="$router.go(-1)"></span>
             <div class="input">
                 <input
+                    @focus="isShow = true"
                     type="text"
                     v-model="keyword"
-                    placeholder="狼殿下最近很火哦"
+                    :placeholder="defaulttSearchKey"
+                    @keydown="inputEvent($event)"
                     @keydown.enter="enterEvent"
                 />
             </div>
         </div>
         <div class="history" v-if="isShow">
             <span class="tag">历史</span>
-            <div class="left">
-                <span
-                    class="h-item"
-                    @click="searchEvent(item)"
-                    v-for="(item, i) in historyList"
-                    :key="i"
-                >{{ item }}</span>
+            <div class="history-box">
+                <div class="left">
+                    <span
+                        class="h-item"
+                        @click="searchEvent(item)"
+                        v-for="(item, i) in historyList"
+                        :key="i"
+                    >{{ item }}</span>
+                </div>
             </div>
+
             <span class="iconfont icon-dustbin_icon" @click="clearEvent"></span>
         </div>
-        <div class="l-content" v-if="contentShow">
+        <div class="l-content" v-if="!isShow">
             <div
                 class="list-item"
                 v-for="(item, i) in resultSongs"
@@ -51,9 +56,10 @@
     </div>
 </template>
 <script>
-import { mapState } from 'vuex'
-import { getSearchResults } from '@/api/index'
-import playCtl from '@/views/playCtl.vue'
+import { mapState } from 'vuex';
+import { getSearchResults } from '@/api/index';
+import playCtl from '@/views/playCtl.vue';
+import { getDefaultSearchKey } from '../api';
 export default {
     data() {
         return {
@@ -61,7 +67,8 @@ export default {
             keyword: '',
             contentShow: false,
             historyList: [],
-            resultSongs: []
+            resultSongs: [],
+            defaulttSearchKey: ""
         }
     },
     computed: {
@@ -70,14 +77,15 @@ export default {
     components: {
         playCtl
     },
-    beforeMount() {
+    async beforeMount() {
         if (localStorage.historyList != undefined && localStorage.historyList != "") {
             this.historyList = JSON.parse(localStorage.historyList)
-            this.historyList = this.historyList.reverse()
+            // this.historyList = this.historyList.reverse()
             this.isShow = true
         } else {
             this.isShow = false
         }
+        this.defaulttSearchKey = this.$route.query.defaulttSearchKey;
     },
 
     methods: {
@@ -85,20 +93,29 @@ export default {
             let result = await getSearchResults(item)
             console.log(result);
             this.resultSongs = result.data.result.songs
-            this.isShow = false
-            this.contentShow = true
+            this.isShow = false;
+            this.contentShow = true;
             console.log(this.resultSongs);
             // this.$store.commit('setPlayList', this.resultSongs)
         },
+        inputEvent(e) {
+            if(e.keyCode != 13) {
+                this.isShow = true;
+            }
+        },
         async enterEvent(event) {
             if (this.keyword != '') {
-                console.log(this.historyList);
-                this.historyList.push(this.keyword)
-                this.historyList = Array.from(new Set(this.historyList))
-                localStorage.historyList = JSON.stringify(this.historyList)
-                this.historyList = this.historyList.reverse()
-                this.isShow = false
-                this.contentShow = true
+                // this.historyList = this.historyList.reverse().push(this.keyword).reverse();
+                this.historyList = this.historyList.reverse();
+                this.historyList.push(this.keyword);
+                this.historyList = this.historyList.reverse();
+                // console.log(this.historyList);
+                // this.historyList.push(this.keyword);
+                this.historyList = Array.from(new Set(this.historyList));
+                localStorage.historyList = JSON.stringify(this.historyList);
+                // this.historyList = this.historyList.reverse()
+                this.isShow = false;
+                this.contentShow = true;
             }
             // 获取关键词搜索结果集
             let result = await getSearchResults(this.keyword)
@@ -108,9 +125,9 @@ export default {
             this.keyword = ''
         },
         clearEvent() {
-            this.isShow = false
-            localStorage.clear()
-            this.historyList = []
+            this.isShow = false;
+            localStorage.removeItem("historyList")
+            this.historyList = [];
         },
         playSong(event, i) {
             console.log(this.resultSongs);
@@ -167,26 +184,34 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative;
         .tag {
             width: 0.8rem;
             font-weight: 700;
             font-size: 0.35rem;
         }
-        .left {
+        .history-box {
             width: 6rem;
             height: 0.5rem;
-            overflow: scroll;
-            display: flex;
-            align-items: center;
-            .h-item {
-                margin: 0 0.15rem;
-                padding: 0 0.2rem;
-                height: 0.5rem;
-                line-height: 0.5rem;
-                background: rgb(230, 225, 225);
-                border-radius: 0.25rem;
+            overflow: hidden;
+            .left {
+                widows: 100%;
+                // position: absolute;
+                overflow-x: scroll;
+                // display: flex;
+                // align-items: center;
+                // flex-wrap: nowrap;
+                .h-item {
+                    margin: 0 0.15rem;
+                    padding: 0 0.1rem;
+                    height: 0.5rem;
+                    line-height: 0.5rem;
+                    background: rgb(230, 225, 225);
+                    border-radius: 0.25rem;
+                }
             }
         }
+
         .iconfont {
             width: 0.2rem;
             margin-left: 0.1rem;
@@ -208,6 +233,7 @@ export default {
             justify-content: space-between;
             align-items: center;
             position: relative;
+
             .left {
                 width: 6rem;
                 display: flex;

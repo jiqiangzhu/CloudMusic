@@ -29,7 +29,7 @@ export default {
             if(i==0) {
                 this.$router.push('/');
             } else if(i==1) {
-                this.$router.push({ path: '/duanzi' });
+                this.$router.push({ path: '/films' });
             } else if(i==2) {
                 this.$router.push({ path: '/games' });
             } else if(i==3) {

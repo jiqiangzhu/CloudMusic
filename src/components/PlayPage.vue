@@ -132,7 +132,8 @@ export default {
     },
     mounted() {
         this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: false });
-        console.log(this.progress);
+        console.log("播放页面当前进度-----------", this.progress);
+        this.tempRate = this.progress + "%";
     },
     watch: {
         currentTime: function(value) {

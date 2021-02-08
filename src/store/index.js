@@ -34,8 +34,8 @@ export default createStore({
     paused: true,
     navArr: [
       { icon: "icon-icon--", txt: "see", text: "首页", isActive: "active" },
-      { icon: "icon-_gongguanchuanbo", txt: "boke", text: "小视频", isActive: "" },
-      { icon: "icon-yinyue", txt: "game", text: "小游戏", isActive: "" },
+      { icon: "icon-_gongguanchuanbo", txt: "boke", text: "MV", isActive: "" },
+      { icon: "icon-yinyue", txt: "game", text: "游戏", isActive: "" },
       { icon: "icon-daohanglan-05", txt: "my", text: "我的", isActive: "" }
     ]
   },
@@ -100,8 +100,9 @@ export default createStore({
     },
     // 设置进度条
     setProgress(state, value) {
-      state.progress = (value * 100).toFixed(2);
-      // console.log("-------state.progress------", state.progress);
+      let currentProgress = (value * 100).toFixed(2);
+      state.progress = currentProgress;
+      // console.log("-------currentProgress------", currentProgress);
     },
     // 设置是否循环播放
     setLoopFlag(state) {
@@ -130,8 +131,10 @@ export default createStore({
     setPlayList(state, list) {
       if (list) {
         state.playlist = list;
+        // 更新本地存储中的播放列表
         localStorage.playlist = JSON.stringify(list);
       }
+      console.log("----------当前播放列表---------\n", state.playlist);
     },
     // 设置当前播放索引
     setCurrentIndex(state, index) {

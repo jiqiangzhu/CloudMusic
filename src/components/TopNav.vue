@@ -4,9 +4,9 @@
             <span class="iconfont icon-liebiao1" @click="$router.push('/homeMunu')"></span>
         <!-- </div> -->
         <div class="top-center">
-            <div class="search-box" @click="$router.push({path: '/search'})">
+            <div class="search-box" @click="$router.push({path: '/search', query: {defaulttSearchKey: defaulttSearchKey}})">
                 <span class="iconfont icon-sousuo"></span>
-                <input type="text" placeholder="大家都在搜 狼殿下">
+                <input type="text" :placeholder="defaulttSearchKey">
             </div>
         </div>
         <!-- <div class="top-right"> -->
@@ -14,6 +14,21 @@
         <!-- </div> -->
     </div>
 </template>
+<script>
+import { getDefaultSearchKey } from '../api'
+export default {
+    data() {
+        return {
+            defaulttSearchKey: ""
+        }
+    },
+    async beforeMount() {
+        let result = await getDefaultSearchKey();
+        // console.log("-------------默认搜索关键词--------------", result);
+        this.defaulttSearchKey = result.data.data.showKeyword;
+    }
+}
+</script>
 <style lang="less">
     .top-nav {
         position: fixed;

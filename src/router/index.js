@@ -38,7 +38,6 @@ const routes = [
       } else {
         next('/login')
       }
-
     },
     component: () => import(/* webpackChunkName: "about" */ '../views/Me.vue')
   },
@@ -47,10 +46,15 @@ const routes = [
     name: 'Login',
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
   },
+  // {//小视频
+  //   path: '/duanzi',
+  //   name: 'Duanzi',
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/Duanzi.vue')
+  // },
   {//小视频
-    path: '/duanzi',
-    name: 'Duanzi',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Duanzi.vue')
+    path: '/films',
+    name: 'Films',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Films.vue')
   },
   {//播放小视频
     path: '/playdz',
@@ -70,10 +74,9 @@ const routes = [
   {//每日推荐
     path: '/recommand',
     name: 'DayRecomm',
-    component: () => import (/* webpackChunkName: "about" */ '../components/DayRecomm.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../components/DayRecomm.vue'),
     beforeEnter: (from, to, next) => {
       // 检查用户是否登录，未登录不能进入
-      debugger;
       console.log(store.state.user)
       if (store.state.user.isLogin) {
         next();
@@ -83,13 +86,12 @@ const routes = [
           next('/login');
         }, 1000)
       }
-
     }
   },
   {//网友精选碟歌单
     path: '/goodPlaylist',
     name: 'GoodPlaylist',
-    component: () => import (/* webpackChunkName: "about" */ '../components/GoodPlaylist.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../components/GoodPlaylist.vue')
   },
   {
     path: '/about',
