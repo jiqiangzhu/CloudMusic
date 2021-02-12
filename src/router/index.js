@@ -56,6 +56,11 @@ const routes = [
     name: 'Films',
     component: () => import(/* webpackChunkName: "about" */ '../views/Films.vue')
   },
+  {//小视频
+    path: '/recomMv',
+    name: 'RecomMV',
+    component: () => import(/* webpackChunkName: "about" */ '../components/RecomMV.vue')
+  },
   {//播放小视频
     path: '/playdz',
     name: 'PlayDZ',

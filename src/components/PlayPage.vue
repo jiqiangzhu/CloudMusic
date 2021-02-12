@@ -35,7 +35,7 @@
                 <span class="iconfont icon-ziyuan" @click="seeMoreFn"></span>
             </div>
             <div class="jindu">
-                <div class="process" :style="{ width: tempRate}"></div>
+                <div class="process" :style="{ width: tempRate }"></div>
             </div>
             <div class="f-bottom">
                 <span class="iconfont icon-xunhuan" v-if="!loopFlag" @click="changeLoopState"></span>
@@ -134,6 +134,7 @@ export default {
         this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: false });
         console.log("播放页面当前进度-----------", this.progress);
         this.tempRate = this.progress + "%";
+        this.$store.commit("setLocalLoopFlag");
     },
     watch: {
         currentTime: function(value) {
@@ -145,7 +146,7 @@ export default {
 
         },
         progress(newV, oldV) {
-            if(this.progress != "NAN" && this.progress) {
+            if (this.progress != "NAN" && this.progress) {
                 this.tempRate = this.progress + "%";
             }
         }

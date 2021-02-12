@@ -107,7 +107,19 @@ export default createStore({
     // 设置是否循环播放
     setLoopFlag(state) {
       state.loopFlag = !state.loopFlag;
+      localStorage.loopFlag = state.loopFlag;
     },
+    // 从本地存储中取播放模式
+    setLocalLoopFlag(state) {
+      if (localStorage.loopFlag || localStorage.loopFlag != "undefined") {
+        if (localStorage.loopFlag == "false") {
+          state.loopFlag = false;
+        } else {
+          state.loopFlag = true;
+        }
+      }
+    },
+
     // 导航栏切换
     setNavArr(state, value) {
       state.navArr.forEach((item, index) => {
@@ -140,7 +152,7 @@ export default createStore({
     setCurrentIndex(state, index) {
       state.currentIndex = index;
       localStorage.currentIndex = index;
-      console.log(state.currentIndex);
+      console.log("当前播放列表索引-----------", state.currentIndex);
     },
     setLyricList(state, value) {
       state.lyric = value
