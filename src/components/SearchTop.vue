@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <playCtl :tracks="resultSongs" v-if="contentShow" class="play-ctl" />
+        <!-- <playCtl :tracks="resultSongs" v-if="contentShow" class="play-ctl" /> -->
     </div>
 </template>
 <script>
