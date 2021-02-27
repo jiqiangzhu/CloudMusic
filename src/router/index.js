@@ -10,7 +10,7 @@ const routes = [
     meta: {
       title: 'Home',
       keepAlive: true
-    }
+    },
   },
   {//搜索歌曲
     path: '/search',
@@ -61,7 +61,7 @@ const routes = [
     // meta: {
     //   title: 'MV',
     //   keepAlive: true
-    // }
+    // },
   },
   {//小视频
     path: '/mvDetails',

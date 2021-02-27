@@ -14,21 +14,24 @@
                     </van-col>
                     <!-- <van-col span="4"></van-col> -->
                 </van-row>
-
-                <!-- <h1>最新MV</h1> -->
-                <van-grid :border="false" :column-num="2" class="mv-content">
-                    <van-grid-item
-                        v-for="(item, index) in details"
-                        @click="seeFilmsDetail(index)"
-                        :key="index"
-                    >
-                        <van-image radius="5" :src="item.cover" />
-                        <span style="text-align: center;">{{ item.name }} - {{ item.artistName }}</span>
-                    </van-grid-item>
-                    <!-- <van-grid-item>
+                <van-pull-refresh v-model="loading" @refresh="onRefresh">
+                    <!-- <h1>最新MV</h1> -->
+                    <van-grid :border="false" :column-num="2" class="mv-content">
+                        <van-grid-item
+                            v-for="(item, index) in details"
+                            @click="seeFilmsDetail(index)"
+                            :key="index"
+                        >
+                            <van-image radius="5" :src="item.cover" />
+                            <span
+                                style="text-align: center;"
+                            >{{ item.name }} - {{ item.artistName }}</span>
+                        </van-grid-item>
+                        <!-- <van-grid-item>
                         <van-button type="primary" @click.stop="getFilmByName()">换一批</van-button>
-                    </van-grid-item>-->
-                </van-grid>
+                        </van-grid-item>-->
+                    </van-grid>
+                </van-pull-refresh>
                 <br />
                 <br />
                 <br />
@@ -37,7 +40,7 @@
     </div>
 </template>
 <script>
-import { Skeleton as VanSkeleton, Toast, Button as VanButton, Col as VanCol, Row as VanRow, Search as VanSearch } from 'vant';
+import { Skeleton as VanSkeleton, Toast, Button as VanButton, Col as VanCol, Row as VanRow, Search as VanSearch, PullRefresh as VanPullRefresh } from 'vant';
 import { Grid as VanGrid, GridItem as VanGridItem, Image as VanImage } from 'vant';
 import { getMVAddress, getMVDetailInfo, getRecomMV } from '../api';
 export default {
@@ -45,20 +48,27 @@ export default {
     data() {
         return {
             loadingFlag: true,
-            details: []
+            details: [],
+            loading: false
         }
     },
     components: {
-        VanSkeleton, VanGrid, VanGridItem, VanImage, VanButton, VanCol, VanRow, VanSearch
+        VanSkeleton, VanGrid, VanGridItem, VanImage, VanButton, VanCol, VanRow, VanSearch, VanPullRefresh
     },
     methods: {
+        onRefresh() {
+            setTimeout(() => {
+                console.log("---------->>>>>----------refresh");
+                this.loading = false;
+            }, 3000)
+        },
         async onLoad() {
             this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: true });
             this.$store.commit("setNavArr", { index: 1 });
 
         },
         async seeFilmsDetail(index) {
-            this.$router.push({path: '/mvDetails', query: {mvid: this.details[index].id}});
+            this.$router.push({ path: '/mvDetails', query: { mvid: this.details[index].id } });
             // console.log(this.details[index]);
             // let result = await getMVAddress(this.details[index].id);
             // console.log("MV播放地址------------------", result);
@@ -83,6 +93,9 @@ export default {
                 Toast("网络不太给力，请重新加载....");
             }
         }
+    },
+    async beforeMount() {
+        await this.onLoad();
     },
     async mounted() {
         await this.onLoad();

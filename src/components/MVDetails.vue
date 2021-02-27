@@ -27,6 +27,17 @@
                         </van-row>
                     </van-col>
                 </van-row>
+                <van-row>
+                    <van-col span="6" offset="1" class="count">
+                        播放次数： {{details.playCount}}
+                    </van-col>
+                    <van-col span="6" offset="1" class="count">
+                        分享次数：{{details.shareCount}}
+                    </van-col>
+                    <van-col span="6" offset="1" class="count">
+                        评论数：{{details.commentCount}}
+                    </van-col>
+                </van-row>
                 <van-row justify="center">
                     <van-col span="16" class="van-ellipsis mv-title">{{ details.name }}-{{ details.artistName }}</van-col>
                 </van-row>
@@ -107,7 +118,12 @@ export default {
         top: 0.2rem;
         z-index: 100;
     }
-
+    .count {
+        background: rgba(164, 201, 198, 0.205);
+        border-radius: 0.3rem;
+        text-align: center;
+        color: #999;
+    }
     .mv-content {
         margin-top: 0.5rem;
         margin-bottom: 0.1rem;
