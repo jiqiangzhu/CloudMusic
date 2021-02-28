@@ -15,7 +15,7 @@
         </div>
         <div class="history" v-if="isShow">
             <span class="tag">历史</span>
-            <div class="history-box">
+            <!-- <div class="history-box">
                 <div class="left">
                     <span
                         class="h-item"
@@ -24,8 +24,17 @@
                         :key="i"
                     >{{ item }}</span>
                 </div>
+            </div>-->
+            <div class="h-content">
+                <div class="content">
+                    <p
+                        class="h-item"
+                        @click="searchEvent(item)"
+                        v-for="(item, i) in historyList"
+                        :key="i"
+                    >{{ item }}</p>
+                </div>
             </div>
-
             <span class="iconfont icon-dustbin_icon" @click="clearEvent"></span>
         </div>
         <div class="l-content" v-if="!isShow">
@@ -52,6 +61,11 @@
                 </div>
             </div>
         </div>
+        <!-- <div class="test">
+            <div class="content">
+                <span>1test</span><span>2test</span><span>3test</span><span>4test</span><span>5test</span><span>6test</span><span>7test</span><span>8test</span><span>9test</span><span>10test</span>
+            </div>
+        </div>-->
         <!-- <playCtl :tracks="resultSongs" v-if="contentShow" class="play-ctl" /> -->
     </div>
 </template>
@@ -60,6 +74,7 @@ import { mapState } from 'vuex';
 import { getSearchResults } from '@/api/index';
 import playCtl from '@/views/playCtl.vue';
 import { getDefaultSearchKey } from '../api';
+import { Toast } from 'vant';
 export default {
     data() {
         return {
@@ -72,7 +87,7 @@ export default {
         }
     },
     computed: {
-
+        Toast
     },
     components: {
         playCtl
@@ -90,27 +105,42 @@ export default {
 
     methods: {
         async searchEvent(item) {
+            Toast.loading("正在加载中，请稍候...");
             let result = await getSearchResults(item)
             console.log(result);
             this.resultSongs = result.data.result.songs
             this.isShow = false;
             this.contentShow = true;
+            Toast.clear();
+            Toast.success("加载成功！");
             console.log(this.resultSongs);
             // this.$store.commit('setPlayList', this.resultSongs)
         },
         inputEvent(e) {
-            if(e.keyCode != 13) {
+            if (e.keyCode != 13) {
                 this.isShow = true;
             }
         },
         async enterEvent(event) {
+            // Toast.setDefaultOptions(option);
+            Toast.loading("正在加载中，请稍候...");
             if (this.keyword != '') {
                 // this.historyList = this.historyList.reverse().push(this.keyword).reverse();
                 this.historyList = this.historyList.reverse();
                 this.historyList.push(this.keyword);
                 this.historyList = this.historyList.reverse();
-                // console.log(this.historyList);
-                // this.historyList.push(this.keyword);
+                this.historyList = Array.from(new Set(this.historyList));
+                localStorage.historyList = JSON.stringify(this.historyList);
+                // this.historyList = this.historyList.reverse()
+                this.isShow = false;
+                this.contentShow = true;
+            } else {
+                console.log(this.$route.query.defaulttSearchKey);
+                this.keyword = this.$route.query.defaulttSearchKey;
+
+                this.historyList = this.historyList.reverse();
+                this.historyList.push(this.keyword);
+                this.historyList = this.historyList.reverse();
                 this.historyList = Array.from(new Set(this.historyList));
                 localStorage.historyList = JSON.stringify(this.historyList);
                 // this.historyList = this.historyList.reverse()
@@ -118,11 +148,13 @@ export default {
                 this.contentShow = true;
             }
             // 获取关键词搜索结果集
-            let result = await getSearchResults(this.keyword)
-            this.resultSongs = result.data.result.songs
-            // this.$store.commit('setPlayList', this.resultSongs)
+            let result = await getSearchResults(this.keyword);
+            this.resultSongs = result.data.result.songs;
+
+            Toast.clear();
+            Toast.success("加载成功！");
             // 清空搜索框
-            this.keyword = ''
+            // this.keyword = ''
         },
         clearEvent() {
             this.isShow = false;
@@ -131,9 +163,9 @@ export default {
         },
         playSong(event, i) {
             console.log(this.resultSongs);
-            this.$store.commit('setPlayList', this.resultSongs)
-            this.$store.commit('setCurrentIndex', i)
-            this.$store.commit("setPausedFlag", { paused: false })
+            this.$store.commit('setPlayList', this.resultSongs);
+            this.$store.commit('setCurrentIndex', i);
+            this.$store.commit("setPausedFlag", { paused: false });
         }
     }
 }
@@ -190,27 +222,45 @@ export default {
             font-weight: 700;
             font-size: 0.35rem;
         }
-        .history-box {
+        .h-content {
             width: 6rem;
-            height: 0.5rem;
-            overflow: hidden;
-            .left {
-                widows: 100%;
-                // position: absolute;
-                overflow-x: scroll;
-                // display: flex;
-                // align-items: center;
-                // flex-wrap: nowrap;
-                .h-item {
-                    margin: 0 0.15rem;
-                    padding: 0 0.1rem;
-                    height: 0.5rem;
-                    line-height: 0.5rem;
-                    background: rgb(230, 225, 225);
-                    border-radius: 0.25rem;
-                }
+            height: 0.6rem;
+            line-height: 0.6rem;
+            overflow-x: scroll;
+            // overflow-y: auto;
+            // align-content: flex-start;
+            .content {
+                display: flex;
+                flex-wrap: nowrap;
+            }
+            .h-item {
+                // display: inline-block;
+                margin: 0.02rem 0.1rem;
+                padding: 0rem 0.1rem;
+                border-radius: 0.15rem;
+                font-size: 0.12rem;
+                background: #efefef;
+                flex-shrink:0;
             }
         }
+        // .history-box {
+        //     width: 6rem;
+        //     height: 0.5rem;
+        //     overflow-x: auto;
+        //     .left {
+        //         display: flex;
+        //         flex-wrap: nowrap;
+        //         .h-item {
+        //             display: inline-block;
+        //             margin: 0 0.15rem;
+        //             padding: 0 0.1rem;
+        //             height: 0.5rem;
+        //             line-height: 0.5rem;
+        //             background: rgb(230, 225, 225);
+        //             border-radius: 0.25rem;
+        //         }
+        //     }
+        // }
 
         .iconfont {
             width: 0.2rem;
@@ -278,10 +328,19 @@ export default {
             }
         }
     }
-    .play-ctl {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-    }
+    // .test {
+    //     width: 7.5rem;
+    //     height: 1rem;
+    //     display: flex;
+    //     flex-wrap: nowrap;
+    //     overflow-x: auto;
+    //     .content {
+    //         display: flex;
+    //         flex-wrap: nowrap;
+    //         span {
+    //             width: 2rem;
+    //         }
+    //     }
+    // }
 }
 </style>

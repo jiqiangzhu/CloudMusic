@@ -168,7 +168,7 @@ export default {
         position: absolute;
         left: 0;
         top: 0;
-        background-size: auto 100%;
+        background-size: 100% 100%;
         // background-image: url("http://p3.music.126.net/W61Q1gkQAewX5zFlq3i-0Q==/109951165181285684.jpg");
         filter: blur(80px);
     }
