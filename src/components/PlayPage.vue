@@ -59,6 +59,7 @@ import { Popup } from 'vant';
 import { mapGetters, mapMutations, mapState } from 'vuex';
 import { Toast } from 'vant';
 export default {
+    name: "PlayPage",
     components: {
         Toast,
         PopupList,

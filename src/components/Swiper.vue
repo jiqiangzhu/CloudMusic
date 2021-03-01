@@ -19,7 +19,7 @@ import Swiper from 'swiper'
 // import style (<= Swiper 5.x)
 import 'swiper/css/swiper.css'
 export default {
-    name: 'QSwiper',
+    name: 'Swiper',
     props: {
         imgList: {
             type: Array,

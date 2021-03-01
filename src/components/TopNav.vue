@@ -17,6 +17,7 @@
 <script>
 import { getDefaultSearchKey } from '../api'
 export default {
+    name: "TopNav",
     data() {
         return {
             defaulttSearchKey: ""

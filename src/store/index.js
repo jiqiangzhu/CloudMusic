@@ -6,6 +6,7 @@ export default createStore({
     navBarFlag: true,
     loopFlag: false,
     birthFlag: true,
+    refreshSearch: true, //刷新标志 
     // 进度条
     progress: 0,
     // currentRate: 0,
@@ -166,6 +167,9 @@ export default createStore({
     },
     setVideoList(state, value) {
       state.videoList = value.videoList
+    },
+    setRefreshSearch(state, flag) {
+      state.refreshSearch = flag
     }
   },
   actions: {

@@ -230,6 +230,7 @@
 </template>
 <script>
 export default {
+    name: "BackG",
     mounted() {
         
     }

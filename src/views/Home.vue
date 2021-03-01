@@ -4,26 +4,26 @@
     <div class="scroll">
       <TopNav class="top-nav" />
       <!-- <van-pull-refresh v-model="loading" @refresh="onRefresh"> -->
-        <Swiper
-          @click="swiperFn"
-          ref="mySwiper"
-          class="swiper"
-          :imgList="imgList"
-          style="position: relative"
-          :autoplay="true"
-        >
-          <template v-slot="slotProps">
-            <img :src="slotProps.item.pic" alt />
-            <span
-              class="tag"
-              style="position: absolute; bottom: 5px; right: 20px; background:red;padding: 0 5px; border-radius: 3px;color:#fff;"
-            >新歌首发</span>
-          </template>
-        </Swiper>
-        <IconList class="iconlist" />
-        <SetupMusicList class="musiclist" />
-        <CSS3D class="css-3d" />
-        <img src="../assets/iconlist/3.png" :alt="'背景图'" class="bg" />
+      <Swiper
+        @click="swiperFn"
+        ref="mySwiper"
+        class="swiper"
+        :imgList="imgList"
+        style="position: relative"
+        :autoplay="true"
+      >
+        <template v-slot="slotProps">
+          <img :src="slotProps.item.pic" alt />
+          <span
+            class="tag"
+            style="position: absolute; bottom: 5px; right: 20px; background:red;padding: 0 5px; border-radius: 3px;color:#fff;"
+          >新歌首发</span>
+        </template>
+      </Swiper>
+      <IconList class="iconlist" />
+      <SetupMusicList class="musiclist" />
+      <CSS3D class="css-3d" />
+      <img src="../assets/iconlist/3.png" :alt="'背景图'" class="bg" />
       <!-- </van-pull-refresh> -->
     </div>
     <div class="dialog" v-show="birthFlag">
@@ -85,8 +85,17 @@ export default {
       showDialogFlag: false
     }
   },
+  // activated() {
+  //   if (this.refreshSearch) {
+  //     // 若为true，则执行重置页面等相关操作
+  //     this.fetchData();
+  //   } else {
+  //     this.reset(true);
+  //   }
+  // },
+
   computed: {
-    // ...mapState(['birthFlag']),
+    ...mapState(['refreshSearch']),
   },
   methods: {
     onRefresh() {

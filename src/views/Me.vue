@@ -19,6 +19,7 @@
 <script>
 import Bottom from '@/views/Bottom.vue'
 export default {
+    name: "Me",
     components: {
         Bottom
     },

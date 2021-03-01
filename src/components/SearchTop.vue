@@ -15,16 +15,6 @@
         </div>
         <div class="history" v-if="isShow">
             <span class="tag">历史</span>
-            <!-- <div class="history-box">
-                <div class="left">
-                    <span
-                        class="h-item"
-                        @click="searchEvent(item)"
-                        v-for="(item, i) in historyList"
-                        :key="i"
-                    >{{ item }}</span>
-                </div>
-            </div>-->
             <div class="h-content">
                 <div class="content">
                     <p
@@ -45,7 +35,6 @@
                 :key="i"
             >
                 <div class="left">
-                    <!-- <span class="index"></span> -->
                     <div class="content van-ellipsis">
                         <span class="title">{{ item.name }}-</span>
                         <span
@@ -61,12 +50,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="test">
-            <div class="content">
-                <span>1test</span><span>2test</span><span>3test</span><span>4test</span><span>5test</span><span>6test</span><span>7test</span><span>8test</span><span>9test</span><span>10test</span>
-            </div>
-        </div>-->
-        <!-- <playCtl :tracks="resultSongs" v-if="contentShow" class="play-ctl" /> -->
     </div>
 </template>
 <script>
@@ -76,6 +59,7 @@ import playCtl from '@/views/playCtl.vue';
 import { getDefaultSearchKey } from '../api';
 import { Toast } from 'vant';
 export default {
+    name: "SearchTop",
     data() {
         return {
             isShow: false,
@@ -95,7 +79,6 @@ export default {
     async beforeMount() {
         if (localStorage.historyList != undefined && localStorage.historyList != "") {
             this.historyList = JSON.parse(localStorage.historyList)
-            // this.historyList = this.historyList.reverse()
             this.isShow = true
         } else {
             this.isShow = false
@@ -114,7 +97,6 @@ export default {
             Toast.clear();
             Toast.success("加载成功！");
             console.log(this.resultSongs);
-            // this.$store.commit('setPlayList', this.resultSongs)
         },
         inputEvent(e) {
             if (e.keyCode != 13) {
@@ -122,16 +104,13 @@ export default {
             }
         },
         async enterEvent(event) {
-            // Toast.setDefaultOptions(option);
             Toast.loading("正在加载中，请稍候...");
             if (this.keyword != '') {
-                // this.historyList = this.historyList.reverse().push(this.keyword).reverse();
                 this.historyList = this.historyList.reverse();
                 this.historyList.push(this.keyword);
                 this.historyList = this.historyList.reverse();
                 this.historyList = Array.from(new Set(this.historyList));
                 localStorage.historyList = JSON.stringify(this.historyList);
-                // this.historyList = this.historyList.reverse()
                 this.isShow = false;
                 this.contentShow = true;
             } else {
@@ -143,18 +122,14 @@ export default {
                 this.historyList = this.historyList.reverse();
                 this.historyList = Array.from(new Set(this.historyList));
                 localStorage.historyList = JSON.stringify(this.historyList);
-                // this.historyList = this.historyList.reverse()
                 this.isShow = false;
                 this.contentShow = true;
             }
             // 获取关键词搜索结果集
             let result = await getSearchResults(this.keyword);
             this.resultSongs = result.data.result.songs;
-
             Toast.clear();
             Toast.success("加载成功！");
-            // 清空搜索框
-            // this.keyword = ''
         },
         clearEvent() {
             this.isShow = false;
@@ -227,41 +202,19 @@ export default {
             height: 0.6rem;
             line-height: 0.6rem;
             overflow-x: scroll;
-            // overflow-y: auto;
-            // align-content: flex-start;
             .content {
                 display: flex;
                 flex-wrap: nowrap;
             }
             .h-item {
-                // display: inline-block;
                 margin: 0.02rem 0.1rem;
                 padding: 0rem 0.1rem;
                 border-radius: 0.15rem;
                 font-size: 0.12rem;
                 background: #efefef;
-                flex-shrink:0;
+                flex-shrink: 0;
             }
         }
-        // .history-box {
-        //     width: 6rem;
-        //     height: 0.5rem;
-        //     overflow-x: auto;
-        //     .left {
-        //         display: flex;
-        //         flex-wrap: nowrap;
-        //         .h-item {
-        //             display: inline-block;
-        //             margin: 0 0.15rem;
-        //             padding: 0 0.1rem;
-        //             height: 0.5rem;
-        //             line-height: 0.5rem;
-        //             background: rgb(230, 225, 225);
-        //             border-radius: 0.25rem;
-        //         }
-        //     }
-        // }
-
         .iconfont {
             width: 0.2rem;
             margin-left: 0.1rem;
@@ -296,7 +249,6 @@ export default {
                 .content {
                     display: flex;
                     .title {
-                        // width: 4rem;
                         font-size: 0.28rem;
                         font-weight: 500;
                         margin-bottom: 0.05rem;
@@ -328,19 +280,5 @@ export default {
             }
         }
     }
-    // .test {
-    //     width: 7.5rem;
-    //     height: 1rem;
-    //     display: flex;
-    //     flex-wrap: nowrap;
-    //     overflow-x: auto;
-    //     .content {
-    //         display: flex;
-    //         flex-wrap: nowrap;
-    //         span {
-    //             width: 2rem;
-    //         }
-    //     }
-    // }
 }
 </style>

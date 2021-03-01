@@ -14,7 +14,7 @@
 <script>
 import HitPlane from '../components/HitPlane.vue';
 export default {
-    name: "Game",
+    name: "Games",
     components: {
         HitPlane
     },

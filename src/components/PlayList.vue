@@ -46,6 +46,7 @@
 import { Toast } from 'vant'
 import { mapMutations } from 'vuex'
 export default {
+    name: "PlayList",
     props: ['playlist', "paused"],
     
     methods: {

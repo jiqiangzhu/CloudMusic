@@ -32,6 +32,7 @@ import { Skeleton as VanSkeleton, Toast, Button as VanButton, Col as VanCol, Row
 import { Grid as VanGrid, GridItem as VanGridItem, Image as VanImage } from 'vant';
 import { getRecomMV } from '../api';
 export default {
+    name: "Films",
     data() {
         return {
             loadingFlag: true,

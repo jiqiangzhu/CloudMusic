@@ -43,6 +43,7 @@
 import { Skeleton as VanSkeleton, Toast, Button as VanButton, Col as VanCol, Row as VanRow, Search as VanSearch, PullRefresh as VanPullRefresh } from 'vant';
 import { Grid as VanGrid, GridItem as VanGridItem, Image as VanImage } from 'vant';
 import { getMVAddress, getMVDetailInfo, getRecomMV } from '../api';
+import { mapState } from 'vuex';
 export default {
     name: "RecomMV",
     data() {
@@ -51,6 +52,18 @@ export default {
             details: [],
             loading: false
         }
+    },
+    activated() {
+        console.log("--------refresh");
+        if (this.refreshSearch) {
+            // 若为true，则执行重置页面等相关操作
+            this.onLoad();
+        } else {
+            this.$store.commit("setRefreshSearch", true)
+        }
+    },
+    computed: {
+        ...mapState(['refreshSearch']),
     },
     components: {
         VanSkeleton, VanGrid, VanGridItem, VanImage, VanButton, VanCol, VanRow, VanSearch, VanPullRefresh

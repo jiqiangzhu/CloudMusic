@@ -10,6 +10,7 @@ import playCtl from '@/views/playCtl.vue'
 import { mapState } from 'vuex';
 import BottomNav from '@/components/BottomNav.vue'
 export default {
+    name: "Bottom",
     data() {
         return {
             

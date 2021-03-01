@@ -26,6 +26,7 @@ import { getRecMusicList } from '@/api/index'
 import { onMounted, reactive } from 'vue'
 import { mapMutations } from 'vuex'
 export default {
+    name: "SetupMusicList",
     // methods: {
     //     ...mapMutations(['setIsShow']),
     //     changeShowFn(arr) {

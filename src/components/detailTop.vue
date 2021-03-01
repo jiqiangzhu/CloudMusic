@@ -64,6 +64,7 @@
 import { Toast } from 'vant'
 import { onMounted } from 'vue';
 export default {
+    name: "detailTop",
     props: ['playlist'],
     methods: {
         addToplay() {

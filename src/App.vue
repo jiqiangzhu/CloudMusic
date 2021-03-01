@@ -9,6 +9,9 @@
       </keep-alive>
       <component :is="Component" v-if="!$route.meta.keepAlive" />
     </router-view>
+    <!-- <keep-alive exclude="About">
+      <router-view></router-view>
+    </keep-alive> -->
     <!-- </keep-alive> -->
     <!-- 这里不会被keepAlive -->
     <!-- <router-view v-if="!$route.meta.keepAlive"></router-view> -->
@@ -16,9 +19,9 @@
   </div>
 </template>
 <script>
-import Home from './views/Home';
 import Bottom from './views/Bottom.vue'
 export default {
+  name: "App",
   components: {
     Bottom
   },

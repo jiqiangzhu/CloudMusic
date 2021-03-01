@@ -47,6 +47,7 @@
 <script>
 import { Toast } from 'vant'
 export default {
+    name: "HitPlane",
     beforeMount() {
         this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: false })
     },

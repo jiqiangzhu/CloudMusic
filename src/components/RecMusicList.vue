@@ -19,6 +19,7 @@
 <script>
 import {getRecMusicList} from '@/api/index'
 export default {
+    name: "RecMusicList",
     data() {
         return {
             musicList: []

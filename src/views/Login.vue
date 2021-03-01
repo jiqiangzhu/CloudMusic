@@ -53,6 +53,7 @@
 <script>
 import { Toast } from "vant"
 export default {
+    name: "Login",
     data() {
         return {
             phone: '',
