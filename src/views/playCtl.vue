@@ -75,7 +75,7 @@ export default {
             if (this.paused) {
                 return;
             }
-            if(localStorage.duration != "NAN" && localStorage.duration && !this.duration) {
+            if (localStorage.duration != "NAN" && localStorage.duration && !this.duration) {
                 this.duration = localStorage.duration;
             }
             // 设置当前播放时间
@@ -89,7 +89,12 @@ export default {
             this.$router.push({ path: '/playPage' });
         },
         playNext(index1) {//上下首切换
-            let index = index1 + 1
+            let index;
+            if (this.loopFlag) {
+                index = index1;
+            } else {
+                index = index1 + 1;
+            }
             if (index >= this.playlist.length) {
                 index = 0;
             }
