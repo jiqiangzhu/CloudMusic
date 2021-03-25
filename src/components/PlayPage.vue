@@ -79,8 +79,9 @@ export default {
     },
     methods: {
         ...mapMutations(['setCurrentTime']),
+        // 歌词处于上一句结束且当前为结束时，返回true
         getStateFn(nowTime, preTime) {
-            return this.currentTime * 1000 < nowTime && this.currentTime * 1000 > preTime
+            return this.currentTime * 1000 < nowTime && this.currentTime * 1000 > preTime;
         },
         likesFn() {
             Toast.fail('开发中，敬请期待');

@@ -45,20 +45,29 @@ export default createStore({
       if (state.lyric == null) {
         return
       }
+      // 换行
       let arr1 = state.lyric.split(/\n/);
+      // 去空行
       let arr2 = arr1.filter((item, index) => {
         if (item == null || item == "") {
-          return false
+          return false;
         } else {
-          return true
+          return true;
         }
       })
+      // 分隔 内容 时分秒
       let arr3 = arr2.map((item, index) => {
         let min = parseInt(item.slice(1, 3))
         let sec = parseInt(item.slice(4, 6))
         let mil = parseInt(item.slice(7, 10))
         let time = min * 60 * 1000 + sec * 1000 + mil
-        let content = item.slice(11, item.length)
+        let content = item.slice(11, item.length);
+        let pre;
+        if(index == 0) {
+          pre = 0;
+        } else {
+          pre = arr2[index-1].time;
+        }
         return {
           content: content,
           min: min,
@@ -68,25 +77,20 @@ export default createStore({
           item: item
         }
       })
-      arr3.forEach((item, i) => {
-        if (i == 0) {
-          item.pre = 0
-        } else {
-          item.pre = arr3[i - 1].time
-        }
-      })
-      let arr4 = arr3.map((item, i) => {
-        return item
-      })
-      arr4.forEach((item, i) => {
-        item.pre = item.time
-        if (i + 1 > arr4.length - 1) {
-          item.time = arr4[i].time
-        } else {
-          item.time = arr4[i + 1].time
-        }
-      })
-      return arr4
+      // console.log("arr3---------", arr3);
+      // ES6扩展运算符...克隆数组
+      // let arr4 = [...arr3]; //浅拷贝 拷贝的是引用，拷贝的数组改动会影响原数组
+      // pre和time是当前一句时间段
+      // arr4.forEach((item, i) => {
+      //   item.pre = item.time;
+      //   if (i + 1 > arr4.length - 1) {
+      //     item.time = arr4[i].time;
+      //   } else {
+      //     item.time = arr4[i + 1].time;
+      //   }
+      // })
+      // console.log("arr4---------", arr4); 
+      return arr3;
     }
   },
   mutations: {

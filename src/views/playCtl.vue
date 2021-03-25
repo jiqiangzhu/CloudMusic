@@ -136,7 +136,11 @@ export default {
             let localPlayList = JSON.parse(localStorage.playlist);
             this.$store.commit("setPlayList", localPlayList)
         }
-
+        if(localStorage.loopFlag == "true") {
+            this.$store.commit("setLocalLoopFlag")
+        } else if(localStorage.loopFlag == "false") {
+            this.$store.commit("setLocalLoopFlag")
+        }
         // 设置索引
         if (localStorage.currentIndex != "NAN" && localStorage.currentIndex != "undefined" && localStorage.currentIndex) {
             console.log("localStorage.currentIndex-------------", localStorage.currentIndex);

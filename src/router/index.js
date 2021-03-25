@@ -11,6 +11,9 @@ const routes = [
       title: 'Home',
       keepAlive: true
     },
+    beforeRouteLeave: (to, from, next) => {
+      console.log(to.meta);
+    }
   },
   {//搜索歌曲
     path: '/search',
@@ -20,7 +23,11 @@ const routes = [
   {//游戏
     path: '/games',
     name: 'Games',
-    component: Games
+    component: Games,
+    meta: {
+      title: 'Home',
+      keepAlive: true
+    },
   },
   {//飞机大战
     path: '/hitPlane',
@@ -42,12 +49,20 @@ const routes = [
         next('/login')
       }
     },
-    component: () => import(/* webpackChunkName: "about" */ '../views/Me.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Me.vue'),
+    meta: {
+      title: 'Home',
+      keepAlive: true
+    },
   },
   {//登录
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
+    meta: {
+      title: 'Home',
+      keepAlive: true
+    },
   },
   {//小视频 已弃用
     path: '/films',
@@ -58,10 +73,10 @@ const routes = [
     path: '/recomMv',
     name: 'RecomMV',
     component: () => import(/* webpackChunkName: "about" */ '../components/RecomMV.vue'),
-    // meta: {
-    //   title: 'MV',
-    //   keepAlive: true
-    // },
+    meta: {
+      title: 'MV',
+      keepAlive: true
+    }
   },
   {//小视频
     path: '/mvDetails',
@@ -76,7 +91,11 @@ const routes = [
   {//音乐歌单详情
     path: '/playlistDetail',
     name: 'PlaylistDetail',
-    component: () => import(/* webpackChunkName: "about" */ '../views/PlaylistDetail.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/PlaylistDetail.vue'),
+    // meta: {
+    //   title: 'Home',
+    //   keepAlive: true
+    // },
   },
   {//音乐播放页面
     path: '/playPage',
