@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue';
 import store from '@/store/index.js';
 import Games from '../views/Games.vue';
 import { Toast } from 'vant';
@@ -7,7 +6,11 @@ const routes = [
   {//主页
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue'),
+    meta: {
+      title: 'Home',
+      keepAlive: true
+    },
   },
   {//搜索歌曲
     path: '/search',
@@ -38,7 +41,6 @@ const routes = [
       } else {
         next('/login')
       }
-
     },
     component: () => import(/* webpackChunkName: "about" */ '../views/Me.vue')
   },
@@ -47,10 +49,24 @@ const routes = [
     name: 'Login',
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
   },
+  {//小视频 已弃用
+    path: '/films',
+    name: 'Films',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Films.vue')
+  },
+  {//推荐mv
+    path: '/recomMv',
+    name: 'RecomMV',
+    component: () => import(/* webpackChunkName: "about" */ '../components/RecomMV.vue'),
+    // meta: {
+    //   title: 'MV',
+    //   keepAlive: true
+    // },
+  },
   {//小视频
-    path: '/duanzi',
-    name: 'Duanzi',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Duanzi.vue')
+    path: '/mvDetails',
+    name: 'MVDetails',
+    component: () => import(/* webpackChunkName: "about" */ '../components/MVDetails.vue')
   },
   {//播放小视频
     path: '/playdz',
@@ -70,10 +86,9 @@ const routes = [
   {//每日推荐
     path: '/recommand',
     name: 'DayRecomm',
-    component: () => import (/* webpackChunkName: "about" */ '../components/DayRecomm.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../components/DayRecomm.vue'),
     beforeEnter: (from, to, next) => {
       // 检查用户是否登录，未登录不能进入
-      debugger;
       console.log(store.state.user)
       if (store.state.user.isLogin) {
         next();
@@ -83,13 +98,12 @@ const routes = [
           next('/login');
         }, 1000)
       }
-
     }
   },
   {//网友精选碟歌单
     path: '/goodPlaylist',
     name: 'GoodPlaylist',
-    component: () => import (/* webpackChunkName: "about" */ '../components/GoodPlaylist.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../components/GoodPlaylist.vue')
   },
   {
     path: '/about',

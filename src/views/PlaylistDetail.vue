@@ -16,6 +16,7 @@ import { useRoute } from 'vue-router'
 import store from '@/store/index';
 import { mapState, useStore } from 'vuex';
 export default {
+    name: "PlaylistDetail",
     components: {
         detailTop,
         PlayList,

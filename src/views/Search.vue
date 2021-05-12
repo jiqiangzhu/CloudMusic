@@ -7,6 +7,7 @@ import SearchTop from '@/components/SearchTop.vue'
 import { useStore } from 'vuex'
 import { onBeforeMount, onMounted } from 'vue';
 export default {
+    name: "Search",
     components: {
         SearchTop
     },

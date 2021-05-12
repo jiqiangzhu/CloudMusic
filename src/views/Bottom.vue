@@ -10,13 +10,14 @@ import playCtl from '@/views/playCtl.vue'
 import { mapState } from 'vuex';
 import BottomNav from '@/components/BottomNav.vue'
 export default {
+    name: "Bottom",
     data() {
         return {
             
         }
     },
     mounted() {
-        console.log(this.playlist);
+        // console.log(this.playlist);
     },
     computed: {
         ...mapState(['playControlFlag', 'navBarFlag', 'playlist'])

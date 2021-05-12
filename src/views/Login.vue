@@ -53,6 +53,7 @@
 <script>
 import { Toast } from "vant"
 export default {
+    name: "Login",
     data() {
         return {
             phone: '',
@@ -93,6 +94,7 @@ a {
 .login-bg {
     // background: #ff0000;
     background: url(../assets/iconlist/1.png);
+    
     position: fixed;
     width: 100vw;
     height: 100vh;

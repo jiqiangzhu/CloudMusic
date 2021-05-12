@@ -14,6 +14,7 @@
 </template>
 <script>
 export default {
+    name: "NotFound",
     mounted() {
         this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: false });
     }

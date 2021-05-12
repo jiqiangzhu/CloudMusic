@@ -57,6 +57,7 @@
 <script>
 import { mapState } from 'vuex';
 export default {
+    name: "PopupList",
     props: ['showPopupFlag'],
     components: {
         

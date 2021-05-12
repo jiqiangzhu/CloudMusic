@@ -58,6 +58,7 @@
 
 
 export default {
+    name: "IconList",
     data() {
         return {
             iconlist: [

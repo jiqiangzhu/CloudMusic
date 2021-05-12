@@ -4,26 +4,30 @@
             <span class="iconfont icon-arrowLeft" @click="$router.go(-1)"></span>
             <div class="input">
                 <input
+                    @focus="isShow = true"
                     type="text"
                     v-model="keyword"
-                    placeholder="狼殿下最近很火哦"
+                    :placeholder="defaulttSearchKey"
+                    @keydown="inputEvent($event)"
                     @keydown.enter="enterEvent"
                 />
             </div>
         </div>
         <div class="history" v-if="isShow">
             <span class="tag">历史</span>
-            <div class="left">
-                <span
-                    class="h-item"
-                    @click="searchEvent(item)"
-                    v-for="(item, i) in historyList"
-                    :key="i"
-                >{{ item }}</span>
+            <div class="h-content">
+                <div class="content">
+                    <p
+                        class="h-item"
+                        @click="searchEvent(item)"
+                        v-for="(item, i) in historyList"
+                        :key="i"
+                    >{{ item }}</p>
+                </div>
             </div>
             <span class="iconfont icon-dustbin_icon" @click="clearEvent"></span>
         </div>
-        <div class="l-content" v-if="contentShow">
+        <div class="l-content" v-if="!isShow">
             <div
                 class="list-item"
                 v-for="(item, i) in resultSongs"
@@ -31,7 +35,6 @@
                 :key="i"
             >
                 <div class="left">
-                    <!-- <span class="index"></span> -->
                     <div class="content van-ellipsis">
                         <span class="title">{{ item.name }}-</span>
                         <span
@@ -47,76 +50,97 @@
                 </div>
             </div>
         </div>
-        <playCtl :tracks="resultSongs" v-if="contentShow" class="play-ctl" />
     </div>
 </template>
 <script>
-import { mapState } from 'vuex'
-import { getSearchResults } from '@/api/index'
-import playCtl from '@/views/playCtl.vue'
+import { mapState } from 'vuex';
+import { getSearchResults } from '@/api/index';
+import playCtl from '@/views/playCtl.vue';
+import { getDefaultSearchKey } from '../api';
+import { Toast } from 'vant';
 export default {
+    name: "SearchTop",
     data() {
         return {
             isShow: false,
             keyword: '',
             contentShow: false,
             historyList: [],
-            resultSongs: []
+            resultSongs: [],
+            defaulttSearchKey: ""
         }
     },
     computed: {
-
+        Toast
     },
     components: {
         playCtl
     },
-    beforeMount() {
+    async beforeMount() {
         if (localStorage.historyList != undefined && localStorage.historyList != "") {
             this.historyList = JSON.parse(localStorage.historyList)
-            this.historyList = this.historyList.reverse()
             this.isShow = true
         } else {
             this.isShow = false
         }
+        this.defaulttSearchKey = this.$route.query.defaulttSearchKey;
     },
 
     methods: {
         async searchEvent(item) {
+            Toast.loading("正在加载中，请稍候...");
             let result = await getSearchResults(item)
             console.log(result);
             this.resultSongs = result.data.result.songs
-            this.isShow = false
-            this.contentShow = true
+            this.isShow = false;
+            this.contentShow = true;
+            Toast.clear();
+            Toast.success("加载成功！");
             console.log(this.resultSongs);
-            // this.$store.commit('setPlayList', this.resultSongs)
+        },
+        inputEvent(e) {
+            if (e.keyCode != 13) {
+                this.isShow = true;
+            }
         },
         async enterEvent(event) {
+            Toast.loading("正在加载中，请稍候...");
             if (this.keyword != '') {
-                console.log(this.historyList);
-                this.historyList.push(this.keyword)
-                this.historyList = Array.from(new Set(this.historyList))
-                localStorage.historyList = JSON.stringify(this.historyList)
-                this.historyList = this.historyList.reverse()
-                this.isShow = false
-                this.contentShow = true
+                this.historyList = this.historyList.reverse();
+                this.historyList.push(this.keyword);
+                this.historyList = this.historyList.reverse();
+                this.historyList = Array.from(new Set(this.historyList));
+                localStorage.historyList = JSON.stringify(this.historyList);
+                this.isShow = false;
+                this.contentShow = true;
+            } else {
+                console.log(this.$route.query.defaulttSearchKey);
+                this.keyword = this.$route.query.defaulttSearchKey;
+
+                this.historyList = this.historyList.reverse();
+                this.historyList.push(this.keyword);
+                this.historyList = this.historyList.reverse();
+                this.historyList = Array.from(new Set(this.historyList));
+                localStorage.historyList = JSON.stringify(this.historyList);
+                this.isShow = false;
+                this.contentShow = true;
             }
             // 获取关键词搜索结果集
-            let result = await getSearchResults(this.keyword)
-            this.resultSongs = result.data.result.songs
-            // this.$store.commit('setPlayList', this.resultSongs)
-            // 清空搜索框
-            this.keyword = ''
+            let result = await getSearchResults(this.keyword);
+            this.resultSongs = result.data.result.songs;
+            Toast.clear();
+            Toast.success("加载成功！");
         },
         clearEvent() {
-            this.isShow = false
-            localStorage.clear()
-            this.historyList = []
+            this.isShow = false;
+            localStorage.removeItem("historyList")
+            this.historyList = [];
         },
         playSong(event, i) {
             console.log(this.resultSongs);
-            this.$store.commit('setPlayList', this.resultSongs)
-            this.$store.commit('setCurrentIndex', i)
-            this.$store.commit("setPausedFlag", { paused: false })
+            this.$store.commit('setPlayList', this.resultSongs);
+            this.$store.commit('setCurrentIndex', i);
+            this.$store.commit("setPausedFlag", { paused: false });
         }
     }
 }
@@ -167,24 +191,28 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative;
         .tag {
             width: 0.8rem;
             font-weight: 700;
             font-size: 0.35rem;
         }
-        .left {
+        .h-content {
             width: 6rem;
-            height: 0.5rem;
-            overflow: scroll;
-            display: flex;
-            align-items: center;
+            height: 0.6rem;
+            line-height: 0.6rem;
+            overflow-x: scroll;
+            .content {
+                display: flex;
+                flex-wrap: nowrap;
+            }
             .h-item {
-                margin: 0 0.15rem;
-                padding: 0 0.2rem;
-                height: 0.5rem;
-                line-height: 0.5rem;
-                background: rgb(230, 225, 225);
-                border-radius: 0.25rem;
+                margin: 0.02rem 0.1rem;
+                padding: 0rem 0.1rem;
+                border-radius: 0.15rem;
+                font-size: 0.12rem;
+                background: #efefef;
+                flex-shrink: 0;
             }
         }
         .iconfont {
@@ -208,6 +236,7 @@ export default {
             justify-content: space-between;
             align-items: center;
             position: relative;
+
             .left {
                 width: 6rem;
                 display: flex;
@@ -220,7 +249,6 @@ export default {
                 .content {
                     display: flex;
                     .title {
-                        // width: 4rem;
                         font-size: 0.28rem;
                         font-weight: 500;
                         margin-bottom: 0.05rem;
@@ -251,11 +279,6 @@ export default {
                 }
             }
         }
-    }
-    .play-ctl {
-        position: fixed;
-        left: 0;
-        bottom: 0;
     }
 }
 </style>

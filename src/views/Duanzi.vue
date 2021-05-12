@@ -42,7 +42,7 @@ import { mapState } from 'vuex';
 import { getDuanzi } from '../api/index.js'
 import { Toast } from 'vant';
 export default {
-	name: "HaoKan",
+	name: "Duanzi",
 	data() {
 		return {
 

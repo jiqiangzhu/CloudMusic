@@ -35,7 +35,7 @@
                 <span class="iconfont icon-ziyuan" @click="seeMoreFn"></span>
             </div>
             <div class="jindu">
-                <div class="process" :style="{ width: tempRate}"></div>
+                <div class="process" :style="{ width: tempRate }"></div>
             </div>
             <div class="f-bottom">
                 <span class="iconfont icon-xunhuan" v-if="!loopFlag" @click="changeLoopState"></span>
@@ -59,6 +59,7 @@ import { Popup } from 'vant';
 import { mapGetters, mapMutations, mapState } from 'vuex';
 import { Toast } from 'vant';
 export default {
+    name: "PlayPage",
     components: {
         Toast,
         PopupList,
@@ -132,7 +133,9 @@ export default {
     },
     mounted() {
         this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: false });
-        console.log(this.progress);
+        console.log("播放页面当前进度-----------", this.progress);
+        this.tempRate = this.progress + "%";
+        this.$store.commit("setLocalLoopFlag");
     },
     watch: {
         currentTime: function(value) {
@@ -144,7 +147,7 @@ export default {
 
         },
         progress(newV, oldV) {
-            if(this.progress != "NAN" && this.progress) {
+            if (this.progress != "NAN" && this.progress) {
                 this.tempRate = this.progress + "%";
             }
         }
@@ -166,7 +169,7 @@ export default {
         position: absolute;
         left: 0;
         top: 0;
-        background-size: auto 100%;
+        background-size: 100% 100%;
         // background-image: url("http://p3.music.126.net/W61Q1gkQAewX5zFlq3i-0Q==/109951165181285684.jpg");
         filter: blur(80px);
     }

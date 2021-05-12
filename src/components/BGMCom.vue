@@ -7,11 +7,12 @@
 <script>
 import HappyBirthDay from '@/views/HappyBirthDay.vue'
 export default {
+    name: "BGMCom",
     components: {
         HappyBirthDay
     },
     mounted() {
-        
+
     }
 }
 </script>

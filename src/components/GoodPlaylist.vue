@@ -6,6 +6,7 @@
 <script>
 import { getGoodPlaylist } from '../api'
 export default {
+    name: "GoodPlaylist",
     data() {
         return {
             playlist: []
