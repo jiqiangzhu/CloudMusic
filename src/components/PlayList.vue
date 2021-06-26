@@ -67,9 +67,6 @@ export default {
             this.$store.commit('setCurrentIndex', i)
             this.$store.commit("setPausedFlag", {paused: false})
         }
-    },
-    mounted() {
-        
     }
 }
 </script>

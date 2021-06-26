@@ -1,8 +1,5 @@
 <template>
     <div class="playdz" @click="changeState">
-        <!-- <button @click="playClick" :class="{hide: isPlay}">点击播放</button> -->
-
-        <!--class="video-js vjs-default-skin vjs-big-play-centered" -->
         <video
             ref="video"
             :preload="preload"
@@ -53,7 +50,7 @@ export default {
         this.index = this.$route.query.index;
         console.log(this.videoList);
         this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: false });
-        
+
     }
 
     // 自动播放属性,muted:静音播放

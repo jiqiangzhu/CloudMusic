@@ -1,6 +1,6 @@
 <template>
     <div id="swiper-com">
-        <div class="swiper-container" :id="'swiperIndex'+id">
+        <div class="swiper-container" :id="'swiperIndex' + id">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="(item,i) in imgList" :key="i">
                     <slot :item="item"></slot>
@@ -8,7 +8,6 @@
             </div>
             <!-- 如果需要分页器 -->
             <div class="swiper-pagination"></div>
-            <!-- <button class="next" style="position: absolute; z-index: 100;" @click="nextFn">下一张</button> -->
         </div>
     </div>
 </template>
@@ -37,7 +36,7 @@ export default {
     data() {
         return {
             swiper: null,
-            id: parseInt(Math.random()*100000)
+            id: parseInt(Math.random() * 100000)
         }
     },
     components: {
@@ -48,10 +47,10 @@ export default {
             this.swiper.slideNext()
         },
         instance() {
-            if(this.swiper) {
+            if (this.swiper) {
                 this.swiper.destroy()
             }
-            this.swiper = new Swiper ('#swiperIndex'+this.id, {
+            this.swiper = new Swiper('#swiperIndex' + this.id, {
                 // direction: 'vertical', // 垂直切换选项
                 loop: this.loop, // 循环模式选项
                 autoplay: this.autoplay,
@@ -61,10 +60,10 @@ export default {
                     clickable: true
                 },
                 on: {
-                    slideChangeTransitionStart: ()=>{
+                    slideChangeTransitionStart: () => {
                         this.$emit('slideChangeTransitionStart')
                     },
-                    slideChangeTransitionEnd: ()=>{
+                    slideChangeTransitionEnd: () => {
                         this.$emit('slideChangeTransitionEnd')
                     }
                 }
@@ -76,7 +75,7 @@ export default {
     },
     async mounted() {
         this.instance()
-        
+
     }
 }
 </script>
@@ -101,7 +100,6 @@ export default {
                 border-radius: 5px;
             }
         }
-        
-    }  
+    }
 }
 </style>

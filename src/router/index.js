@@ -58,10 +58,10 @@ const routes = [
     path: '/recomMv',
     name: 'RecomMV',
     component: () => import(/* webpackChunkName: "about" */ '../components/RecomMV.vue'),
-    // meta: {
-    //   title: 'MV',
-    //   keepAlive: true
-    // },
+    meta: {
+      title: 'MV',
+      keepAlive: true
+    },
   },
   {//小视频
     path: '/mvDetails',

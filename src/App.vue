@@ -5,17 +5,10 @@
     <!-- <keep-alive> -->
     <router-view v-slot="{ Component }">
       <keep-alive>
-        <component :is="Component" v-if="$route.meta.keepAlive" />
+        <component :is="Component" :key="$route.meta.title" v-if="$route.meta.keepAlive" />
       </keep-alive>
       <component :is="Component" v-if="!$route.meta.keepAlive" />
     </router-view>
-    <!-- <keep-alive exclude="About">
-      <router-view></router-view>
-    </keep-alive> -->
-    <!-- </keep-alive> -->
-    <!-- 这里不会被keepAlive -->
-    <!-- <router-view v-if="!$route.meta.keepAlive"></router-view> -->
-    <!-- <router-view v-if="!$route.meta.keepAlive" /> -->
   </div>
 </template>
 <script>
@@ -30,9 +23,6 @@ export default {
       this.$store.commit("setUser", JSON.parse(localStorage.userInfo));
       console.log("====>>>>>>>>localStorage.userInfo>>>>>>=====", this.$store.state.user);
     }
-
-  },
-  unmounted() {
 
   },
   methods: {

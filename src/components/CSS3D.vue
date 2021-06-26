@@ -39,12 +39,9 @@ export default {
     components: {
         HappyBirthDay
     },
-    mounted() {
-        
-    },
     methods: {
         bgMusicPlay() {
-            
+            console.log('play');
         }
     }
 }

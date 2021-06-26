@@ -1,57 +1,39 @@
 <template>
     <div class="popup">
-        <!-- <van-popup
-            v-model:show="showPopupFlag"
-            closeable
-            round
-            position="bottom"
-            duration="0.4"
-        > -->
-            <div id="popup-list">
-                <div class="list-top">
-                    <div class="left" @click="playAllFn">
-                        <span class="iconfont icon-bofang2"></span>
-                        <div class="all">
-                            <span class="txt">播放全部</span>
-                            <span class="num">({{ playlist.length }})</span>
-                        </div>
-                    </div>
-                    <!-- <div class="right">
-                        <span class="iconfont icon-download" @click="$router.push('/download')"></span>
-                        <span
-                            class="iconfont icon-plus-checkbox"
-                            @click="$router.push('/chooseAll')"
-                        ></span>
-                    </div>-->
-                </div>
-                <div class="list-content">
-                    <div
-                        class="list-item"
-                        @click="playSongFn(i)"
-                        v-for="(item, i) in playlist"
-                        :key="i"
-                    >
-                        <div class="left">
-                            <span class="index">{{ i + 1 }}</span>
-                            <div class="content">
-                                <span class="title van-ellipsis">{{ item.name }}</span>
-                                <span class="tag"></span>
-                                <div class="name van-ellipsis">
-                                    <span
-                                        v-for="(name, index) in item.ar"
-                                        :key="index"
-                                    >{{ name.name }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <span class="iconfont icon-iconset0481" @click="setCurrentIndex(i)"></span>
-                            <span class="iconfont icon-ziyuan" @click="moreFn(i)"></span>
-                        </div>
+        <div id="popup-list">
+            <div class="list-top">
+                <div class="left" @click="playAllFn">
+                    <span class="iconfont icon-bofang2"></span>
+                    <div class="all">
+                        <span class="txt">播放全部</span>
+                        <span class="num">({{ playlist.length }})</span>
                     </div>
                 </div>
             </div>
-        <!-- </van-popup> -->
+            <div class="list-content">
+                <div
+                    class="list-item"
+                    @click="playSongFn(i)"
+                    v-for="(item, i) in playlist"
+                    :key="i"
+                >
+                    <div class="left">
+                        <span class="index">{{ i + 1 }}</span>
+                        <div class="content">
+                            <span class="title van-ellipsis">{{ item.name }}</span>
+                            <span class="tag"></span>
+                            <div class="name van-ellipsis">
+                                <span v-for="(name, index) in item.ar" :key="index">{{ name.name }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <span class="iconfont icon-iconset0481" @click="setCurrentIndex(i)"></span>
+                        <span class="iconfont icon-ziyuan" @click="moreFn(i)"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -60,7 +42,7 @@ export default {
     name: "PopupList",
     props: ['showPopupFlag'],
     components: {
-        
+
     },
     computed: {
         ...mapState(['playlist'])
@@ -74,21 +56,20 @@ export default {
             this.$store.commit('setPlayList', this.playlist.tracks)
             // 设置播放index
             this.$store.commit('setCurrentIndex', 0)
-            this.$store.commit("setPausedFlag", {paused: false})
+            this.$store.commit("setPausedFlag", { paused: false })
         },
         playSongFn(i) {
             // 设置播放列表
             this.$store.commit('setPlayList', this.playlist.tracks)
             // 设置播放index
             this.$store.commit('setCurrentIndex', i)
-            this.$store.commit("setPausedFlag", {paused: false})
+            this.$store.commit("setPausedFlag", { paused: false })
         }
     }
 
 }
 </script>
 <style lang="less" scoped>
-
 #popup-list {
     min-height: 3rem;
     max-height: 9rem;

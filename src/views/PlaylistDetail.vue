@@ -2,7 +2,6 @@
     <div id="play-list">
         <detailTop :playlist="state.playlist" class="detail-top"></detailTop>
         <PlayList :playlist="state.playlist" class="playlist" />
-        <!-- <Bottom :playFlag="true" :barFlag="false" :playlist="state.playlist" /> -->
     </div>
 </template>
 <script>
@@ -25,7 +24,6 @@ export default {
     },
     setup() {
         const route = useRoute();
-        // const store = useStore();
         const state = reactive({
             playlist: {
                 creator: {
@@ -44,11 +42,10 @@ export default {
             let id = route.query.id;
             let result = await getPlaylistDetail(id);
             let data = result.data;
-            // console.log("PlaylistDetail: ", data);
             state.playlist = data.playlist;
             // store.commit('setPlayList', data.playlist.tracks)
             store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: false })
-            // console.log("setPlayList-tracks: ", data.playlist.tracks);
+            console.log("setPlayList-tracks: ", data.playlist.tracks);
             state.avatarUrl = data.playlist.creator.avatarUrl;
 
         })

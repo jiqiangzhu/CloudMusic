@@ -1,9 +1,7 @@
 <template>
-  <!-- <van-skeleton title :row="8" :loading="loading"> -->
   <div class="home">
     <div class="scroll">
       <TopNav class="top-nav" />
-      <!-- <van-pull-refresh v-model="loading" @refresh="onRefresh"> -->
       <Swiper
         @click="swiperFn"
         ref="mySwiper"
@@ -24,7 +22,6 @@
       <SetupMusicList class="musiclist" />
       <CSS3D class="css-3d" />
       <img src="../assets/iconlist/3.png" :alt="'背景图'" class="bg" />
-      <!-- </van-pull-refresh> -->
     </div>
     <div class="dialog" v-show="birthFlag">
       <img src="../assets/duanzi/close1.png" @click="closeFn" class="close" alt="关闭" />
@@ -40,12 +37,10 @@
     >不再显示</van-checkbox>
   </div>
 
-  <!-- </van-skeleton> -->
 </template>
 
 <script>
 // @ is an alias to /src
-import { Checkbox, CheckboxGroup } from 'vant';
 import TopNav from '@/components/TopNav.vue';
 import Bottom from '@/views/Bottom.vue';
 import Swiper from '@/components/Swiper.vue';
@@ -56,7 +51,7 @@ import CSS3D from '@/components/CSS3D.vue';
 import playCtl from '@/views/playCtl.vue';
 import { getBanner } from '../api/index';
 import { mapMutations, mapState } from 'vuex';
-import { Toast, Overlay, Skeleton as VanSkeleton, PullRefresh as VanPullRefresh } from 'vant';
+import { Checkbox, Toast, Skeleton as VanSkeleton, PullRefresh as VanPullRefresh } from 'vant';
 import BGMCom from '@/components/BGMCom.vue';
 
 export default {
@@ -75,7 +70,6 @@ export default {
   data() {
     return {
       birthFlag: true,
-      loading: true,
       loading: false,
       imgList: [
         { pic: require('../assets/img/swiper1.jpg') },
@@ -85,14 +79,6 @@ export default {
       showDialogFlag: false
     }
   },
-  // activated() {
-  //   if (this.refreshSearch) {
-  //     // 若为true，则执行重置页面等相关操作
-  //     this.fetchData();
-  //   } else {
-  //     this.reset(true);
-  //   }
-  // },
 
   computed: {
     ...mapState(['refreshSearch']),
@@ -116,8 +102,6 @@ export default {
         localStorage.showDialogFlag = this.showDialogFlag;
       }
       this.birthFlag = !this.birthFlag;
-      // this.birthFlag = false;
-      // this.$store.commit("setBirthFlag");
     }
 
   },
@@ -129,10 +113,6 @@ export default {
     this.imgList = res.data.banners;
     this.$store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: true });
     this.$store.commit("setNavArr", { index: 0 });
-    // if (localStorage.playlist) {
-    //   let localPlayList = JSON.parse(localStorage.playlist);
-    //   this.$store.commit("setPlayList", localPlayList)
-    // }
   },
   mounted() {
     this.$store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: true });

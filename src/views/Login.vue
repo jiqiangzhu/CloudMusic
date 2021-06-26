@@ -72,7 +72,6 @@ export default {
         }
     },
     mounted() {
-        // console.log(this.$store.state.user.userDetail.profile.avatarUrl);
         this.$store.commit("setNavArr", { index: 3 });
         this.$store.commit('setPlayFlag', { playControlFlag: false, navBarFlag: true });
     },

@@ -230,10 +230,7 @@
 </template>
 <script>
 export default {
-    name: "BackG",
-    mounted() {
-        
-    }
+    name: "BackG"
 }
 </script>
 <style scoped>

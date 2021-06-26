@@ -58,9 +58,6 @@ export default {
                 this.$router.go(-1)
             }, 1000)
         }
-    },
-    mounted() {
-        
     }
 }
 </script>

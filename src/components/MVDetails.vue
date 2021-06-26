@@ -3,7 +3,6 @@
         <div class="content">
             <van-skeleton title :row="8" :loading="loadingFlag" round>
                 <van-row>
-                    <!-- <van-col span="4"></van-col> -->
                     <van-col span="24" class="mv-top">
                         <van-icon
                             name="arrow-left"

@@ -3,7 +3,6 @@
         <div class="left" @click="toPlayPageFn">
             <img :src="playlist[currentIndex].al.picUrl" :alt="playlist[currentIndex].name" />
             <span class="title van-ellipsis">{{ playlist[currentIndex].name }}</span>
-            <!-- <span>-</span> -->
             <span class="author van-ellipsis">
                 <span v-for="(item, i) in playlist[currentIndex].ar" :key="i">{{ item.name }}</span>
             </span>

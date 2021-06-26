@@ -55,9 +55,8 @@
 <script>
 import { getLyric } from '@/api/index';
 import PopupList from '@/components/PopupList.vue';
-import { Popup } from 'vant';
+import { Popup, Toast } from 'vant';
 import { mapGetters, mapMutations, mapState } from 'vuex';
-import { Toast } from 'vant';
 export default {
     name: "PlayPage",
     components: {

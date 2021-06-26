@@ -10,9 +10,6 @@ export default {
     name: "BGMCom",
     components: {
         HappyBirthDay
-    },
-    mounted() {
-
     }
 }
 </script>

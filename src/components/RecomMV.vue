@@ -3,7 +3,6 @@
         <div class="content">
             <van-skeleton title :row="8" :loading="loadingFlag" round>
                 <van-row>
-                    <!-- <van-col span="4"></van-col> -->
                     <van-col span="24" class="mv-top">
                         <van-search
                             background="#efefef"
@@ -12,10 +11,8 @@
                             placeholder="请输入搜索关键词"
                         />
                     </van-col>
-                    <!-- <van-col span="4"></van-col> -->
                 </van-row>
                 <van-pull-refresh v-model="loading" @refresh="onRefresh">
-                    <!-- <h1>最新MV</h1> -->
                     <van-grid :border="false" :column-num="2" class="mv-content">
                         <van-grid-item
                             v-for="(item, index) in details"
@@ -27,9 +24,6 @@
                                 style="text-align: center;"
                             >{{ item.name }} - {{ item.artistName }}</span>
                         </van-grid-item>
-                        <!-- <van-grid-item>
-                        <van-button type="primary" @click.stop="getFilmByName()">换一批</van-button>
-                        </van-grid-item>-->
                     </van-grid>
                 </van-pull-refresh>
                 <br />
@@ -82,16 +76,9 @@ export default {
         },
         async seeFilmsDetail(index) {
             this.$router.push({ path: '/mvDetails', query: { mvid: this.details[index].id } });
-            // console.log(this.details[index]);
-            // let result = await getMVAddress(this.details[index].id);
-            // console.log("MV播放地址------------------", result);
-            // let videoUrl = result.data.data.url;
-            // console.log("MV-Url------------------", videoUrl);
-            // let details = await getMVDetailInfo(this.details[index].id);
-            // console.log("details------------------", details);
         },
         SearchFn() {
-            // Toast("暂不支持哟......");
+            Toast("暂不支持哟......");
         },
         async getFilmByName() {
             Toast("抱歉，没有更多了....");

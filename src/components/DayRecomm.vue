@@ -1,15 +1,11 @@
 <template>
     <div class="day-recomm">
-        <!-- <detailTop :playlist="state.playlist" class="detail-top"></detailTop> -->
     </div>
 </template>
 <script>
 import { getDayRecomMusicList } from '@/api/index.js';
 import detailTop from './detailTop.vue';
 import PlayList from './PlayList.vue';
-import { onMounted, reactive } from 'vue';
-import store from '@/store/index.js';
-import { Toast } from 'vant';
 export default {
     name: "DayRecomm",
     components: {

@@ -23,7 +23,6 @@
                 <div class="title">{{ playlist.name }}</div>
 
                 <div class="b-content">
-                    <!-- <img :src="playlist.creator.avatarUrl" alt="" class="avatar" /> -->
                     <img :src="playlist.creator.avatarUrl" alt class="avatar" />
                     <img
                         :src="playlist.creator.avatarDetail.identityIconUrl"
@@ -78,8 +77,6 @@ export default {
         }
     },
     setup() {
-        onMounted(() => {
-        })
         function changeValue(num) {
             let res = 0
             if (num >= 100000000) {

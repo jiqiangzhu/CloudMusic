@@ -16,9 +16,6 @@ export default {
         onBeforeMount(()=>{
             store.commit('setPlayFlag', {playControlFlag: true, navBarFlag: false})
         });
-        onMounted(()=>{
-            
-        })
     }
 }
 </script>

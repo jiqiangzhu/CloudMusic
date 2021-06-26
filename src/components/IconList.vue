@@ -1,19 +1,11 @@
 <template>
     <div id="icon-list">
         <div class="i-list">
-            <!-- <div class="list-item" v-for="(item, i) in iconlist" :key="i">
-                <div class="icon-item">
-                    <img :src="item.pic" alt="icon" class="birth" />
-                </div>
-            </div>-->
-
-            <!-- <div class="txt">Happy Birthday</div> -->
             <div class="list-item" @click="$router.push('/recommand')">
                 <div class="icon-item">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-rili" />
                     </svg>
-                    <!-- <img :src="iconlist[0].pic" alt="icon" class="birth" /> -->
                 </div>
                 <span class="txt">推荐</span>
             </div>
@@ -50,7 +42,6 @@
                 <span class="txt">直播</span>
             </div>
         </div>
-        <!-- <div class="txt">静静，生日快乐呀</div> -->
         <div class="icon-bottom-line"></div>
     </div>
 </template>
