@@ -10,7 +10,7 @@ module.exports = {
         }
     },
     devServer: {
-        port: 8080, // 端口
+        port: 8081, // 端口
         proxy: { // 配置跨域处理 可以设置多个
             '/api': {
                 target: 'http://api.blairq.top/',//跨域请求头信息
