@@ -10,6 +10,7 @@ module.exports = {
         }
     },
     devServer: {
+        open: true,
         port: 8081, // 端口
         proxy: { // 配置跨域处理 可以设置多个
             '/api': {

@@ -36,7 +36,6 @@
       v-model="showDialogFlag"
     >不再显示</van-checkbox>
   </div>
-
 </template>
 
 <script>

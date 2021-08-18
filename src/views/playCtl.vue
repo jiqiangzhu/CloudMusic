@@ -43,6 +43,7 @@ import { Popup, Circle as VanCircle } from 'vant';
 import { mapState, mapMutations } from 'vuex';
 import PlayPage from '@/components/PlayPage.vue';
 import PopupList from '@/components/PopupList.vue';
+
 export default {
     name: "playCtl",
     data() {

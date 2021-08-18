@@ -5,7 +5,8 @@
     </div>
 </template>
 <script>
-import happyMp3Path from '@/assets/music/happybirthday.mp3'
+import happyMp3Path from '@/assets/music/happybirthday.mp3';
+
 export default {
     name: "HappyBirthDay",
     data() {

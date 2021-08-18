@@ -14,7 +14,7 @@
             />
         </div>
 
-        <HappyBirthDay class="bgm"/>
+        <HappyBirthDay class="bgm" />
     </div>
 </template>
 <script>
