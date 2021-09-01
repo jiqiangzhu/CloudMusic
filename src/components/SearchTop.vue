@@ -73,6 +73,13 @@ export default {
     computed: {
         Toast
     },
+    watch: {
+        keyword(newValue, oldValue) {
+            if(newValue.includes("  ")) {
+                this.keyword = oldValue
+            }
+        }
+    },
     components: {
         playCtl
     },

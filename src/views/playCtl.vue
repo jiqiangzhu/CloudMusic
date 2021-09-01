@@ -53,7 +53,8 @@ export default {
             isShow: false,
             timer: 0,
             showPopupFlag: false,
-            text: ""
+            text: "",
+            testVar: localStorage.test ?? "12"
         }
     },
     methods: {
@@ -62,7 +63,7 @@ export default {
             this.$store.commit("setDuration", this.$refs.audio.duration)
         },
         changeStateFn() {//切换播放暂停
-            if (this.paused == true) {
+            if (this.paused) {
                 this.$refs.audio.play();
                 this.updateTime();
             } else {
