@@ -32,9 +32,6 @@ export default {
     }
 
   },
-  unmounted() {
-
-  },
   methods: {
 
   }
