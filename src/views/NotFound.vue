@@ -9,7 +9,7 @@
             <span></span>
         </div>
         <h4 style="text-align: center;">请等待开发....</h4>
-        <img src="../assets/iconlist/1.png" alt />
+<!--        <img src="../assets/iconlist/1.png" alt />-->
     </div>
 </template>
 <script>

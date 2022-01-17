@@ -8,7 +8,7 @@
             <img src="../assets/plane/pull_box.png" alt="推箱子" class="pull-box" />
             <span class="game-name">推箱子</span>
         </div>
-        <img src="../assets/iconlist/4.jpg" alt=" " class="bg" />
+<!--        <img src="../assets/iconlist/4.jpg" alt=" " class="bg" />-->
     </div>
 </template>
 <script>

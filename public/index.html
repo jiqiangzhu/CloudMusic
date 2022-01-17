@@ -5,33 +5,66 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=375,user-scalable=no">
-  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <link rel="icon" href="<%= htmlWebpackPlugin.options.url %>favicon.ico">
   <title>
     <%= htmlWebpackPlugin.options.title %>
   </title>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/vant@next/lib/index.css"
+  />
+  <!-- 引入 Vue 和 Vant 的 JS 文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@next"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vant@next/lib/vant.min.js"></script>
   <script src="./static/iconfont.js"></script>
+
+  <!-- 引入CSS资源 -->
+  <% for(var i in htmlWebpackPlugin.options.cdn &&
+  htmlWebpackPlugin.options.cdn.css) { %>
+  <link
+    href="<%= htmlWebpackPlugin.options.cdn.css[i] %>"
+    rel="preload"
+    as="style"
+  />
+  <link
+    href="<%= htmlWebpackPlugin.options.cdn.css[i] %>"
+    rel="stylesheet"
+  />
+  <% } %>
+
+  <!-- 引入js资源 -->
+  <% for(var i in htmlWebpackPlugin.options.cdn &&
+  htmlWebpackPlugin.options.cdn.js) { %>
+  <link
+    href="<%= htmlWebpackPlugin.options.cdn.js[i] %>"
+    rel="preload"
+    as="script"
+  />
+  <% } %>
+  <% for(var i in htmlWebpackPlugin.options.cdn &&
+  htmlWebpackPlugin.options.cdn.js) { %>
+  <script type="module" src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+  <% } %>
 </head>
 
 <body>
-  <noscript>
-    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
-        Please enable it to continue.</strong>
-  </noscript>
-  <div id="app"></div>
-  <script src="./static/mui.min.js"></script>
-  <script>
-    // 引入mui.min.js 前提下
-    mui.init({
-      keyEventBind: {
-        backbutton: true //关闭back按键监听
-      }
-    });
-  </script>
+<noscript>
+  <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+    Please enable it to continue.</strong>
+</noscript>
+<div id="app"></div>
+<!--<script>
+  // 引入mui.min.js 前提下
+  mui.init({
+    keyEventBind: {
+      backbutton: true //关闭back按键监听
+    }
+  });
+</script>-->
 
-   <script src="//cdn.jsdelivr.net/npm/eruda"></script>
-  <script>eruda.init();</script>
-  <script src="<%= BASE_URL %>js/rem.js"></script>
-  <!-- <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script> -->
+<!--<script src="//cdn.jsdelivr.net/npm/eruda"></script>-->
+<!--<script>eruda.init();</script>-->
+<!-- <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script> -->
 </body>
 
 </html>

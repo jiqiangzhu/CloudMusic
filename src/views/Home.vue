@@ -1,53 +1,36 @@
 <template>
-  <!-- <van-skeleton title :row="8" :loading="loading"> -->
-  <div class="home">
-    <div class="scroll">
-      <TopNav class="top-nav"/>
-      <Swiper @click="swiperFn" ref="mySwiper" class="swiper" :imgList="imgList" style="position: relative"
-              :autoplay="true">
-        <template v-slot="slotProps">
-          <img :src="slotProps.item.pic" alt/>
-          <span class="tag">新歌首发</span>
-        </template>
-      </Swiper>
-      <IconList class="iconlist"/>
-      <SetupMusicList class="musiclist"/>
-<!--      <CSS3D class="css-3d"/>-->
-      <img src="../assets/iconlist/3.png" :alt="'背景图'" class="bg"/>
-      <!-- </van-pull-refresh> -->
+  <van-skeleton title :row="8" :loading="loading">
+    <div class="home">
+      <div class="scroll">
+        <TopNav class="top-nav"/>
+        <Swiper @click="swiperFn" ref="mySwiper" class="swiper" :imgList="imgList" style="position: relative"
+                :autoplay="true">
+          <template v-slot="slotProps">
+            <img :src="slotProps.item.pic" alt/>
+            <span class="tag">新歌首发</span>
+          </template>
+        </Swiper>
+        <IconList class="iconlist"/>
+        <SetupMusicList class="musiclist"/>
+        <div class="bg"></div>
+      </div>
     </div>
-    <!--    <div class="dialog" v-show="birthFlag">
-          <img src="../assets/duanzi/close1.png" @click="closeFn" class="close" alt="关闭" />
-          <BGMCom class="birth" />
-        </div>
-        <van-checkbox
-          v-show="birthFlag"
-          :icon-size="25"
-          :shape="'square'"
-          class="show-dialog"
-          checked-color="#ee0a24"
-          v-model="showDialogFlag"
-        >不再显示</van-checkbox>-->
-  </div>
-
-  <!-- </van-skeleton> -->
+  </van-skeleton>
 </template>
 
 <script>
 // @ is an alias to /src
-import {Checkbox, CheckboxGroup} from 'vant';
+import {Checkbox} from 'vant';
 import TopNav from '@/components/TopNav.vue';
 import Bottom from '@/views/Bottom.vue';
 import Swiper from '@/components/Swiper.vue';
 import IconList from '@/components/IconList.vue';
 import RecMusicList from '@/components/RecMusicList.vue';
 import SetupMusicList from '@/components/SetupMusicList.vue';
-import CSS3D from '@/components/CSS3D.vue';
 import playCtl from '@/views/playCtl.vue';
 import {getBanner} from '../api/index';
 import {mapMutations, mapState} from 'vuex';
-import {Toast, Overlay, Skeleton as VanSkeleton, PullRefresh as VanPullRefresh} from 'vant';
-import BGMCom from '@/components/BGMCom.vue';
+import {Toast, Skeleton as VanSkeleton, PullRefresh as VanPullRefresh} from 'vant';
 
 export default {
   name: 'Home',
@@ -59,19 +42,14 @@ export default {
     RecMusicList,
     SetupMusicList,
     playCtl,
-    CSS3D, VanSkeleton,
-    BGMCom, "van-checkbox": Checkbox, VanPullRefresh
+    VanSkeleton,
+    "van-checkbox": Checkbox, VanPullRefresh
   },
   data() {
     return {
       birthFlag: true,
       loading: true,
-      imgList: [
-        {pic: require('../assets/img/swiper1.jpg')},
-        {pic: require('../assets/img/swiper2.jpg')},
-        {pic: require('../assets/img/swiper3.jpg')}
-      ],
-      showDialogFlag: false
+      imgList: []
     }
   },
   // activated() {
@@ -93,35 +71,17 @@ export default {
       }, 3000)
     },
     ...mapMutations(['setPlayFlag']),
-    neverShow() {
-      this.showDialogFlag = !this.showDialogFlag
-    },
+
     swiperFn() {
       Toast("敬请期待...");
-    },
-    closeFn() {
-      console.log("======>>>>>>>this.showDialogFlag>>>>>>=====", this.showDialogFlag);
-      if (this.showDialogFlag) {
-        localStorage.showDialogFlag = this.showDialogFlag;
-      }
-      this.birthFlag = !this.birthFlag;
-      // this.birthFlag = false;
-      // this.$store.commit("setBirthFlag");
     }
-
   },
   async beforeMount() {
-    if (localStorage.showDialogFlag) {
-      this.birthFlag = false;
-    }
+
     let res = await getBanner(1);
     this.imgList = res.data.banners;
     this.$store.commit('setPlayFlag', {playControlFlag: true, navBarFlag: true});
     this.$store.commit("setNavArr", {index: 0});
-    // if (localStorage.playlist) {
-    //   let localPlayList = JSON.parse(localStorage.playlist);
-    //   this.$store.commit("setPlayList", localPlayList)
-    // }
   },
   mounted() {
     this.$store.commit('setPlayFlag', {playControlFlag: true, navBarFlag: true});
@@ -132,7 +92,6 @@ export default {
     this.$store.commit('setPlayFlag', {playControlFlag: true, navBarFlag: true});
     this.$store.commit("setNavArr", {index: 0});
   }
-
 }
 </script>
 <style lang="less">
@@ -172,7 +131,7 @@ export default {
 
   .scroll {
     width: 7.5rem;
-    font-family: "微软雅黑";
+    font-family: 微软雅黑;
     width: 7.5rem;
     overflow: hidden;
     padding-bottom: 2rem;
@@ -204,9 +163,10 @@ export default {
       position: fixed;
       left: 0;
       top: 0;
-      z-index: 1;
+      z-index: 0;
       width: 7.5rem;
       height: 100vh;
+      background-image: radial-gradient(#5d4157, #a8caba);
       filter: blur(15px);
     }
   }

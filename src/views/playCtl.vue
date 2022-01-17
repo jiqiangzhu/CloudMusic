@@ -3,24 +3,16 @@
     <div class="left" @click="toPlayPageFn">
       <img :src="playlist[currentIndex].al.picUrl" :alt="playlist[currentIndex].name"/>
       <span class="title van-ellipsis">{{ playlist[currentIndex].name }}</span>
-      <!-- <span>-</span> -->
       <span class="author van-ellipsis">
-                <span v-for="(item, i) in playlist[currentIndex].ar" :key="i">{{ item.name }}</span>
-            </span>
+          <span v-for="(item, i) in playlist[currentIndex].ar" :key="i">{{ item.name }}</span>
+      </span>
     </div>
     <div class="right">
       <div class="circle-process">
         <van-circle
           v-model:current-rate="tempRate"
-          :rate="rate"
-          :speed="100"
-          :text="text"
-          :color="'#f00'"
-          :stroke-width="80"
-          size="30px"
-          layer-color="#999"
-        />
-
+          :rate="rate" :speed="100" :color="gradientColor"
+          size="0.6rem"/>
         <span v-if="paused" @click="changeStateFn" class="iconfont icon-icon-"></span>
         <span v-else @click="changeStateFn" class="iconfont icon-zanting"></span>
       </div>
@@ -54,7 +46,10 @@ export default {
       isShow: false,
       timer: 0,
       showPopupFlag: false,
-      text: ""
+      gradientColor: {
+        '0%': '#3fecff',
+        '100%': '#6149f6',
+      }
     }
   },
   methods: {

@@ -5,7 +5,6 @@
             ref="audio"
             :src="`https://music.163.com/song/media/outer/url?id=5270588.mp3`"
         ></audio>
-
     </div>
 </template>
 <script>

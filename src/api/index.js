@@ -6,6 +6,21 @@ let baseUrl = "https://qg-unlock-netease-cloud.blairq.top/"
 // 本地api
 // let baseUrl = "http://localhost:3000"
 
+axios.interceptors.request.use(config => {
+  return config
+})
+
+axios.interceptors.response.use(data => {
+  return Promise.resolve(data)
+}, reason => {
+  console.log(reason)
+  return Promise.reject(reason)
+})
+
+
+
+
+
 // 网易云音乐api 调用此接口 , 可获取 banner( 轮播图 ) 数据
 //  type:资源类型,对应以下类型,默认为 0 即PC
 // 1: android  2: iphone   3: ipad

@@ -23,7 +23,7 @@ export default {
     name: "CSS3D",
     data() {
         return {
-            iconlist: [
+            /*iconlist: [
                 { pic: require('../assets/iconlist/1.png'), txt: "img01" },
                 { pic: require('../assets/iconlist/2.png'), txt: "img02" },
                 { pic: require('../assets/iconlist/3.png'), txt: "img03" },
@@ -33,7 +33,7 @@ export default {
                 { pic: require('../assets/iconlist/7.jpg'), txt: "img07" },
                 { pic: require('../assets/iconlist/8.jpg'), txt: "img08" },
                 { pic: require('../assets/iconlist/4.jpg'), txt: "img09" }
-            ]
+            ]*/
         }
     },
     components: {

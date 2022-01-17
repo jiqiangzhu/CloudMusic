@@ -1,19 +1,11 @@
 <template>
     <div id="icon-list">
         <div class="i-list">
-            <!-- <div class="list-item" v-for="(item, i) in iconlist" :key="i">
-                <div class="icon-item">
-                    <img :src="item.pic" alt="icon" class="birth" />
-                </div>
-            </div>-->
-
-            <!-- <div class="txt">Happy Birthday</div> -->
             <div class="list-item" @click="$router.push('/recommand')">
                 <div class="icon-item">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-rili" />
                     </svg>
-                    <!-- <img :src="iconlist[0].pic" alt="icon" class="birth" /> -->
                 </div>
                 <span class="txt">推荐</span>
             </div>
@@ -62,11 +54,11 @@ export default {
     data() {
         return {
             iconlist: [
-                { pic: require('../assets/iconlist/icon1.png'), txt: "生" },
+                /*{ pic: require('../assets/iconlist/icon1.png'), txt: "生" },
                 { pic: require('../assets/iconlist/icon2.png'), txt: "日" },
                 { pic: require('../assets/iconlist/icon3.png'), txt: "快" },
                 { pic: require('../assets/iconlist/icon4.png'), txt: "乐" },
-                { pic: require('../assets/iconlist/icon5.png'), txt: "呀" }
+                { pic: require('../assets/iconlist/icon5.png'), txt: "呀" }*/
             ]
         }
     },

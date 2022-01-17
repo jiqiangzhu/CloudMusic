@@ -1,13 +1,11 @@
-import {createRouter, createWebHistory, createWebHashHistory} from 'vue-router'
+import {createRouter, createWebHashHistory} from 'vue-router'
 import store from '@/store/index.js';
-import Games from '../views/Games.vue';
-import {Toast} from 'vant';
 
 const routes = [
   {//主页
     path: '/',
     name: 'Home',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue'),
+    component: () => import(/* webpackChunkName: "Home" */ '../views/Home.vue'),
     meta: {
       title: 'Home',
       keepAlive: true
@@ -16,31 +14,13 @@ const routes = [
   {//搜索歌曲
     path: '/search',
     name: 'Search',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Search.vue'),
+    component: () => import(/* webpackChunkName: "Search" */ '../views/Search.vue'),
     meta: {
       title: 'search',
       keepAlive: true
     },
   },
-  {//游戏
-    path: '/games',
-    name: 'Games',
-    component: Games,
-    meta: {
-      title: 'games',
-      keepAlive: true
-    },
-  },
-  {//飞机大战
-    path: '/hitPlane',
-    name: 'HitPlane',
-    component: () => import(/* webpackChunkName: "about" */ '../components/HitPlane.vue')
-  },
-  {//推箱子
-    path: '/pullBox',
-    name: 'PullBox',
-    component: () => import(/* webpackChunkName: "about" */ '../components/PullBox.vue')
-  },
+
   {//我的
     path: '/me',
     name: 'Me',
@@ -51,41 +31,41 @@ const routes = [
         next('/login')
       }
     },
-    component: () => import(/* webpackChunkName: "about" */ '../views/Me.vue')
+    component: () => import(/* webpackChunkName: "Me" */ '../views/Me.vue')
   },
   {//登录
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    component: () => import(/* webpackChunkName: "Login" */ '../views/Login.vue')
   },
   {//小视频 已弃用
     path: '/films',
     name: 'Films',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Films.vue')
+    component: () => import(/* webpackChunkName: "Films" */ '../views/Films.vue')
   },
   {//推荐mv
     path: '/recomMv',
     name: 'RecomMV',
-    component: () => import(/* webpackChunkName: "about" */ '../components/RecomMV.vue'),
-    // meta: {
-    //   title: 'MV',
-    //   keepAlive: true
-    // },
+    component: () => import(/* webpackChunkName: "RecomMV" */ '../components/RecomMV.vue'),
+    meta: {
+      title: 'MV',
+      keepAlive: true
+    },
   },
   {//小视频
     path: '/mvDetails',
     name: 'MVDetails',
-    component: () => import(/* webpackChunkName: "about" */ '../components/MVDetails.vue')
+    component: () => import(/* webpackChunkName: "MVDetails" */ '../components/MVDetails.vue')
   },
   {//播放小视频
     path: '/playdz',
     name: 'PlayDZ',
-    component: () => import(/* webpackChunkName: "about" */ '../components/PlayDZ.vue')
+    component: () => import(/* webpackChunkName: "PlayDZ" */ '../components/PlayDZ.vue')
   },
   {//音乐歌单详情
     path: '/playlistDetail',
     name: 'PlaylistDetail',
-    component: () => import(/* webpackChunkName: "about" */ '../views/PlaylistDetail.vue'),
+    component: () => import(/* webpackChunkName: "PlaylistDetail" */ '../views/PlaylistDetail.vue'),
     meta: {
       title: 'playlistDetail',
       keepAlive: true
@@ -94,7 +74,7 @@ const routes = [
   {//音乐播放页面
     path: '/playPage',
     name: 'PlayPage',
-    component: () => import(/* webpackChunkName: "about" */ '../components/PlayPage.vue'),
+    component: () => import(/* webpackChunkName: "PlayPage" */ '../components/PlayPage.vue'),
     meta: {
       title: 'playPage',
       keepAlive: true
@@ -103,28 +83,28 @@ const routes = [
   {//每日推荐
     path: '/recommand',
     name: 'DayRecomm',
-    component: () => import(/* webpackChunkName: "about" */ '../components/DayRecomm.vue'),
+    component: () => import(/* webpackChunkName: "DayRecomm" */ '../components/DayRecomm.vue'),
     meta: {
       title: 'recommand',
       keepAlive: true
     },
-    beforeEnter: (from, to, next) => {
-      // 检查用户是否登录，未登录不能进入
-      console.log(store.state.user)
-      if (store.state.user.isLogin) {
-        next();
-      } else {
-        Toast("请先登录");
-        setTimeout(() => {
-          next('/login');
-        }, 1000)
-      }
-    }
+    // beforeEnter: (from, to, next) => {
+    //   // 检查用户是否登录，未登录不能进入
+    //   console.log(store.state.user)
+    //   if (store.state.user.isLogin) {
+    //     next();
+    //   } else {
+    //     Toast("请先登录");
+    //     setTimeout(() => {
+    //       next('/login');
+    //     }, 1000)
+    //   }
+    // }
   },
   {//网友精选碟歌单
     path: '/goodPlaylist',
     name: 'GoodPlaylist',
-    component: () => import(/* webpackChunkName: "about" */ '../components/GoodPlaylist.vue')
+    component: () => import(/* webpackChunkName: "GoodPlaylist" */ '../components/GoodPlaylist.vue')
   },
   {
     path: '/about',
@@ -136,7 +116,7 @@ const routes = [
   },
   {//404页面
     path: '/:id(.*)',
-    component: () => import(/* webpackChunkName: "about" */ '../views/NotFound.vue')
+    component: () => import(/* webpackChunkName: "NotFound" */ '../views/NotFound.vue')
   } //匹配未找到的路径
 ]
 

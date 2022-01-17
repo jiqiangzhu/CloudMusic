@@ -36,7 +36,7 @@ export default createStore({
     navArr: [
       { icon: "icon-icon--", txt: "see", text: "首页", isActive: "active" },
       { icon: "icon-_gongguanchuanbo", txt: "boke", text: "MV", isActive: "" },
-      { icon: "icon-yinyue", txt: "game", text: "游戏", isActive: "" },
+      // { icon: "icon-yinyue", txt: "game", text: "游戏", isActive: "" },
       { icon: "icon-daohanglan-05", txt: "my", text: "我的", isActive: "" }
     ]
   },

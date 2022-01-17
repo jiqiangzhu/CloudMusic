@@ -92,9 +92,8 @@ a {
     color: black;
 }
 .login-bg {
-    // background: #ff0000;
-    background: url(../assets/iconlist/1.png);
-    
+    //background: url(../assets/iconlist/1.png);
+    background-image: radial-gradient(#5d4157, #a8caba);
     position: fixed;
     width: 100vw;
     height: 100vh;
