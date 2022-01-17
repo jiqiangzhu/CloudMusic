@@ -11,17 +11,15 @@ module.exports = {
     },
     devServer: {
         open: true,
-        port: 8081, // 端口
+        port: 8080, // 端口
         proxy: { // 配置跨域处理 可以设置多个
             '/api': {
-                target: 'http://api.blairq.top/',//跨域请求头信息
+                target: 'https://qg-unlock-netease-cloud.blairq.top/',//跨域请求头信息
                 changeOrigin: true,
                 ws: false,
                 pathRewrite: {
                     '^/api': '/'
                 }
-                //pathRewrite: {'^/api': '/'} 重写之后url为 http://a.abc.com:8081/xxxx
-                //pathRewrite: {'^/api': '/api'} 重写之后url为 http://a.abc.com:8081/api/xxxx
             }
         }
     },

@@ -1,7 +1,8 @@
-import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
+import {createRouter, createWebHistory, createWebHashHistory} from 'vue-router'
 import store from '@/store/index.js';
 import Games from '../views/Games.vue';
-import { Toast } from 'vant';
+import {Toast} from 'vant';
+
 const routes = [
   {//主页
     path: '/',
@@ -15,12 +16,20 @@ const routes = [
   {//搜索歌曲
     path: '/search',
     name: 'Search',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Search.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Search.vue'),
+    meta: {
+      title: 'search',
+      keepAlive: true
+    },
   },
   {//游戏
     path: '/games',
     name: 'Games',
-    component: Games
+    component: Games,
+    meta: {
+      title: 'games',
+      keepAlive: true
+    },
   },
   {//飞机大战
     path: '/hitPlane',
@@ -76,17 +85,29 @@ const routes = [
   {//音乐歌单详情
     path: '/playlistDetail',
     name: 'PlaylistDetail',
-    component: () => import(/* webpackChunkName: "about" */ '../views/PlaylistDetail.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/PlaylistDetail.vue'),
+    meta: {
+      title: 'playlistDetail',
+      keepAlive: true
+    },
   },
   {//音乐播放页面
     path: '/playPage',
     name: 'PlayPage',
-    component: () => import(/* webpackChunkName: "about" */ '../components/PlayPage.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../components/PlayPage.vue'),
+    meta: {
+      title: 'playPage',
+      keepAlive: true
+    },
   },
   {//每日推荐
     path: '/recommand',
     name: 'DayRecomm',
     component: () => import(/* webpackChunkName: "about" */ '../components/DayRecomm.vue'),
+    meta: {
+      title: 'recommand',
+      keepAlive: true
+    },
     beforeEnter: (from, to, next) => {
       // 检查用户是否登录，未登录不能进入
       console.log(store.state.user)
