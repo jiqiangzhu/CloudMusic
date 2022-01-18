@@ -10,3 +10,4 @@ window.Toast = Toast
 console.log('测试 CI/CD 1')
 createApp(App).use(store).use(router).use(Popup).mount('#app')
 
+//chmod +x post-receive

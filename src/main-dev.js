@@ -10,6 +10,6 @@ import Swiper from 'swiper'
 import 'swiper/css/swiper.css'
 
 window.Toast = Toast
-
+window.Swiper = Swiper
 createApp(App).use(store).use(router).use(Popup).mount('#app')
 

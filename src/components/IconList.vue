@@ -17,14 +17,14 @@
                 </div>
                 <span class="txt">FM</span>
             </div>
-<!--            <div class="list-item" @click="$router.push('/goodPlaylist')">-->
-<!--                <div class="icon-item">-->
-<!--                    <svg class="icon" aria-hidden="true">-->
-<!--                        <use xlink:href="#icon-gedan" />-->
-<!--                    </svg>-->
-<!--                </div>-->
-<!--                <span class="txt">歌单</span>-->
-<!--            </div>-->
+            <div class="list-item" @click="$router.push('/goodPlaylist')">
+                <div class="icon-item">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-gedan" />
+                    </svg>
+                </div>
+                <span class="txt">歌单</span>
+            </div>
             <div class="list-item" @click="$router.push('/rank')">
                 <div class="icon-item">
                     <svg class="icon" aria-hidden="true">
