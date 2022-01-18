@@ -3,15 +3,27 @@ const WebpackBar = require('webpackbar')
 const isProd = process.env.NODE_ENV.startsWith('prod');
 
 const externals = {
-  swiper: 'Swiper'
+  Swiper: 'swiper',
+  axios: 'axios',
+  vue: 'Vue',
+  vuex: 'Vuex',
+  'vue-router': 'VueRouter',
+  vant: 'vant'
 }
 
 const cdn = {
   css: [
-    "https://cdn.bootcdn.net/ajax/libs/Swiper/5.4.5/css/swiper.min.css"
+    "https://cdn.jsdelivr.net/npm/vant@next/lib/index.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.min.css"
   ],
   js: [
-    "https://cdn.bootcdn.net/ajax/libs/Swiper/5.4.5/js/swiper.min.js",
+    "https://cdn.jsdelivr.net/npm/vue@next",
+    "https://unpkg.com/vue-router@4.0.2/dist/vue-router.global.js",
+    "https://unpkg.com/vuex@4.0.0/dist/vuex.global.js",
+    "https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js",
+    "https://unpkg.com/axios/dist/axios.min.js",
+    "https://cdn.jsdelivr.net/npm/vant@next/lib/vant.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js"
   ]
 }
 
@@ -32,9 +44,9 @@ module.exports = {
       config.entry("app").clear().add("./src/main-prod.js");
       config.set("externals", externals);
       config.plugin("html").tap(args => {
-        args[0].cdn = cdn
         args[0].title = 'QG'
         args[0].url = './'
+        args[0].cdn = cdn
         return args;
       })
     })
@@ -45,6 +57,7 @@ module.exports = {
   },
 
   publicPath: './',
+  outputDir: './cloud-music',
   devServer: {
     open: false,
     port: 8081, // 端口

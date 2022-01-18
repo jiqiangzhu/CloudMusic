@@ -14,10 +14,6 @@
 </template>
 <script>
 
-import Swiper from 'swiper'
-
-// import style (<= Swiper 5.x)
-import 'swiper/css/swiper.css'
 export default {
     name: 'Swiper',
     props: {

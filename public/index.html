@@ -6,17 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=375,user-scalable=no">
   <link rel="icon" href="<%= htmlWebpackPlugin.options.url %>favicon.ico">
-  <title>
-    <%= htmlWebpackPlugin.options.title %>
-  </title>
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/vant@next/lib/index.css"
-  />
-  <!-- 引入 Vue 和 Vant 的 JS 文件 -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@next"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vant@next/lib/vant.min.js"></script>
-  <script src="./static/iconfont.js"></script>
+  <title><%= htmlWebpackPlugin.options.title %></title>
 
   <!-- 引入CSS资源 -->
   <% for(var i in htmlWebpackPlugin.options.cdn &&
@@ -31,7 +21,6 @@
     rel="stylesheet"
   />
   <% } %>
-
   <!-- 引入js资源 -->
   <% for(var i in htmlWebpackPlugin.options.cdn &&
   htmlWebpackPlugin.options.cdn.js) { %>
@@ -43,8 +32,14 @@
   <% } %>
   <% for(var i in htmlWebpackPlugin.options.cdn &&
   htmlWebpackPlugin.options.cdn.js) { %>
-  <script type="module" src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+  <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
   <% } %>
+
+  <!-- 引入 Vue 和 Vant 的 JS 文件 -->
+<!--  <script src="https://cdn.jsdelivr.net/npm/vue@next"></script>-->
+  <script src="https://cdn.jsdelivr.net/npm/vant@next/lib/vant.min.js"></script>
+  <script src="./static/iconfont.js"></script>
+
 </head>
 
 <body>

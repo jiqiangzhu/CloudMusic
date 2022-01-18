@@ -6,6 +6,8 @@ import '../static/font/iconfont.css';
 import './static/mui.min.js';
 import './common/rem.js'
 import { Toast, Popup } from 'vant';
+import Swiper from 'swiper'
+import 'swiper/css/swiper.css'
 
 window.Toast = Toast
 
