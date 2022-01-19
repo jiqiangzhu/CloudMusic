@@ -2,7 +2,8 @@ import axios from 'axios';
 
 // 121腾讯云服务器api接口
 // let baseUrl = "http://121.5.9.142:3000";
-let baseUrl = window.baseUrl
+// let baseUrl = window.baseUrl
+let baseUrl = "https://qg-unlock-netease-cloud.blairq.top/"
 // 本地api
 // let baseUrl = "http://localhost:3000"
 
