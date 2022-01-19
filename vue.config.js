@@ -18,6 +18,7 @@ const cdn = {
   ],
   js: [
     "https://cdn.jsdelivr.net/npm/vue@next",
+    "https://cdn.jsdelivr.net/npm/vant@next/lib/vant.min.js",
     "https://unpkg.com/vue-router@4.0.2/dist/vue-router.global.js",
     "https://unpkg.com/vuex@4.0.0/dist/vuex.global.js",
     "https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js",
@@ -62,7 +63,7 @@ module.exports = {
     open: false,
     port: 8081, // 端口
     proxy: { // 配置跨域处理 可以设置多个
-      '/api': {
+      '/': {
         target: 'https://qg-unlock-netease-cloud.blairq.top/',//跨域请求头信息
         changeOrigin: true,
         ws: false,
