@@ -7,7 +7,6 @@ import './common/rem.js'
 import { Toast, Popup } from 'vant';
 
 window.Toast = Toast
-console.log('测试 CI/CD 1')
+window.baseUrl = "https://qg-unlock-netease-cloud.blairq.top/"
 createApp(App).use(store).use(router).use(Popup).mount('#app')
 
-//chmod +x post-receive
