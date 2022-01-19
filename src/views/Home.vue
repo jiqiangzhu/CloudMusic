@@ -10,7 +10,7 @@
             <span class="tag">新歌首发</span>
           </template>
         </Swiper>
-<!--        <IconList class="iconlist"/>-->
+        <IconList class="iconlist"/>
         <SetupMusicList class="musiclist"/>
         <div class="bg"></div>
       </div>
