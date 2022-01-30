@@ -27,7 +27,6 @@ export default {
 
   setup() {
     const route = useRoute();
-    // const store = useStore();
     const state = reactive({
       playlist: {
         creator: {
