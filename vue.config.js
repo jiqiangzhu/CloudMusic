@@ -3,7 +3,7 @@ const WebpackBar = require('webpackbar')
 const isProd = process.env.NODE_ENV.startsWith('prod');
 
 const externals = {
-  Swiper: 'swiper',
+  // Swiper: 'swiper',
   axios: 'axios',
   vue: 'Vue',
   vuex: 'Vuex',
@@ -14,7 +14,7 @@ const externals = {
 const cdn = {
   css: [
     "https://cdn.jsdelivr.net/npm/vant@next/lib/index.css",
-    "https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.min.css"
+    // "https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.min.css"
   ],
   js: [
     "https://cdn.jsdelivr.net/npm/vue@next",
@@ -24,7 +24,7 @@ const cdn = {
     "https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js",
     "https://unpkg.com/axios/dist/axios.min.js",
     "https://cdn.jsdelivr.net/npm/vant@next/lib/vant.min.js",
-    "https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js"
+    // "https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js"
   ]
 }
 
