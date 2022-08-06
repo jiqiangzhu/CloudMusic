@@ -5,7 +5,8 @@
   "author": "zjq",
   "scripts": {
     "dev": "vue-cli-service serve",
-    "prod": "vue-cli-service build"
+    "prod": "vue-cli-service build",
+    "deploy": "git push prod/master"
   },
   "dependencies": {
     "axios": "^0.21.1",
