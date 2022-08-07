@@ -71,13 +71,11 @@ export default {
       }, 3000)
     },
     ...mapMutations(['setPlayFlag']),
-
     swiperFn() {
       Toast("敬请期待...");
     }
   },
   async beforeMount() {
-
     let res = await getBanner(1);
     this.imgList = res.data.banners;
     this.$store.commit('setPlayFlag', {playControlFlag: true, navBarFlag: true});
