@@ -73,6 +73,7 @@ export default {
     ...mapMutations(['setPlayFlag']),
     swiperFn() {
       Toast("敬请期待...");
+
     }
   },
   async beforeMount() {
