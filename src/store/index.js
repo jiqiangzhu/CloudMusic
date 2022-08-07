@@ -147,13 +147,11 @@ export default createStore({
         // 更新本地存储中的播放列表
         localStorage.playlist = JSON.stringify(list);
       }
-      console.log("----------当前播放列表---------\n", state.playlist);
     },
     // 设置当前播放索引
     setCurrentIndex(state, index) {
       state.currentIndex = index;
       localStorage.currentIndex = index;
-      console.log("当前播放列表索引-----------", state.currentIndex);
     },
     setLyricList(state, value) {
       state.lyric = value

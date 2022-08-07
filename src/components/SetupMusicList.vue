@@ -24,7 +24,7 @@
 <script>
 import { getRecMusicList } from '@/api/index'
 import { onMounted, reactive } from 'vue'
-import { mapMutations } from 'vuex'
+// import { mapMutations } from 'vuex'
 export default {
     name: "SetupMusicList",
     // methods: {
@@ -46,7 +46,7 @@ export default {
         }
 
         onMounted(async () => {
-            let result = await getRecMusicList(10)
+            let result = await getRecMusicList(12)
             state.musicList = result.data.result
         })
         return {
@@ -88,11 +88,12 @@ export default {
     }
     .music-content {
         width: 100%;
-        height: 4.8rem;
+        // height: 4.8rem;
         overflow: hidden;
+        margin-bottom: 0.3rem;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-evenly;
+        justify-content: flex-start;
         padding: 0 0.2rem;
         .music-item {
             width: 2.3rem;
