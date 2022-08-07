@@ -81,7 +81,6 @@ export default {
       this.$store.commit("setProgress", progress);
     },
     toPlayPageFn() {//进入播放页
-      console.log(this.$router);
       this.$router.push({path: '/playPage'});
     },
     playNext(index1) {//上下首切换
@@ -103,7 +102,6 @@ export default {
     setProgress() {// 播放进度条
       let progress = this.$refs.audio.currentTime / localStorage.duration;
       this.$store.commit("setProgress", progress);
-      console.log("进度条百分比率----------------", progress);
       progress = parseInt(progress * 100)
       this.tempRate = progress;
       this.rate = this.tempRate;
@@ -135,7 +133,6 @@ export default {
 
     // 设置索引
     if (localStorage.currentIndex != "NAN" && localStorage.currentIndex != "undefined" && localStorage.currentIndex) {
-      console.log("localStorage.currentIndex-------------", localStorage.currentIndex);
       this.$store.commit("setCurrentIndex", localStorage.currentIndex)
     }
 
@@ -148,7 +145,6 @@ export default {
       // 设置当前播放的时间
       this.$refs.audio.currentTime = localStorage.currentTime;
       this.$store.commit('setCurrentTime', this.$refs.audio.currentTime);
-      console.log("------------当前播放时间---单位--秒----------", this.$refs.audio.currentTime);
       // 设置播放进度条
       this.setProgress();
     }
