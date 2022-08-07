@@ -71,6 +71,7 @@ export default {
       if (this.paused) {
         return;
       }
+
       if (localStorage.duration != "NAN" && localStorage.duration && !this.duration) {
         this.duration = localStorage.duration;
       }
