@@ -1,17 +1,23 @@
 <template>
   <van-skeleton title :row="8" :loading="loading">
     <div class="home">
+      <TopNav class="top-nav" />
       <div class="scroll">
-        <TopNav class="top-nav"/>
-        <Swiper @click="swiperFn" ref="mySwiper" class="swiper" :imgList="imgList" style="position: relative"
-                :autoplay="true">
+        <Swiper
+          @click="swiperFn"
+          ref="mySwiper"
+          class="swiper"
+          :imgList="imgList"
+          style="position: relative"
+          :autoplay="true"
+        >
           <template v-slot="slotProps">
-            <img :src="slotProps.item.pic" alt/>
+            <img :src="slotProps.item.pic" alt />
             <span class="tag">新歌首发</span>
           </template>
         </Swiper>
-        <IconList class="iconlist"/>
-        <SetupMusicList class="musiclist"/>
+        <IconList class="iconlist" />
+        <SetupMusicList class="musiclist" />
         <div class="bg"></div>
       </div>
     </div>
@@ -20,20 +26,24 @@
 
 <script>
 // @ is an alias to /src
-import {Checkbox} from 'vant';
-import TopNav from '@/components/TopNav.vue';
-import Bottom from '@/views/Bottom.vue';
-import Swiper from '@/components/Swiper.vue';
-import IconList from '@/components/IconList.vue';
-import RecMusicList from '@/components/RecMusicList.vue';
-import SetupMusicList from '@/components/SetupMusicList.vue';
-import playCtl from '@/views/playCtl.vue';
-import {getBanner} from '../api/index';
-import {mapMutations, mapState} from 'vuex';
-import {Toast, Skeleton as VanSkeleton, PullRefresh as VanPullRefresh} from 'vant';
+import { Checkbox } from "vant";
+import TopNav from "@/components/TopNav.vue";
+import Bottom from "@/views/Bottom.vue";
+import Swiper from "@/components/Swiper.vue";
+import IconList from "@/components/IconList.vue";
+import RecMusicList from "@/components/RecMusicList.vue";
+import SetupMusicList from "@/components/SetupMusicList.vue";
+import playCtl from "@/views/playCtl.vue";
+import { getBanner } from "../api/index";
+import { mapMutations, mapState } from "vuex";
+import {
+  Toast,
+  Skeleton as VanSkeleton,
+  PullRefresh as VanPullRefresh,
+} from "vant";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     TopNav,
     Swiper,
@@ -43,14 +53,15 @@ export default {
     SetupMusicList,
     playCtl,
     VanSkeleton,
-    "van-checkbox": Checkbox, VanPullRefresh
+    "van-checkbox": Checkbox,
+    VanPullRefresh,
   },
   data() {
     return {
       birthFlag: true,
       loading: true,
-      imgList: []
-    }
+      imgList: [],
+    };
   },
   // activated() {
   //   if (this.refreshSearch) {
@@ -62,39 +73,50 @@ export default {
   // },
 
   computed: {
-    ...mapState(['refreshSearch']),
+    ...mapState(["refreshSearch"]),
   },
   methods: {
     onRefresh() {
       setTimeout(() => {
         this.loading = false;
-      }, 3000)
+      }, 3000);
     },
-    ...mapMutations(['setPlayFlag']),
+    ...mapMutations(["setPlayFlag"]),
     swiperFn() {
       Toast("敬请期待...");
-
-    }
+    },
   },
   async beforeMount() {
     let res = await getBanner(1);
     this.imgList = res.data.banners;
-    this.$store.commit('setPlayFlag', {playControlFlag: true, navBarFlag: true});
-    this.$store.commit("setNavArr", {index: 0});
+    this.$store.commit("setPlayFlag", {
+      playControlFlag: true,
+      navBarFlag: true,
+    });
+    this.$store.commit("setNavArr", { index: 0 });
   },
   mounted() {
-    this.$store.commit('setPlayFlag', {playControlFlag: true, navBarFlag: true});
-    this.$store.commit("setNavArr", {index: 0});
+    this.$store.commit("setPlayFlag", {
+      playControlFlag: true,
+      navBarFlag: true,
+    });
+    this.$store.commit("setNavArr", { index: 0 });
     this.loading = false;
   },
   updated() {
-    this.$store.commit('setPlayFlag', {playControlFlag: true, navBarFlag: true});
-    this.$store.commit("setNavArr", {index: 0});
-  }
-}
+    this.$store.commit("setPlayFlag", {
+      playControlFlag: true,
+      navBarFlag: true,
+    });
+    this.$store.commit("setNavArr", { index: 0 });
+  },
+};
 </script>
 <style lang="less">
 .home {
+  .top-nav {
+    z-index: 999;
+  }
   .tag {
     position: absolute;
     bottom: 5px;

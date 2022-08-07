@@ -23,15 +23,17 @@
               <span class="title van-ellipsis">{{ item.name }}</span>
               <span class="tag"></span>
               <div class="name van-ellipsis">
-                                    <span
-                                      v-for="(name, index) in item.ar"
-                                      :key="index"
-                                    >{{ name.name }}</span>
+                <span v-for="(name, index) in item.ar" :key="index">{{
+                  name.name
+                }}</span>
               </div>
             </div>
           </div>
           <div class="right">
-            <span class="iconfont icon-iconset0481" @click="setCurrentIndex(i)"></span>
+            <span
+              class="iconfont icon-iconset0481"
+              @click="setCurrentIndex(i)"
+            ></span>
             <span class="iconfont icon-ziyuan" @click="moreFn(i)"></span>
           </div>
         </div>
@@ -41,44 +43,41 @@
   </div>
 </template>
 <script>
-import {mapState} from 'vuex';
+import { mapState } from "vuex";
 
 export default {
   name: "PopupList",
-  props: ['showPopupFlag'],
+  props: ["showPopupFlag"],
   components: {},
   computed: {
-    ...mapState(['playlist'])
+    ...mapState(["playlist"]),
   },
   methods: {
     closeFn() {
-      debugger
-      this.$emit("setShowPopupFlag")
+      debugger;
+      this.$emit("setShowPopupFlag");
     },
     playAllFn() {
-      this.$store.commit('setPlayList', this.playlist.tracks)
+      this.$store.commit("setPlayList", this.playlist.tracks);
       // 设置播放index
-      this.$store.commit('setCurrentIndex', 0)
-      this.$store.commit("setPausedFlag", {paused: false})
+      this.$store.commit("setCurrentIndex", 0);
+      this.$store.commit("setPausedFlag", { paused: false });
     },
     playSongFn(i) {
       // 设置播放列表
-      this.$store.commit('setPlayList', this.playlist.tracks)
+      this.$store.commit("setPlayList", this.playlist.tracks);
       // 设置播放index
-      this.$store.commit('setCurrentIndex', i)
-      this.$store.commit("setPausedFlag", {paused: false})
-    }
-  }
-
-}
+      this.$store.commit("setCurrentIndex", i);
+      this.$store.commit("setPausedFlag", { paused: false });
+    },
+  },
+};
 </script>
 <style lang="less" scoped>
-
 #popup-list {
-  min-height: 3rem;
-  max-height: 9rem;
   position: relative;
-
+  overflow: hidden;
+  margin-bottom: 0.3rem;
   .list-top {
     width: 7.5rem;
     display: flex;
@@ -125,11 +124,14 @@ export default {
 
   .list-content {
     width: 7.5rem;
+    min-height: 3rem;
+    max-height: 8rem;
     margin-top: 0.3rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     align-items: center;
-    // padding-bottom: 1rem;
     .list-item {
       width: 7.1rem;
       height: 0.8rem;
