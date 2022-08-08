@@ -11,19 +11,19 @@ export default createStore({
     progress: 0,
     // currentRate: 0,
     playlist: [
-      // {
-      //   al: {
-      //     id: 91888443,
-      //     name: "是想你的声音啊",
-      //     pic: 109951165109878600,
-      //     picUrl:
-      //       "http://p3.music.126.net/cIR63lyPGgQ4mAyuOTg8lA==/109951165109878587.jpg",
-      //     pic_str: "109951165109878587",
-      //   },
-      //   id: 1807500165,
-      //   name: "是你的声音啊",
-      //   ar: [{ name: "傲七爷" }],
-      // },
+      {
+        al: {
+          id: 91888443,
+          name: "是想你的声音啊",
+          pic: 109951165109878600,
+          picUrl:
+            "http://p3.music.126.net/cIR63lyPGgQ4mAyuOTg8lA==/109951165109878587.jpg",
+          pic_str: "109951165109878587",
+        },
+        id: 1807500165,
+        name: "是你的声音啊",
+        ar: [{ name: "傲七爷" }],
+      },
     ],
     videoList: [],
     currentIndex: 0,
