@@ -90,7 +90,7 @@ export default {
       return this.playlist[this.currentIndex] ? this.playlist[this.currentIndex].name : ''
     },
     arr() {
-      return this.playlist[this.currentIndex].ar
+      return this.playlist[this.currentIndex] ? this.playlist[this.currentIndex].ar : []
     }
   },
   methods: {
