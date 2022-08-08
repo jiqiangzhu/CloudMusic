@@ -2,7 +2,7 @@
   <div class="play-control">
     <div class="left" @click="toPlayPageFn">
       <img
-        :src="playlist[currentIndex].al.picUrl"
+        :src="url"
         :alt="playlist[currentIndex].name"
       />
       <span class="title van-ellipsis">{{ playlist[currentIndex].name }}</span>
@@ -58,7 +58,6 @@ import { Popup, Circle as VanCircle } from "vant";
 import { mapState, mapMutations } from "vuex";
 import PlayPage from "@/components/PlayPage.vue";
 import PopupList from "@/components/PopupList.vue";
-
 export default {
   name: "playCtl",
   data() {
@@ -73,6 +72,11 @@ export default {
         "100%": "#6149f6",
       },
     };
+  },
+  computed: {
+    url() {
+      return this.playlist[currentIndex].al ? this.playlist[currentIndex].al.picUrl : ''
+    }
   },
   methods: {
     ...mapMutations(["setCurrentIndex"]),
@@ -96,7 +100,6 @@ export default {
       if (this.paused) {
         return;
       }
-
       if (
         localStorage.duration != "NAN" &&
         localStorage.duration &&
