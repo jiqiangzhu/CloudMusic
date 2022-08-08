@@ -49,7 +49,7 @@
       ref="audio"
       :loop="loopFlag"
       @ended="playNext(currentIndex)"
-      :src="`https://music.163.com/song/media/outer/url?id=${playlist[currentIndex].id}.mp3`"
+      :src="`https://music.163.com/song/media/outer/url?id=${id}.mp3`"
     ></audio>
   </div>
 </template>
@@ -91,6 +91,9 @@ export default {
     },
     arr() {
       return this.playlist[this.currentIndex] ? this.playlist[this.currentIndex].ar : []
+    },
+    id(){
+      return this.playlist[this.currentIndex] ? this.playlist[this.currentIndex].id : ''
     }
   },
   methods: {
