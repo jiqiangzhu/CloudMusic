@@ -7,7 +7,7 @@
       />
       <span class="title van-ellipsis">{{ name }}</span>
       <span class="author van-ellipsis">
-        <span v-for="(item, i) in playlist[currentIndex].ar || []" :key="i">{{
+        <span v-for="(item, i) in arr || []" :key="i">{{
           item.name
         }}</span>
       </span>
@@ -88,6 +88,9 @@ export default {
     },
     name() {
       return this.playlist[this.currentIndex] ? this.playlist[this.currentIndex].name : ''
+    },
+    arr() {
+      return this.playlist[this.currentIndex].ar
     }
   },
   methods: {
