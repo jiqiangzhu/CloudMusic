@@ -84,7 +84,7 @@ export default {
       "progress",
     ]),
     url() {
-      return this.playlist[this.currentIndex].al ? this.playlist[this.currentIndex].al.picUrl : ''
+      return (this.playlist[this.currentIndex] && this.playlist[this.currentIndex].al) ? this.playlist[this.currentIndex].al.picUrl : ''
     },
     name() {
       return this.playlist[this.currentIndex] ? this.playlist[this.currentIndex].name : ''
