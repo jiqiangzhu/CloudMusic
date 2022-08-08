@@ -3,11 +3,11 @@
     <div class="left" @click="toPlayPageFn">
       <img
         :src="url"
-        :alt="playlist[currentIndex].name"
+        :alt="name"
       />
-      <span class="title van-ellipsis">{{ playlist[currentIndex].name }}</span>
+      <span class="title van-ellipsis">{{ name }}</span>
       <span class="author van-ellipsis">
-        <span v-for="(item, i) in playlist[currentIndex].ar" :key="i">{{
+        <span v-for="(item, i) in playlist[currentIndex].ar || []" :key="i">{{
           item.name
         }}</span>
       </span>
@@ -74,8 +74,20 @@ export default {
     };
   },
   computed: {
+    ...mapState([
+      "currentIndex",
+      "loopFlag",
+      "playlist",
+      "paused",
+      "currentTime",
+      "duration",
+      "progress",
+    ]),
     url() {
-      return this.playlist[currentIndex].al ? this.playlist[currentIndex].al.picUrl : ''
+      return this.playlist[this.currentIndex].al ? this.playlist[this.currentIndex].al.picUrl : ''
+    },
+    name() {
+      return this.playlist[this.currentIndex] ? this.playlist[this.currentIndex].name : ''
     }
   },
   methods: {
@@ -149,17 +161,6 @@ export default {
     VanCircle,
     PopupList,
     "van-popup": Popup,
-  },
-  computed: {
-    ...mapState([
-      "currentIndex",
-      "loopFlag",
-      "playlist",
-      "paused",
-      "currentTime",
-      "duration",
-      "progress",
-    ]),
   },
   watch: {
     progress(newV, oldV) {
