@@ -182,9 +182,12 @@ export default {
     ) {
       this.$store.commit("setCurrentIndex", localStorage.currentIndex);
     }
-
-    // 获取歌词
-    this.playlist[this.currentIndex] && this.playlist[this.currentIndex].id && this.$store.dispatch("setLyric", this.playlist[this.currentIndex].id);
+    this.$nextTick(() => {
+      // 获取歌词
+      this.playlist[this.currentIndex] &&
+        this.playlist[this.currentIndex].id &&
+        this.$store.dispatch("setLyric", this.playlist[this.currentIndex].id);
+    });
   },
   mounted() {
     // 本地存储播放信息 当前播放列表索引 当前歌曲播放时间点 进度
@@ -202,7 +205,11 @@ export default {
   },
 
   updated() {
-    this.$store.dispatch("setLyric", this.playlist[this.currentIndex].id);
+    this.$nextTick(() => {
+      this.playlist[this.currentIndex] &&
+        this.playlist[this.currentIndex].id &&
+        this.$store.dispatch("setLyric", this.playlist[this.currentIndex].id);
+    });
     if (!this.paused) {
       this.$refs.audio.play();
     } else {
