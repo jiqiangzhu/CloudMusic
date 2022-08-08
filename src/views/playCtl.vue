@@ -184,7 +184,7 @@ export default {
     }
 
     // 获取歌词
-    this.$store.dispatch("setLyric", this.playlist[this.currentIndex].id);
+    this.playlist[this.currentIndex] && this.playlist[this.currentIndex].id && this.$store.dispatch("setLyric", this.playlist[this.currentIndex].id);
   },
   mounted() {
     // 本地存储播放信息 当前播放列表索引 当前歌曲播放时间点 进度
