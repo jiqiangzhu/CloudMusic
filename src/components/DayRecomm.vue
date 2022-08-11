@@ -1,6 +1,6 @@
 <template>
   <div class="day-recomm">
-<!--    <detailTop :playlist="state.playlist" class="detail-top"></detailTop>-->
+    <!--    <detailTop :playlist="state.playlist" class="detail-top"></detailTop>-->
   </div>
 </template>
 <script>

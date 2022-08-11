@@ -26,21 +26,21 @@
 
 <script>
 // @ is an alias to /src
-import { Checkbox } from "vant";
-import TopNav from "@/components/TopNav.vue";
-import Bottom from "@/views/Bottom.vue";
-import Swiper from "@/components/Swiper.vue";
-import IconList from "@/components/IconList.vue";
-import RecMusicList from "@/components/RecMusicList.vue";
-import SetupMusicList from "@/components/SetupMusicList.vue";
-import playCtl from "@/views/playCtl.vue";
-import { getBanner } from "../api/index";
-import { mapMutations, mapState } from "vuex";
+import { Checkbox } from "vant"
+import TopNav from "@/components/TopNav.vue"
+import Bottom from "@/views/Bottom.vue"
+import Swiper from "@/components/Swiper.vue"
+import IconList from "@/components/IconList.vue"
+import RecMusicList from "@/components/RecMusicList.vue"
+import SetupMusicList from "@/components/SetupMusicList.vue"
+import playCtl from "@/views/playCtl.vue"
+import { getBanner } from "../api/index"
+import { mapMutations, mapState } from "vuex"
 import {
   Toast,
   Skeleton as VanSkeleton,
   PullRefresh as VanPullRefresh,
-} from "vant";
+} from "vant"
 
 export default {
   name: "Home",
@@ -56,12 +56,12 @@ export default {
     "van-checkbox": Checkbox,
     VanPullRefresh,
   },
-  data() {
+  data () {
     return {
       birthFlag: true,
       loading: true,
       imgList: [],
-    };
+    }
   },
   // activated() {
   //   if (this.refreshSearch) {
@@ -76,39 +76,39 @@ export default {
     ...mapState(["refreshSearch"]),
   },
   methods: {
-    onRefresh() {
+    onRefresh () {
       setTimeout(() => {
-        this.loading = false;
-      }, 3000);
+        this.loading = false
+      }, 3000)
     },
     ...mapMutations(["setPlayFlag"]),
-    swiperFn() {
-      Toast("敬请期待...");
+    swiperFn () {
+      Toast("敬请期待...")
     },
   },
-  async beforeMount() {
-    let res = await getBanner(1);
-    this.imgList = res.data.banners;
+  async beforeMount () {
+    let res = await getBanner(1)
+    this.imgList = res.data.banners
     this.$store.commit("setPlayFlag", {
       playControlFlag: true,
       navBarFlag: true,
-    });
-    this.$store.commit("setNavArr", { index: 0 });
+    })
+    this.$store.commit("setNavArr", { index: 0 })
   },
-  mounted() {
+  mounted () {
     this.$store.commit("setPlayFlag", {
       playControlFlag: true,
       navBarFlag: true,
-    });
-    this.$store.commit("setNavArr", { index: 0 });
-    this.loading = false;
+    })
+    this.$store.commit("setNavArr", { index: 0 })
+    this.loading = false
   },
-  updated() {
+  updated () {
     this.$store.commit("setPlayFlag", {
       playControlFlag: true,
       navBarFlag: true,
-    });
-    this.$store.commit("setNavArr", { index: 0 });
+    })
+    this.$store.commit("setNavArr", { index: 0 })
   },
 };
 </script>

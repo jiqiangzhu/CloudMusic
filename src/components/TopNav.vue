@@ -4,36 +4,53 @@
     <span class="iconfont icon-liebiao1" @click="showMenu"></span>
     <!-- </div> -->
     <div class="top-center">
-      <div class="search-box" @click="$router.push({path: '/search', query: {defaulttSearchKey: defaulttSearchKey}})">
+      <div
+        class="search-box"
+        @click="
+          $router.push({
+            path: '/search',
+            query: { defaulttSearchKey: defaulttSearchKey },
+          })
+        "
+      >
         <span class="iconfont icon-sousuo"></span>
-        <input type="text" :placeholder="defaulttSearchKey">
+        <input type="text" :placeholder="defaulttSearchKey" />
       </div>
     </div>
-    <span class="iconfont icon-maikefeng-tianchong" @click="showTips('暂不支持')"></span>
-    <van-popup v-model:show="show" round position="left" teleport="body" :style="{ width: '70%', height: '100%', opacity: '0.4' }" />
+    <span
+      class="iconfont icon-maikefeng-tianchong"
+      @click="showTips('暂不支持')"
+    ></span>
+    <van-popup
+      v-model:show="show"
+      round
+      position="left"
+      teleport="body"
+      :style="{ width: '70%', height: '100%', opacity: '0.4' }"
+    />
   </div>
 </template>
 <script>
-import {getDefaultSearchKey} from '../api'
+import { getDefaultSearchKey } from '../api'
 
 export default {
   name: "TopNav",
-  data() {
+  data () {
     return {
       defaulttSearchKey: "",
       show: false
     }
   },
-  async beforeMount() {
-    let result = await getDefaultSearchKey();
+  async beforeMount () {
+    let result = await getDefaultSearchKey()
     // console.log("-------------默认搜索关键词--------------", result);
-    this.defaulttSearchKey = result.data.data.showKeyword;
+    this.defaulttSearchKey = result.data.data.showKeyword
   },
   methods: {
-    showTips(message) {
-      Toast({message, forbidClick: true})
+    showTips (message) {
+      Toast({ message, forbidClick: true })
     },
-    showMenu() {
+    showMenu () {
       this.show = true
     }
   }

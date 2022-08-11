@@ -5,7 +5,11 @@
     <!-- <keep-alive> -->
     <router-view v-slot="{ Component }">
       <keep-alive>
-        <component :key="$route.meta.title" :is="Component" v-if="$route.meta.keepAlive" />
+        <component
+          :key="$route.meta.title"
+          :is="Component"
+          v-if="$route.meta.keepAlive"
+        />
       </keep-alive>
       <component :is="Component" v-if="!$route.meta.keepAlive" />
     </router-view>
@@ -25,10 +29,10 @@ export default {
   components: {
     Bottom
   },
-  async mounted() {
+  async mounted () {
     if (localStorage.userInfo) {
-      this.$store.commit("setUser", JSON.parse(localStorage.userInfo));
-      console.log("====>>>>>>>>localStorage.userInfo>>>>>>=====", this.$store.state.user);
+      this.$store.commit("setUser", JSON.parse(localStorage.userInfo))
+      console.log("====>>>>>>>>localStorage.userInfo>>>>>>=====", this.$store.state.user)
     }
 
   },

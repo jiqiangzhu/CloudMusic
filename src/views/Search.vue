@@ -1,24 +1,24 @@
 <template>
-    <SearchTop />
+  <SearchTop />
 </template>
 
 <script>
 import SearchTop from '@/components/SearchTop.vue'
 import { useStore } from 'vuex'
-import { onBeforeMount, onMounted } from 'vue';
+import { onBeforeMount, onMounted } from 'vue'
 export default {
-    name: "Search",
-    components: {
-        SearchTop
-    },
-    setup() {
-        const store = useStore();
-        onBeforeMount(()=>{
-            store.commit('setPlayFlag', {playControlFlag: true, navBarFlag: false})
-        });
-        onMounted(()=>{
-            
-        })
-    }
+  name: "Search",
+  components: {
+    SearchTop
+  },
+  setup () {
+    const store = useStore()
+    onBeforeMount(() => {
+      store.commit('setPlayFlag', { playControlFlag: true, navBarFlag: false })
+    })
+    onMounted(() => {
+
+    })
+  }
 }
 </script>

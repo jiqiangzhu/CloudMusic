@@ -59,14 +59,14 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
-import { getSearchResults } from "@/api/index";
-import playCtl from "@/views/playCtl.vue";
-import { getDefaultSearchKey } from "../api";
-import { Toast } from "vant";
+import { mapState } from "vuex"
+import { getSearchResults } from "@/api/index"
+import playCtl from "@/views/playCtl.vue"
+import { getDefaultSearchKey } from "../api"
+import { Toast } from "vant"
 export default {
   name: "SearchTop",
-  data() {
+  data () {
     return {
       isShow: false,
       keyword: "",
@@ -74,7 +74,7 @@ export default {
       historyList: [],
       resultSongs: [],
       defaulttSearchKey: "",
-    };
+    }
   },
   computed: {
     Toast,
@@ -82,72 +82,72 @@ export default {
   components: {
     playCtl,
   },
-  async beforeMount() {
+  async beforeMount () {
     if (
       localStorage.historyList != undefined &&
       localStorage.historyList != ""
     ) {
-      this.historyList = JSON.parse(localStorage.historyList);
-      this.isShow = true;
+      this.historyList = JSON.parse(localStorage.historyList)
+      this.isShow = true
     } else {
-      this.isShow = false;
+      this.isShow = false
     }
-    this.defaulttSearchKey = this.$route.query.defaulttSearchKey;
+    this.defaulttSearchKey = this.$route.query.defaulttSearchKey
   },
 
   methods: {
-    async searchEvent(item) {
-      Toast.loading("正在加载中，请稍候...");
-      let result = await getSearchResults(item);
-      Toast.success("加载成功！");
-      this.resultSongs = result.data.result.songs;
-      this.isShow = false;
-      this.contentShow = true;
-      Toast.clear();
-      console.log(this.resultSongs);
+    async searchEvent (item) {
+      Toast.loading("正在加载中，请稍候...")
+      let result = await getSearchResults(item)
+      Toast.success("加载成功！")
+      this.resultSongs = result.data.result.songs
+      this.isShow = false
+      this.contentShow = true
+      Toast.clear()
+      console.log(this.resultSongs)
     },
-    inputEvent(e) {
+    inputEvent (e) {
       if (e.keyCode != 13) {
-        this.isShow = true;
+        this.isShow = true
       }
     },
-    async enterEvent(event) {
-      Toast.loading("正在加载中，请稍候...");
+    async enterEvent (event) {
+      Toast.loading("正在加载中，请稍候...")
       if (this.keyword != "") {
-        this.historyList = this.historyList.reverse();
-        this.historyList.push(this.keyword);
-        this.historyList = this.historyList.reverse();
-        this.historyList = Array.from(new Set(this.historyList));
-        localStorage.historyList = JSON.stringify(this.historyList);
-        this.isShow = false;
-        this.contentShow = true;
+        this.historyList = this.historyList.reverse()
+        this.historyList.push(this.keyword)
+        this.historyList = this.historyList.reverse()
+        this.historyList = Array.from(new Set(this.historyList))
+        localStorage.historyList = JSON.stringify(this.historyList)
+        this.isShow = false
+        this.contentShow = true
       } else {
-        console.log(this.$route.query.defaulttSearchKey);
-        this.keyword = this.$route.query.defaulttSearchKey;
+        console.log(this.$route.query.defaulttSearchKey)
+        this.keyword = this.$route.query.defaulttSearchKey
 
-        this.historyList = this.historyList.reverse();
-        this.historyList.push(this.keyword);
-        this.historyList = this.historyList.reverse();
-        this.historyList = Array.from(new Set(this.historyList));
-        localStorage.historyList = JSON.stringify(this.historyList);
-        this.isShow = false;
-        this.contentShow = true;
+        this.historyList = this.historyList.reverse()
+        this.historyList.push(this.keyword)
+        this.historyList = this.historyList.reverse()
+        this.historyList = Array.from(new Set(this.historyList))
+        localStorage.historyList = JSON.stringify(this.historyList)
+        this.isShow = false
+        this.contentShow = true
       }
       // 获取关键词搜索结果集
-      let result = await getSearchResults(this.keyword);
-      this.resultSongs = result.data.result.songs;
-      Toast.clear();
+      let result = await getSearchResults(this.keyword)
+      this.resultSongs = result.data.result.songs
+      Toast.clear()
     },
-    clearEvent() {
-      this.isShow = false;
-      localStorage.removeItem("historyList");
-      this.historyList = [];
+    clearEvent () {
+      this.isShow = false
+      localStorage.removeItem("historyList")
+      this.historyList = []
     },
-    playSong(event, i) {
-      console.log(this.resultSongs);
-      this.$store.commit("setPlayList", this.resultSongs);
-      this.$store.commit("setCurrentIndex", i);
-      this.$store.commit("setPausedFlag", { paused: false });
+    playSong (event, i) {
+      console.log(this.resultSongs)
+      this.$store.commit("setPlayList", this.resultSongs)
+      this.$store.commit("setCurrentIndex", i)
+      this.$store.commit("setPausedFlag", { paused: false })
     },
   },
 };

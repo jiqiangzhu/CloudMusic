@@ -43,7 +43,7 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState } from "vuex"
 
 export default {
   name: "PopupList",
@@ -53,22 +53,22 @@ export default {
     ...mapState(["playlist"]),
   },
   methods: {
-    closeFn() {
-      debugger;
-      this.$emit("setShowPopupFlag");
+    closeFn () {
+      debugger
+      this.$emit("setShowPopupFlag")
     },
-    playAllFn() {
-      this.$store.commit("setPlayList", this.playlist.tracks);
+    playAllFn () {
+      this.$store.commit("setPlayList", this.playlist.tracks)
       // 设置播放index
-      this.$store.commit("setCurrentIndex", 0);
-      this.$store.commit("setPausedFlag", { paused: false });
+      this.$store.commit("setCurrentIndex", 0)
+      this.$store.commit("setPausedFlag", { paused: false })
     },
-    playSongFn(i) {
+    playSongFn (i) {
       // 设置播放列表
-      this.$store.commit("setPlayList", this.playlist.tracks);
+      this.$store.commit("setPlayList", this.playlist.tracks)
       // 设置播放index
-      this.$store.commit("setCurrentIndex", i);
-      this.$store.commit("setPausedFlag", { paused: false });
+      this.$store.commit("setCurrentIndex", i)
+      this.$store.commit("setPausedFlag", { paused: false })
     },
   },
 };

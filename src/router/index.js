@@ -1,5 +1,5 @@
-import {createRouter, createWebHashHistory} from 'vue-router'
-import store from '@/store/index.js';
+import { createRouter, createWebHashHistory } from 'vue-router'
+import store from '@/store/index.js'
 
 const routes = [
   {//主页

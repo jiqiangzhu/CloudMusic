@@ -1,15 +1,10 @@
 <template>
   <div class="play-control">
     <div class="left" @click="toPlayPageFn">
-      <img
-        :src="url"
-        :alt="name"
-      />
+      <img :src="url" :alt="name" />
       <span class="title van-ellipsis">{{ name }}</span>
       <span class="author van-ellipsis">
-        <span v-for="(item, i) in arr || []" :key="i">{{
-          item.name
-        }}</span>
+        <span v-for="(item, i) in arr || []" :key="i">{{ item.name }}</span>
       </span>
     </div>
     <div class="right">
@@ -54,13 +49,13 @@
   </div>
 </template>
 <script>
-import { Popup, Circle as VanCircle } from "vant";
-import { mapState, mapMutations } from "vuex";
-import PlayPage from "@/components/PlayPage.vue";
-import PopupList from "@/components/PopupList.vue";
+import { Popup, Circle as VanCircle } from "vant"
+import { mapState, mapMutations } from "vuex"
+import PlayPage from "@/components/PlayPage.vue"
+import PopupList from "@/components/PopupList.vue"
 export default {
   name: "playCtl",
-  data() {
+  data () {
     return {
       tempRate: 0,
       rate: 0,
@@ -71,7 +66,7 @@ export default {
         "0%": "#3fecff",
         "100%": "#6149f6",
       },
-    };
+    }
   },
   computed: {
     ...mapState([
@@ -83,83 +78,83 @@ export default {
       "duration",
       "progress",
     ]),
-    url() {
+    url () {
       return (this.playlist[this.currentIndex] && this.playlist[this.currentIndex].al) ? this.playlist[this.currentIndex].al.picUrl : ''
     },
-    name() {
+    name () {
       return this.playlist[this.currentIndex] ? this.playlist[this.currentIndex].name : ''
     },
-    arr() {
+    arr () {
       return this.playlist[this.currentIndex] ? this.playlist[this.currentIndex].ar : []
     },
-    id(){
+    id () {
       return this.playlist[this.currentIndex] ? this.playlist[this.currentIndex].id : ''
     }
   },
   methods: {
     ...mapMutations(["setCurrentIndex"]),
-    getDuration() {
+    getDuration () {
       //音乐总时长
-      this.$store.commit("setDuration", this.$refs.audio.duration);
+      this.$store.commit("setDuration", this.$refs.audio.duration)
     },
-    changeStateFn() {
+    changeStateFn () {
       //切换播放暂停
       if (this.paused == true) {
-        this.$refs.audio.play();
-        this.updateTime();
+        this.$refs.audio.play()
+        this.updateTime()
       } else {
-        this.$refs.audio.pause();
-        clearInterval(this.$store.state.intervalId);
+        this.$refs.audio.pause()
+        clearInterval(this.$store.state.intervalId)
       }
-      this.$store.commit("setPausedFlag", { paused: !this.paused });
+      this.$store.commit("setPausedFlag", { paused: !this.paused })
     },
-    updateTime() {
+    updateTime () {
       //播放时更新当前播放时间
       if (this.paused) {
-        return;
+        return
       }
       if (
         localStorage.duration != "NAN" &&
         localStorage.duration &&
         !this.duration
       ) {
-        this.duration = localStorage.duration;
+        this.duration = localStorage.duration
       }
       // 设置当前播放时间
-      this.$store.commit("setCurrentTime", this.$refs.audio.currentTime);
-      let progress = this.currentTime / this.duration;
+      this.$store.commit("setCurrentTime", this.$refs.audio.currentTime)
+      let progress = this.currentTime / this.duration
       // 设置进度条
-      this.$store.commit("setProgress", progress);
+      this.$store.commit("setProgress", progress)
     },
-    toPlayPageFn() {
+    toPlayPageFn () {
       //进入播放页
-      this.$router.push({ path: "/playPage" });
+      this.$router.push({ path: "/playPage" })
     },
-    playNext(index1) {
+    playNext (index1) {
       //上下首切换
-      let index;
+      let index
       if (this.loopFlag) {
-        index = index1;
+        index = index1
       } else {
-        index = index1 + 1;
+        index = index1 + 1
       }
       if (index >= this.playlist.length) {
-        index = 0;
+        index = 0
       }
-      this.$store.commit("setCurrentIndex", index);
-      this.$refs.audio.play();
+      this.$store.commit("setCurrentIndex", index)
+      this.$refs.audio.play()
     },
-    showPopupFn() {
+    showPopupFn () {
       //列表弹出层
-      this.showPopupFlag = !this.showPopupFlag;
+      this.showPopupFlag = !this.showPopupFlag
     },
-    setProgress() {
+    setProgress () {
       // 播放进度条
-      let progress = this.$refs.audio.currentTime / localStorage.duration;
-      this.$store.commit("setProgress", progress);
-      progress = parseInt(progress * 100);
-      this.tempRate = progress;
-      this.rate = this.tempRate;
+      let progress = this.$refs.audio.currentTime / localStorage.duration
+      this.$store.commit("setProgress", progress)
+      progress = parseInt(progress * 100)
+      this.tempRate = progress
+      this.rate = this.tempRate
     },
   },
   components: {
@@ -169,19 +164,19 @@ export default {
     "van-popup": Popup,
   },
   watch: {
-    progress(newV, oldV) {
+    progress (newV, oldV) {
       if (this.progress != "NAN") {
-        this.tempRate = parseInt(this.progress);
+        this.tempRate = parseInt(this.progress)
       } else {
-        this.tempRate = 0;
+        this.tempRate = 0
       }
     },
   },
-  beforeMount() {
+  beforeMount () {
     // 若本地存储中播放列表有值，那么取本地存储的播放列表
     if (localStorage.playlist) {
-      let localPlayList = JSON.parse(localStorage.playlist);
-      this.$store.commit("setPlayList", localPlayList);
+      let localPlayList = JSON.parse(localStorage.playlist)
+      this.$store.commit("setPlayList", localPlayList)
     }
 
     // 设置索引
@@ -190,16 +185,16 @@ export default {
       localStorage.currentIndex != "undefined" &&
       localStorage.currentIndex
     ) {
-      this.$store.commit("setCurrentIndex", localStorage.currentIndex);
+      this.$store.commit("setCurrentIndex", localStorage.currentIndex)
     }
     this.$nextTick(() => {
       // 获取歌词
       this.playlist[this.currentIndex] &&
         this.playlist[this.currentIndex].id &&
-        this.$store.dispatch("setLyric", this.playlist[this.currentIndex].id);
-    });
+        this.$store.dispatch("setLyric", this.playlist[this.currentIndex].id)
+    })
   },
-  mounted() {
+  mounted () {
     // 本地存储播放信息 当前播放列表索引 当前歌曲播放时间点 进度
     if (
       localStorage.currentTime != "NAN" &&
@@ -207,23 +202,23 @@ export default {
       localStorage.currentTime
     ) {
       // 设置当前播放的时间
-      this.$refs.audio.currentTime = localStorage.currentTime;
-      this.$store.commit("setCurrentTime", this.$refs.audio.currentTime);
+      this.$refs.audio.currentTime = localStorage.currentTime
+      this.$store.commit("setCurrentTime", this.$refs.audio.currentTime)
       // 设置播放进度条
-      this.setProgress();
+      this.setProgress()
     }
   },
 
-  updated() {
+  updated () {
     this.$nextTick(() => {
       this.playlist[this.currentIndex] &&
         this.playlist[this.currentIndex].id &&
-        this.$store.dispatch("setLyric", this.playlist[this.currentIndex].id);
-    });
+        this.$store.dispatch("setLyric", this.playlist[this.currentIndex].id)
+    })
     if (!this.paused) {
-      this.$refs.audio.play();
+      this.$refs.audio.play()
     } else {
-      this.$refs.audio.pause();
+      this.$refs.audio.pause()
     }
   },
 };
