@@ -34,10 +34,6 @@ export default {
       } else if (i == 2) {
         this.$router.push({ path: '/me' })
       }
-      // else if(i==3) {
-      //     this.$router.push({ path: '/me' });
-      //     // this.$router.replace({ path: '/me' });
-      // }
     }
   },
   mounted () {
