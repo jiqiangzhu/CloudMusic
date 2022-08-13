@@ -1,5 +1,5 @@
 <template>
-  <SearchTop />
+  <SearchTop ref="search" />
 </template>
 
 <script>
@@ -10,6 +10,13 @@ export default {
   name: "Search",
   components: {
     SearchTop
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.$nextTick(() => {
+        vm.$refs.search.init()
+      })
+    })
   },
   setup () {
     const store = useStore()

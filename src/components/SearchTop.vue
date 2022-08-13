@@ -4,6 +4,7 @@
       <span class="iconfont icon-arrowLeft" @click="$router.go(-1)"></span>
       <div class="input">
         <input
+          ref="input"
           @focus="isShow = true"
           type="text"
           v-model="keyword"
@@ -94,8 +95,12 @@ export default {
     }
     this.defaulttSearchKey = this.$route.query.defaulttSearchKey
   },
-
   methods: {
+    init () {
+      this.$nextTick(() => {
+        this.$refs.input.focus()
+      })
+    },
     async searchEvent (item) {
       Toast.loading("正在加载中，请稍候...")
       let result = await getSearchResults(item)
